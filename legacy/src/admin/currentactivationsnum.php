@@ -1,5 +1,4 @@
-<?
-//require_once "base/conn.php";
+<?php //require_once "base/conn.php";
 require_once "/home/wmffl/public_html/base/conn.php";
 require_once "/home/wmffl/public_html/base/useful.php";
 	
@@ -16,8 +15,8 @@ if (isset($_GET["week"])) {
     $week = $_POST["week"];
 	} else {
 		$pickweek = "SELECT week FROM weekmap WHERE EndDate>=now() and StartDate<=now()";
-    $result = mysqli_query($conn, $pickweek) or die("Week Pick");
-    $row = mysqli_fetch_row($result);
+    $result = $conn->query( $pickweek) or die("Week Pick");
+    $row = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 		$week = $row[0];
 	}
 	
@@ -26,16 +25,16 @@ if (isset($_GET["week"])) {
 	
 
 	// Perform queries
-mysqli_query($conn, $create) or die("Create");
-mysqli_query($conn, $insert) or die("Insert");
-$result = mysqli_query($conn, $select) or die("Select");
+$conn->query( $create) or die("Create");
+$conn->query( $insert) or die("Insert");
+$result = $conn->query( $select) or die("Select");
  
 	// Populate records
-while ($row = mysqli_fetch_row($result)) {
+while ($row = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
 		if (!isset($activates[$row[0]]["count"])) $activates[$row[0]]["count"]=0;
 		$activates[$row[0]][$activates[$row[0]]["count"]++] = $row;
 	}
-mysqli_query($conn, $drop) or die("Drop");
+$conn->query( $drop) or die("Drop");
 	
 	
 	// populate team output 

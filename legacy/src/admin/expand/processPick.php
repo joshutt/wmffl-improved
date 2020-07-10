@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $teamid = $_REQUEST['team'];
 $playerid = $_REQUEST['player'];
@@ -15,8 +14,8 @@ where r.playerid=$playerid and (r.dateoff is null or r.dateoff > '2010-01-01');
 
 EOD;
 
-$results = mysqli_query($conn, $sql) or die("Unable to get old team: " . mysqli_error($conn));
-list($oldTeam, $teamName) = mysqli_fetch_array($results);
+$results = $conn->query( $sql) or die("Unable to get old team: " . $conn->error);
+list($oldTeam, $teamName) = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED);
 
 
 // Get the pick info
@@ -25,8 +24,8 @@ select if(max(round) is not null, max(round)+1, 1)
 from expansionpicks;
 EOD;
 
-$results = mysqli_query($conn, $sql) or die("Unable to determine round: " . mysqli_error($conn));
-list($round) = mysqli_fetch_array($results);
+$results = $conn->query( $sql) or die("Unable to determine round: " . $conn->error);
+list($round) = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED);
 
 
 // Get the pullbacks
@@ -39,8 +38,8 @@ and playerid <> $playerid
 and type='pullback';
 EOD;
 
-$results = mysqli_query($conn, $sql) or die("Unable to get number of pullbacks: " . mysqli_error($conn));
-list($numPull) = mysqli_fetch_array($results);
+$results = $conn->query( $sql) or die("Unable to get number of pullbacks: " . $conn->error);
+list($numPull) = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED);
 
 $sql = <<<EOD
 select ep.playerid, concat(p.firstname, ' ', p.lastname) as 'name', p.pos, nr.nflteamid
@@ -53,9 +52,9 @@ and ep.playerid <> $playerid
 and ep.type in ('pullback', if($numPull < 2, 'alternate', ''));
 EOD;
 
-$results = mysqli_query($conn, $sql) or die("Unable to get pullback names: " . mysqli_error($conn));
+$results = $conn->query( $sql) or die("Unable to get pullback names: " . $conn->error);
 $playerList = array();
-while ($player = mysqli_fetch_array($results)) {
+while ($player = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     array_push($playerList, $player);
 }
 
@@ -78,7 +77,7 @@ UPDATE expansionLost SET num=num+1 where teamid=$oldTeam;
 EOD;
 
 //print "$sql <br/>";
-mysqli_query($conn, $sql) or die("Unable to update expansionLost: " . mysqli_error($conn));
+$conn->query( $sql) or die("Unable to update expansionLost: " . $conn->error);
 
 
 // Remove from old roster
@@ -88,7 +87,7 @@ WHERE playerid=$playerid and teamid=$oldTeam and dateoff is null;
 EOD;
 
 //print "$sql <br/>";
-mysqli_query($conn, $sql) or die("Unable to update old roster: " . mysqli_error($conn));
+$conn->query( $sql) or die("Unable to update old roster: " . $conn->error);
 
 
 // Add to new roster
@@ -100,7 +99,7 @@ VALUES
 EOD;
 
 //print "$sql <br/>";
-mysqli_query($conn, $sql) or die("Unable to update new roster: " . mysqli_error($conn));
+$conn->query( $sql) or die("Unable to update new roster: " . $conn->error);
 
 
 // Update Expansion picks
@@ -112,7 +111,7 @@ VALUES
 EOD;
 
 //print "$sql <br/>";
-mysqli_query($conn, $sql) or die("Unable to update expansionPicks: " . mysqli_error($conn));
+$conn->query( $sql) or die("Unable to update expansionPicks: " . $conn->error);
 
 
 // Update expansion protections
@@ -129,6 +128,6 @@ WHERE playerid in ($buildString);
 EOD;
 
 //print "$sql <br/>";
-mysqli_query($conn, $sql) or die("Unable to update expansionProtections: " . mysqli_error($conn));
+$conn->query( $sql) or die("Unable to update expansionProtections: " . $conn->error);
 print "Completed Successfully";
 ?>

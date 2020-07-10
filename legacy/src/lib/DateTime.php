@@ -1,5 +1,4 @@
-<?
-  /* lib_DateTime.php
+<?php   /* lib_DateTime.php
    *
    * A small library used to manipulate date and time structure, without
    * the 1/1/1970 to 2038 limit.

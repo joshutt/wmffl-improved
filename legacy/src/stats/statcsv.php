@@ -1,5 +1,4 @@
-<?
-#header("Content-type: text/txt");
+<?php #header("Content-type: text/txt");
 header("Content-type: text/csv");
 
 require_once "utils/start.php";
@@ -116,8 +115,8 @@ print "$buildString\n";
 //print "Last Name,First Name,Pos,NFL,Week,Pts\n";
 //print $sql;
 
-$results = mysqli_query($conn, $sql) or die("There was an error in the query: " . mysqli_error($conn));
-while ($playList = mysqli_fetch_array($results)) {
+$results = $conn->query( $sql) or die("There was an error in the query: " . $conn->error);
+while ($playList = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     //print $playList[0].",".$playList[1].",".$playList[2].",";
     //print $playList[3].",".$playList[4].",".$playList[5];
     //print "\n";

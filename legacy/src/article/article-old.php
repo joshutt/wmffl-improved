@@ -1,5 +1,4 @@
-<?
-require_once "DataObjects/Articles.php";
+<?php require_once "DataObjects/Articles.php";
 
 $article = new DataObjects_Articles;
 if ($_REQUEST["uid"] != null) {
@@ -30,21 +29,20 @@ if ($_REQUEST["artSeason"] != null) {
 <table width="100%">
 	<tr>
 		<td class="row c1 rap">
-			<div class="row c1 C titleLine1"><? print $article->title; ?></div>
-			<div class="row c1 C"><img src="/<? print $article->link; ?>" alt="<? print $article->caption; ?>" class="headline_photo" />
+			<div class="row c1 C titleLine1"><?php print $article->title; ?></div>
+			<div class="row c1 C"><img src="/<?php print $article->link; ?>" alt="<?php print $article->caption; ?>" class="headline_photo" />
 			</div>
-			<div class="row c1 C caption rap"><? print $article->caption; ?></div>
+			<div class="row c1 C caption rap"><?php print $article->caption; ?></div>
 			<div class="mainStory">
-				<p><span class="newsdate"><? print $article->location; ?></span> - <? print $article->articleText; ?></p>
-			<div class="inelig"><? print $dateString; ?></div>
+				<p><span class="newsdate"><?php print $article->location; ?></span> - <?php print $article->articleText; ?></p>
+			<div class="inelig"><?php print $dateString; ?></div>
 			</div>
 		</td>
 	</tr>
 	<tr>
 		<td class="cat">Past Headlines</td>
 	</tr>
-<?
-$articles = new  DataObjects_Articles;
+<?php $articles = new  DataObjects_Articles;
 $articles->active = 1;
 $articles->orderBy("displayDate desc");
 $articles->orderBy("priority desc");
@@ -55,8 +53,7 @@ $articles->find();
 	<tr>
 		<td class="row c1 C">
 			<select id="news" style="margin:5px" onchange="changenews()">
-				<?
-					while($articles->fetch()) {
+				<?php 					while($articles->fetch()) {
 						$dateString = date("d M Y", strtotime($articles->displayDate));
 						if ($articles->articleId == $artid) {
 							$selectString = " selected=\"selected\" ";
@@ -68,8 +65,7 @@ $articles->find();
 				?>
 			</select>
             <select id="artSeason" style="margin:5px" onchange="changeyear()">
-<?
-$years = array(2012, 2011, 2010, 2009, 2008, 2007, 2006);
+<?php $years = array(2012, 2011, 2010, 2009, 2008, 2007, 2006);
 
 foreach($years as $y) {
     $st = "";

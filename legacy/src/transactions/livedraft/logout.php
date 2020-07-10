@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 if (!isset($logArr)) {
     $_SESSION['logArr'] = array();

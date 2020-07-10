@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 if (!$isin) {
     header("Location: tradescreen.php");
     exit;
@@ -39,7 +38,7 @@ $myTeam = loadTeam($teamnum);
 $title = "Trades";
 ?>
 
-<? 
+<?php
 //$teamid = 0;
 include "base/menu.php"; 
 ?>
@@ -59,34 +58,31 @@ If no action is taken for seven days the offer will automaticlly become void.
 
 <H3 ALIGN=Center>Current Offer</H3>
 
-<P><B><?print $myTeam->getName();?></B> offer <? print printList($youItems);?><BR>
-to the <B><?print $otherTeam->getName();?></B> in exchange for <? print printList($theyItems); ?>
-<?
-?>
+<P><B><?print $myTeam->getName();?></B> offer <?php print printList($youItems);?><BR>
+to the <B><?print $otherTeam->getName();?></B> in exchange for <?php print printList($theyItems); ?>
+<?php ?>
 </P>
 
 <FORM ACTION="edittrade.php" METHOD="POST">
 <CENTER><INPUT TYPE="submit" NAME="edit" VALUE="Edit Offer">
-<?
-foreach ($they as $value) {
+<?php foreach ($they as $value) {
     print "<input type=\"hidden\" name=\"they[]\" value=\"$value\">";
 }
 foreach ($you as $value) {
     print "<input type=\"hidden\" name=\"you[]\" value=\"$value\">";
 }
 ?>
-<INPUT TYPE="hidden" NAME="offerid" VALUE="<? print $offerid;?>">
-<input type="hidden" name="teamto" value="<? print $teamto; ?>"/>
+<INPUT TYPE="hidden" NAME="offerid" VALUE="<?php print $offerid;?>">
+<input type="hidden" name="teamto" value="<?php print $teamto; ?>"/>
 </CENTER>
 </FORM>
 
 <FORM ACTION="processconfirm.php" METHOD="POST">
 Comments:<BR>
 <CENTER>
-<input type="hidden" name="offerid" value="<? print $offerid;?>">
-<input type="hidden" name="teamto" value="<? print $teamto; ?>"/>
-<?
-foreach ($they as $value) {
+<input type="hidden" name="offerid" value="<?php print $offerid;?>">
+<input type="hidden" name="teamto" value="<?php print $teamto; ?>"/>
+<?php foreach ($they as $value) {
     print "<input type=\"hidden\" name=\"they[]\" value=\"$value\">";
 }
 foreach ($you as $value) {
@@ -104,6 +100,6 @@ foreach ($you as $value) {
 </CENTER>
 </FORM>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>
 </BODY>
 </HTML>

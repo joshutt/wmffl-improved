@@ -5,7 +5,7 @@ $username = mysqli_real_escape_string($conn, $username);
 $password = mysqli_real_escape_string($conn, $password);
 $thequery = "select teamid, password, name, userid from user where username='$username' and (password=password('$password') or password=md5('$password')) and Active='Y'";
 
-$result = mysqli_query($conn, $thequery);
+$result = $conn->query( $thequery);
 $numrow = mysqli_num_rows($result);
 
 if ($numrow == 0) {
@@ -14,7 +14,7 @@ if ($numrow == 0) {
     header("Location: " . $_SERVER['HTTP_REFERER']);
     exit();
 } else {
-    $team = mysqli_fetch_row($result);
+    $team = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
     $_SESSION["isin"] = True;
     $_SESSION["teamnum"] = $team[0];
     $_SESSION["user"] = $username;
@@ -24,7 +24,7 @@ if ($numrow == 0) {
 
     $thequery = "update user set lastlog=now(), password=md5('$password') where username='$username'";
     #$thequery = "update user set lastlog=now() where username='$username'";
-    $result = mysqli_query($conn, $thequery);
+    $result = $conn->query( $thequery);
     header("Location: " . $_SERVER['HTTP_REFERER']);
     exit();
 }

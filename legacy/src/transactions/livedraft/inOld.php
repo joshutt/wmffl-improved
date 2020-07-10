@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 require "DataObjects/Draftpicks.php";
 
@@ -58,8 +57,7 @@ $draftPicks->find();
                 <div id="draft_picks_container" class="draft_picks_container">
                     <table class="report" cellspacing="1" align="center">
                         <tbody>
-<?
-
+<?php 
 while ($draftPicks->fetch()) {
     $roundDist = sprintf("%02d", $draftPicks->Round);
     $pickDist = sprintf("%02d", $draftPicks->Pick);

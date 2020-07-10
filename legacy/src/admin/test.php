@@ -1,5 +1,4 @@
-<?
-print "start<br/>";
+<?php print "start<br/>";
 require_once "utils/start.php";
 
 $request_url = "http://football.myfantasyleague.com/2008/export?TYPE=players&L=&W=";

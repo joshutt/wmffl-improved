@@ -1,3 +1,2 @@
-<?
-header("Location: http://wmffl.com");
+<?php header("Location: http://wmffl.com");
 ?>

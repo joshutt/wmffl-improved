@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 function trade($teamid, $date) {
     global $conn;
@@ -16,11 +15,11 @@ function trade($teamid, $date) {
     $tradequery.="and '$date' between wm.startDate and wm.enddate ";
 	$tradequery.="group by t1.tradegroup, abs(tm1.teamid-$teamid), p.lastname ";
 
-    $results = mysqli_query($conn, $tradequery);
+    $results = $conn->query( $tradequery);
 	$oldgroup = 0;
     //print mysqli_num_rows($results);
     //print $tradequery;
-    while (list($group, $date, $TeamFrom, $lastname, $firstname, $position, $nflteam, $other) = mysqli_fetch_row($results)) {
+    while (list($group, $date, $TeamFrom, $lastname, $firstname, $position, $nflteam, $other) = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
 		if ($oldgroup != $group) {
 			print "<LI>Traded ";
 			$oldgroup = $group;
@@ -41,8 +40,8 @@ function trade($teamid, $date) {
 
 
 	$thequery = "SELECT DATE_FORMAT(max(date), '%m/%e/%Y'), DATE_FORMAT(max(date),'%m'), DATE_FORMAT(max(date),'%Y') FROM transactions";
-$results = mysqli_query($conn, $thequery);
-list($lastupdate, $themonth, $theyear) = mysqli_fetch_row($results);
+$results = $conn->query( $thequery);
+list($lastupdate, $themonth, $theyear) = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 
 if (isset($_REQUEST["month"])) $themonth = $_REQUEST["month"];
 if (isset($_REQUEST["year"])) $theyear = $_REQUEST["year"];
@@ -58,18 +57,18 @@ if (isset($_REQUEST["year"])) $theyear = $_REQUEST["year"];
 <!--
 <FORM ACTION="transactions.php" METHOD="GET">
 <SELECT NAME="month">
-	<OPTION VALUE="01"<? if ($themonth=='01') print "SELECTED";?>>January</OPTION>
-	<OPTION VALUE="02"<? if ($themonth=='02') print "SELECTED";?>>February</OPTION>
-	<OPTION VALUE="03"<? if ($themonth=='03') print "SELECTED";?>>March</OPTION>
-	<OPTION VALUE="04"<? if ($themonth=='04') print "SELECTED";?>>April</OPTION>
-	<OPTION VALUE="05"<? if ($themonth=='05') print "SELECTED";?>>May</OPTION>
-	<OPTION VALUE="06"<? if ($themonth=='06') print "SELECTED";?>>June</OPTION>
-	<OPTION VALUE="07"<? if ($themonth=='07') print "SELECTED";?>>July</OPTION>
-	<OPTION VALUE="08"<? if ($themonth=='08') print "SELECTED";?>>August</OPTION>
-	<OPTION VALUE="09"<? if ($themonth=='09') print "SELECTED";?>>September</OPTION>
-	<OPTION VALUE="10"<? if ($themonth=='10') print "SELECTED";?>>October</OPTION>
-	<OPTION VALUE="11"<? if ($themonth=='11') print "SELECTED";?>>November</OPTION>
-	<OPTION VALUE="12"<? if ($themonth=='12') print "SELECTED";?>>December</OPTION>
+	<OPTION VALUE="01"<?php if ($themonth=='01') print "SELECTED";?>>January</OPTION>
+	<OPTION VALUE="02"<?php if ($themonth=='02') print "SELECTED";?>>February</OPTION>
+	<OPTION VALUE="03"<?php if ($themonth=='03') print "SELECTED";?>>March</OPTION>
+	<OPTION VALUE="04"<?php if ($themonth=='04') print "SELECTED";?>>April</OPTION>
+	<OPTION VALUE="05"<?php if ($themonth=='05') print "SELECTED";?>>May</OPTION>
+	<OPTION VALUE="06"<?php if ($themonth=='06') print "SELECTED";?>>June</OPTION>
+	<OPTION VALUE="07"<?php if ($themonth=='07') print "SELECTED";?>>July</OPTION>
+	<OPTION VALUE="08"<?php if ($themonth=='08') print "SELECTED";?>>August</OPTION>
+	<OPTION VALUE="09"<?php if ($themonth=='09') print "SELECTED";?>>September</OPTION>
+	<OPTION VALUE="10"<?php if ($themonth=='10') print "SELECTED";?>>October</OPTION>
+	<OPTION VALUE="11"<?php if ($themonth=='11') print "SELECTED";?>>November</OPTION>
+	<OPTION VALUE="12"<?php if ($themonth=='12') print "SELECTED";?>>December</OPTION>
 </SELECT>
 <INPUT TYPE="hidden" NAME="year" VALUE="2001">
 -->
@@ -83,7 +82,7 @@ if (isset($_REQUEST["year"])) $theyear = $_REQUEST["year"];
 <INPUT TYPE="submit" NAME="submit" VALUE="Search">
 </FORM>
 -->
-<? 
+<?php
 	include "transactions/transmenu.php";
 	//include "transactions/transmenu.html";
 
@@ -108,12 +107,12 @@ if (isset($_REQUEST["year"])) $theyear = $_REQUEST["year"];
 //	$thequery .= "ORDER BY t.date DESC, m.name, t.method, p.lastname";
 	$thequery .= "ORDER BY DATE_FORMAT(t.date, '%Y/%m/%d') DESC, m.name, t.method, p.lastname";
 
-$results = mysqli_query($conn, $thequery) or die("Error: " . mysqli_error($conn));
+$results = $conn->query( $thequery) or die("Error: " . $conn->error);
 	$first = TRUE;
     $olddate = "";
     $oldteam = "";
     $oldmethod = "";
-while (list($date, $teamname, $method, $player, $position, $nflteam, $teamid, $rawdate) = mysqli_fetch_row($results)) {
+while (list($date, $teamname, $method, $player, $position, $nflteam, $teamid, $rawdate) = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
 		$change = FALSE;
 		if ($olddate != $date) {
 			if (!$first) {

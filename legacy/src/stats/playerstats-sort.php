@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 $title = "Player Stats";
 
 if ($_REQUEST["pos"] == null || $_REQUEST["pos"]=="") {
@@ -103,7 +102,7 @@ $(document).ready(function(){
 });
 </script>
 
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
 
 <style>
@@ -118,7 +117,7 @@ $(document).ready(function(){
 
 <h1 align="center">Player Stats</h1>
 <hr/>
-<? include "base/statbar.html";?>
+<?php include "base/statbar.html";?>
 
 <p><table width="100%">
 <tr>
@@ -163,8 +162,8 @@ $(document).ready(function(){
 <div class="SLTables1">
 <table border="0" cellpadding="2" cellspacing="1" width="100%" id="statTable">
 <thead>
-<tr align="left" class="bg0"><td colspan="<? print sizeof($pLine)+7; ?>" class="bg0">
-<font class="bg0font"><? print $posName[$pos]; ?></font></td></tr>
+<tr align="left" class="bg0"><td colspan="<?php print sizeof($pLine)+7; ?>" class="bg0">
+<font class="bg0font"><?php print $posName[$pos]; ?></font></td></tr>
 <tr align="middle" class="bg1"><th>Name</th>
 <th>NFL Team</th>
 <th>Bye</th>
@@ -172,8 +171,7 @@ $(document).ready(function(){
 <th>Games</th>
 <th>Pts</th>
 <th>PPG</th>
-<?
-$pLab = $posLabels[$pos];
+<?php $pLab = $posLabels[$pos];
 foreach ($pLab as $pl) {
     $sortVal = $pLine[array_search($pl, $pLab)];
     print "<th>$pl</td>";
@@ -181,8 +179,8 @@ foreach ($pLab as $pl) {
 print "</tr></thead><tbody>";
 
 //print "Last Name,First Name,Pos,NFL,Week,Pts\n";
-$results = mysqli_query($conn, $sql) or die("There was an error in the query: " . mysqli_error($conn));
-while ($playList = mysqli_fetch_array($results)) {
+$results = $conn->query( $sql) or die("There was an error in the query: " . $conn->error);
+while ($playList = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     //print $playList[0].",".$playList[1].",".$playList[2].",";
     //print $playList[3].",".$playList[4].",".$playList[5];
     //print "\n";
@@ -209,6 +207,6 @@ EOD;
 </table>
 </div>
 
-<p><div align="right"><a href="statcsv.php?pos=<? print "$pos&sort=$sort&season=$season";?>"><img src="/images/csv.gif" border="0"></a></div><p>
+<p><div align="right"><a href="statcsv.php?pos=<?php print "$pos&sort=$sort&season=$season";?>"><img src="/images/csv.gif" border="0"></a></div><p>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

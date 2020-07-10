@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 
 require "DataObjects/Draftpicks.php";
@@ -113,8 +112,8 @@ if ($isin) {
     FROM draftPickHold d JOIN newplayers p ON d.playerid=p.playerid
     JOIN nflrosters r on r.playerid=d.playerid and r.dateoff is null
     WHERE d.teamid=$teamnum";
-    $result2 = mysqli_query($conn, $sql);
-    $preArray = mysqli_fetch_array($result2);
+    $result2 = $conn->query( $sql);
+    $preArray = $result2->fetch(\Doctrine\DBAL\FetchMode::MIXED);
 }
 
 

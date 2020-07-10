@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 $pos = $_REQUEST["pos"];
 $nfl = $_REQUEST["nfl"];
 
@@ -13,10 +12,10 @@ if ($nfl != "*" && $nfl != "") {
 $sql .= "order by p.lastname, p.firstname ";
 
 print $sql;
-$result = mysqli_query($conn, $sql) or die("Ug I died: " . mysqli_error($conn));
+$result = $conn->query( $sql) or die("Ug I died: " . $conn->error);
 
 print "The List<br/>";
-while ($playerList = mysqli_fetch_array($result)) {
+while ($playerList = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     print "{$playerList["playerid"]} - {$playerList["lastname"]}, {$playerList["firstname"]} - {$playerList["pos"]} - {$playerList["team"]}<br/>";
 //    print "<option value=\"{$playerList["playerid"]}\">{$playerList["lastname"]}, {$playerList["firstname"]} - {$playerList["pos"]} - {$playerList["nflteamid"]}</option>";
 }

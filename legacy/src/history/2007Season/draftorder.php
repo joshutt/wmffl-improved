@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $sql = "SELECT d.round, d.pick, substring(t.name, 1, 20) as 'name', ";
 $sql .= "if(d.teamid<>d.orgTeam, '*', '') as 'flag' ";
@@ -9,7 +8,7 @@ $sql .= "ORDER BY Round, Pick";
 
 $title = "2007 WMFFL Draft Order";
 ?>
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
 <H1 Align=Center>Draft Order</H1>
 <H5 ALIGN=Center><I>August 8, 2007</I></H5>
@@ -25,11 +24,10 @@ teams.  The weights were: Go Balls Deep - 6; Gallic Warriors - 5; Pretend I'm No
 <P>
 <TABLE WIDTH=100%>
 
-<?
-$results = mysqli_query($conn, $sql) or die("Database error: " . mysqli_error($conn));
+<?php $results = $conn->query( $sql) or die("Database error: " . $conn->error);
 
 $round = 0;
-while ($pick = mysqli_fetch_array($results)) {
+while ($pick = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($round <> $pick["round"]) {
         if ($round > 0) {
             print "</ol></td>";

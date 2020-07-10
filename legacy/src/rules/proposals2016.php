@@ -1,5 +1,4 @@
-<?
-session_start();
+<?php session_start();
 $title = "WMFFL Rule Proposals";
 $cssList = array("rules.css");
 
@@ -90,4 +89,4 @@ Install Derrick Inman as the new owner of the Woodland Rangers.
 <blockquote><i>No rule change required</i></blockquote>
 </p>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

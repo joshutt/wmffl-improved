@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 #$currentSeason=2004;
 if (!isset($thisSeason)) {
@@ -16,13 +15,13 @@ $sql .= "and r.playerid=p.playerid and r.teamid=t.teamid ";
 $sql .= "and ps.week=w.week and ps.season=w.season and ps.playerid=p.playerid ";
 $sql .= "order by w.week, t.name, p.pos, ps.pts desc";
 
-$results = mysqli_query($conn, $sql) or die ("Dead: " . mysqli_error($conn));
+$results = $conn->query( $sql) or die ("Dead: " . $conn->error);
 $potPts = array();
 $actPts = array();
 
 $curTeam = "";
 $curPos = "";
-while ($row = mysqli_fetch_array($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     $week = $row["week"];
     $teamName = $row["name"];
     if ($curTeam != $teamName) {

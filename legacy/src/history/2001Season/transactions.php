@@ -13,12 +13,12 @@ where (t1.TeamFromid=$teamid or t1.TeamToid=$teamid)
 and t1.date='$date'
 group by t1.tradegroup, abs(tm1.teamid-$teamid), p.lastname";
 
-    $results = mysqli_query($conn, $tradequery) or die("Error: " . mysqli_error($conn));
+    $results = $conn->query( $tradequery) or die("Error: " . $conn->error);
 	$oldgroup = 0;
     $firstteam = "";
     $firstplayer = TRUE;
     /** @noinspection PhpUnusedLocalVariableInspection */
-    while (list($group, $tdate, $TeamFrom, $lastname, $firstname, $position, $nflteam, $other) = mysqli_fetch_row($results)) {
+    while (list($group, $tdate, $TeamFrom, $lastname, $firstname, $position, $nflteam, $other) = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
 		if ($oldgroup != $group) {
 			print "<LI>Traded ";
 			$oldgroup = $group;
@@ -42,8 +42,8 @@ group by t1.tradegroup, abs(tm1.teamid-$teamid), p.lastname";
 require "utils/connect.php";
 	
 	$thequery = "SELECT DATE_FORMAT(max(date), '%m/%e/%Y'), DATE_FORMAT(max(date),'%m'), DATE_FORMAT(max(date),'%Y') FROM transactions";
-$results = mysqli_query($conn, $thequery);
-list($lastupdate, $themonth, $theyear) = mysqli_fetch_row($results);
+$results = $conn->query( $thequery);
+list($lastupdate, $themonth, $theyear) = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 
 if (isset($_REQUEST["month"])) $themonth = $_REQUEST["month"];
 if (isset($_REQUEST["year"])) $theyear = $_REQUEST["year"];
@@ -73,12 +73,12 @@ WHERE t.date BETWEEN '$theyear-$themonth-01' AND
 ORDER BY t.date DESC, m.name, t.method, p.lastname";
 
 
-$results = mysqli_query($conn, $thequery);
+$results = $conn->query( $thequery);
 	$first = TRUE;
 $olddate = "";
 $oldteam = "";
 $oldmethod = "";
-while (list($date, $teamname, $method, $player, $position, $nflteam, $teamid, $rawdate) = mysqli_fetch_row($results)) {
+while (list($date, $teamname, $method, $player, $position, $nflteam, $teamid, $rawdate) = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
 		$change = FALSE;
 		if ($olddate != $date) {
 			if (!$first) {

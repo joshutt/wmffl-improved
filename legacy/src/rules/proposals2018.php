@@ -1,5 +1,4 @@
-<?
-session_start();
+<?php session_start();
 $title = "WMFFL Rule Proposals";
 
 $cssList = array("rules.css");
@@ -121,4 +120,4 @@ Adjust auto draft to draft starters before backups and a single backup before mu
     </i></blockquote>
 </p>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

@@ -94,7 +94,7 @@ VALUES
 EOD;
 
 //print $sql;
-$result = mysqli_query($conn, $sql) or die("Failed: " . mysqli_error($conn));
+$result = $conn->query( $sql) or die("Failed: " . $conn->error);
 $uid = mysqli_insert_id($conn);
 $_REQUEST["uid"] = $uid;
 

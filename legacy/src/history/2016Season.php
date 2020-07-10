@@ -1,5 +1,4 @@
-<?
-$title = "2016 WMFFL Season";
+<?php $title = "2016 WMFFL Season";
 include "base/menu.php"; 
 ?>
 
@@ -60,8 +59,7 @@ include "base/menu.php";
 <HR size = "1">
     <A NAME="standings"/>
 
-<?
-$thisSeason = 2016;
+<?php $thisSeason = 2016;
 $thisWeek = 17;
 $clinchedList = array( 'Sean Taylor\'s Ashes' => 'z-', 'Gallic Warriors' => 'y-', 'MeggaMen' => 'y-', 'Amish Electricians' => 'y-', "Pretend I'm Not Here" => 'z-', 'Woodland Rangers' => '-');
 include "common/weekstandings.php";

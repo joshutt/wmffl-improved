@@ -42,8 +42,8 @@ function checkTransactions($teamid, &$retArray, $post)
                 $sql = "SELECT TotalPts-(ProtectionPts+TransPts) as 'PtsLeft' ";
                 $sql .= "FROM transpoints WHERE season=$year AND ";
                 $sql .= "teamid=$team";
-                $results = mysqli_query($conn, $sql);
-                $arr = mysqli_fetch_array($results);
+                $results = $conn->query( $sql);
+                $arr = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED);
                 if (!$arr || $arr["PtsLeft"] < $pts) {
                     $newInvalid = new InvalidTrans();
                     $newInvalid->team = $team;
@@ -78,8 +78,8 @@ function checkDraft($teamid, &$retArray, $post)
                 $sql = "SELECT * FROM draftpicks WHERE season=$year AND ";
                 $sql .= "round=$round AND teamid=$team";
                 //print "Checking $sql";
-                $results = mysqli_query($conn, $sql);
-                //$arr = mysqli_fetch_array($results);
+                $results = $conn->query( $sql);
+                //$arr = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED);
                 $num = mysqli_num_rows($results);
                 if ($num != 1) {
                     $newInvalid = new InvalidDraft();

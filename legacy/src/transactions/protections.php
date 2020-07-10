@@ -38,10 +38,9 @@ include "base/menu.php";
 <H1 ALIGN=Center>Protections</H1>
 <HR size = "1">
 
-<?
-if ($isin) {
-    $results = mysqli_query($conn, $ptsQuery) or die("Database error: " . mysqli_error($conn));
-    $pts = mysqli_fetch_row($results);
+<?php if ($isin) {
+    $results = $conn->query( $ptsQuery) or die("Database error: " . $conn->error);
+    $pts = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 ?>
 
 <SCRIPT LANGUAGE="JavaScript">
@@ -56,9 +55,9 @@ function change(numPts, index) {
 }
 
 function checkForm() {
-	if (eval(document["protform"].PtsUse.value) <= eval(<? print $pts[0]; ?>)) 
+	if (eval(document["protform"].PtsUse.value) <= eval(<?php print $pts[0]; ?>))
 		return true;
-	alert ("You protections exceed <? print $pts[0]; ?> points");
+	alert ("You protections exceed <?php print $pts[0]; ?> points");
 	return false;
 }
 
@@ -69,30 +68,27 @@ Select the players that you wish to protect, by checking the box next to
 them and then submitting the form.  You may change protections at any time
 up until the deadline: <?= $dateTime->format("h:i a T \o\\n l, F d");?>.</P>
 
-<?
-	if ($dateTime->getTimestamp() <= time()) {
+<?php 	if ($dateTime->getTimestamp() <= time()) {
 ?>
 <P><B><FONT COLOR="red">Sorry, The Deadline For Changing Protections
 has Passed</FONT></B></P>
-<?
-	} else {
+<?php 	} else {
 ?>
 
 <FORM NAME="protform" ACTION="saveprotections" METHOD="POST">
 
-<?
-	print "Points Allowed: <B>$pts[0]</B><BR>";
+<?php 	print "Points Allowed: <B>$pts[0]</B><BR>";
 	print "Points Used: <INPUT TYPE=\"TEXT\" NAME=\"PtsUse\" SIZE=\"3\" MAXLENGTH=\"3\" onFocus=\"this.blur();\" VALUE=\"$pts[1]\">";
 ?>
 
 
 <TABLE>
 <TR><TH></TH><TH>Name</TH><TH>Position</TH><TH>Cost</TH></TR>
-<? 
+<?php
 	// Create the query
-$results = mysqli_query($conn, $thequery);
+$results = $conn->query( $thequery);
 	$idx = 0;
-while (list($playerid, $firstname, $lastname, $pos, $nfl, $year, $cost, $protected) = mysqli_fetch_row($results)) {
+while (list($playerid, $firstname, $lastname, $pos, $nfl, $year, $cost, $protected) = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
 		print "<TR><TD><INPUT TYPE=\"checkbox\" NAME=\"protect[]\" VALUE=\"$playerid\" ONCLICK=\"change($cost, $idx)\"";
 		if ($protected == 1 || $pos=="HC") print "CHECKED ";
 		print "></TD>";
@@ -112,7 +108,7 @@ while (list($playerid, $firstname, $lastname, $pos, $nfl, $year, $cost, $protect
 
 <CENTER><B>You must be logged in to submit protections</B></CENTER>
 
-<? } ?>
+<?php } ?>
 
 <?php
 	include "base/footer.html";

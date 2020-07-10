@@ -3,25 +3,25 @@ require_once "utils/start.php";
 require_once "clock.class.php";
 
 $sql = "SELECT * FROM config WHERE `key` like 'draft.clock.%'";
-$results = mysqli_query($conn, $sql) or die("Unable to get Config values: " . mysqli_error($conn));
+$results = $conn->query( $sql) or die("Unable to get Config values: " . $conn->error);
 
 $configArray = array();
-while ($rows = mysqli_fetch_assoc($results)) {
+while ($rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
     $mainVal = $rows["key"];
     $broken = explode(".", $mainVal);
     $configArray[$broken[2]] = $rows["value"];
 }
 
 $sql = "SELECT t.name, t.teamid from draftpicks d join teamnames t on d.teamid=t.teamid and d.season=t.season where d.season=$currentSeason and d.playerid is null order by d.round, d.pick limit 1";
-$results = mysqli_query($conn, $sql) or die("Unable to get current pick: " . mysqli_error($conn));
-$row = mysqli_fetch_assoc($results);
+$results = $conn->query( $sql) or die("Unable to get current pick: " . $conn->error);
+$row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
 $currentPick = $row["name"];
 $teamId = $row["teamid"];
 
 $sql = "SELECT t.name, c.value FROM `config` c JOIN teamnames t on substring_index(`key`, '.', -1) = t.teamid WHERE `key` like 'draft.team.%' and t.season=$currentSeason ORDER BY t.name ";
-$results = mysqli_query($conn, $sql) or die("Unable to get current pick: " . mysqli_error($conn));
+$results = $conn->query( $sql) or die("Unable to get current pick: " . $conn->error);
 $teamArray = array();
-while ($rows = mysqli_fetch_assoc($results)) {
+while ($rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
     $teamArray[$rows["name"]] = $rows["value"];
 }
 

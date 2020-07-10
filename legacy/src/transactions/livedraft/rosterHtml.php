@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $teamId = $_REQUEST["teamid"];
 
@@ -16,12 +15,12 @@ ORDER BY t.name, p.pos, p.lastname
 
 EOD;
 
-$results = mysqli_query($conn, $sql) or die("Error: " . mysqli_error($conn));
+$results = $conn->query( $sql) or die("Error: " . $conn->error);
 $body = "";
 $team = "";
 $first = true;
 $count = 0;
-while ($row = mysqli_fetch_assoc($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
     if ($first) {
         $body .= "<tr><th colspan=\"4\">{$row["name"]}</th></tr>";
         $first = false;

@@ -1,5 +1,4 @@
-<?
-$PASS_THRES = .67;
+<?php $PASS_THRES = .67;
 $FAIL_THRES = .51;
 
 	// Include the file that defines the connection information
@@ -14,11 +13,11 @@ if (!$isin) {
 
 foreach ($_POST as $key => $value) {
 	$thequery = "update ballot set vote='".$value."' where issueid=".$key." and teamid=".$teamnum;
-    mysqli_query($conn, $thequery);
+    $conn->query( $thequery);
 
 	$checkpassfail = "select sum(if(vote='Accept',1,0))/sum(if(vote<>'Abstain',1,0)) as Pass, sum(if(vote='Reject',1,0))/sum(if(vote<>'Abstain',1,0)) as Reject from ballot where issueid=".$key;
-    $result = mysqli_query($conn, $checkpassfail);
-    list($pass, $fail) = mysqli_fetch_row($result);
+    $result = $conn->query( $checkpassfail);
+    list($pass, $fail) = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 	if ($pass >= $PASS_THRES) {
 		// Here we email a pass message
 		$body = "Proposal $key has passed";
@@ -30,8 +29,8 @@ foreach ($_POST as $key => $value) {
 	}
 	
 	$anotherquery = "select IssueNum, IssueName from issues where issueid=".$key;
-    $result = mysqli_query($conn, $anotherquery);
-    list($voteNum[$key], $voteName[$key]) = mysqli_fetch_row($result);
+    $result = $conn->query( $anotherquery);
+    list($voteNum[$key], $voteName[$key]) = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 	$voteCast[$key] = $value;
 	
     if ($key == 87) {
@@ -53,7 +52,7 @@ foreach ($_POST as $key => $value) {
 
 
 <?php include "WMFFL Ballot" ?>
-<?	include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
 <H1 ALIGN=Center>Votes Cast</H1>
 <HR>
@@ -63,11 +62,10 @@ If you would like to change you vote, you may do so at any time before the
 ballot closes.  <A HREF="ballot.php">Ballot</A>.</P>
 
 <P>
-<?
-foreach ($voteNum as $key => $value) {
+<?php foreach ($voteNum as $key => $value) {
 	print $value." - ".$voteName[$key]." - ".$voteCast[$key]."<BR/>";
 }
 ?>
 </P>
 
-<?	include "base/footer.html";?>
+<?php include "base/footer.html";?>

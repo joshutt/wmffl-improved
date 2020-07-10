@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 include "utils/reportUtils.php";
 
 
@@ -106,10 +105,10 @@ EOD;
 
 }
 
-$results = mysqli_query($conn, $sql) or die("There was an error in the query: " . mysqli_error($conn));
+$results = $conn->query( $sql) or die("There was an error in the query: " . $conn->error);
 $newHold = array();
 $max = 0;
-while ($playList = mysqli_fetch_array($results)) {
+while ($playList = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     // If the new player isn't already in array add it
     $id = $playList["playerid"];
     if (sizeof($newHold) == 0 || !array_key_exists($id, $newHold)) {
@@ -167,8 +166,7 @@ if ($format == "html" || !supportedFormat($format)) {
     <hr size="1">
 
 
-    <?
-    include "base/statbar.html";
+    <?php     include "base/statbar.html";
     print "<div id=\"tblblock\" class='container justify-content-center'>";
     include "weekbyweekinc.php";
     print "<div id=\"mainTable\" class='row col-12 justify-content-center'>";

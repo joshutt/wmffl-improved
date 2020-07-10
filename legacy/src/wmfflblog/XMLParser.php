@@ -1,5 +1,4 @@
-<?
-class XMLParser {
+<?php class XMLParser {
         var $path;
             var $result;
 

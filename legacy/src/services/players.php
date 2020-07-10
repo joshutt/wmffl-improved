@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 // Get extra where
 $where = "";
@@ -25,13 +24,13 @@ ORDER BY p.playerid
 
 EOD;
 
-$results = mysqli_query($conn, $sql) or die("Error: " . mysqli_error($conn));
+$results = $conn->query( $sql) or die("Error: " . $conn->error);
 $team = "";
 $first = true;
 
 $result_array = array();
 // For each item in the Query
-while ($row = mysqli_fetch_assoc($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
     array_push($result_array, $row);
 }
 

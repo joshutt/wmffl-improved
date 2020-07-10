@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $title = "WMFFL Ballot";
 
@@ -9,8 +8,7 @@ include "base/menu.php";
 <H1 ALIGN=Center>Ballot</H1>
 <HR size = "1">
 
-<?
-if ($isin) {
+<?php if ($isin) {
 ?>
 
 <P>
@@ -20,8 +18,7 @@ then press the "VOTE" button to have you vote counted.  To review the issues in 
 
 <TABLE>
 <FORM ACTION="ballotcount.php" METHOD=POST>
-<?
-
+<?php 
 	$thequery = "select i.issueid, i.issuenum, i.issuename, b.vote, i.description
 				from issues i, ballot b
 				where i.issueid=b.issueid
@@ -29,8 +26,8 @@ then press the "VOTE" button to have you vote counted.  To review the issues in 
 				and (Deadline is null or Deadline >= now())
 				and b.teamid=".$teamnum." order by issuenum";
 
-$results = mysqli_query($conn, $thequery);
-while (list($issueid, $issuenum, $issuename, $vote, $descr) = mysqli_fetch_row($results)) {
+$results = $conn->query( $thequery);
+while (list($issueid, $issuenum, $issuename, $vote, $descr) = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
 
         $accept = "Accept";
         $reject = "Reject";
@@ -48,11 +45,11 @@ while (list($issueid, $issuenum, $issuename, $vote, $descr) = mysqli_fetch_row($
         }
 ?>	
 	<TR><TH COLSPAN=3 ALIGN="Left">
-		<? print $issuenum;?> - <? print $issuename;?>
+		<?php print $issuenum;?> - <?php print $issuename;?>
 	</TH></TR>
-	<TR><TD COLSPAN=3><? print $descr; ?></TD></TR>
+	<TR><TD COLSPAN=3><?php print $descr; ?></TD></TR>
 	<TR><TD></TD><TD COLSPAN=2><I>
-	<? if ($vote!="") {
+	<?php if ($vote!="") {
 			print "Your current vote is to $votelabel this proposal";
 			//if ($vote == "1") print "approve this proposal";
 			//else print "reject this proposal";
@@ -62,30 +59,28 @@ while (list($issueid, $issuenum, $issuename, $vote, $descr) = mysqli_fetch_row($
 	?>
 	</I></TD></TR>
 	<TR><TD></TD><TD>
-	<INPUT TYPE="radio" NAME="<? print $issueid;?>" VALUE="Accept" <? if ($vote=="Accept") print "CHECKED";?>>
-	</TD><TD><? print $accept; ?></TD></TR>
+	<INPUT TYPE="radio" NAME="<?php print $issueid;?>" VALUE="Accept" <?php if ($vote=="Accept") print "CHECKED";?>>
+	</TD><TD><?php print $accept; ?></TD></TR>
 	<TR><TD></TD><TD>
-		<INPUT TYPE="radio" NAME="<? print $issueid;?>" VALUE="Reject" <? if ($vote=="Reject") print "CHECKED";?>>
-	</TD><TD><? print $reject; ?></TD></TR>
+		<INPUT TYPE="radio" NAME="<?php print $issueid;?>" VALUE="Reject" <?php if ($vote=="Reject") print "CHECKED";?>>
+	</TD><TD><?php print $reject; ?></TD></TR>
 	<TR><TD></TD><TD>
-		<INPUT TYPE="radio" NAME="<? print $issueid;?>" VALUE="Abstain" <? if ($vote=="Abstain") print "CHECKED";?>>
-	</TD><TD><? print $abstain; ?></TD></TR>
+		<INPUT TYPE="radio" NAME="<?php print $issueid;?>" VALUE="Abstain" <?php if ($vote=="Abstain") print "CHECKED";?>>
+	</TD><TD><?php print $abstain; ?></TD></TR>
 	<TR><TD>&nbsp;</TD></TR>			
 
-<?
-	}
+<?php 	}
 	
 ?>
 <TR><TD COLSPAN=3 ALIGN=Center><INPUT TYPE="SUBMIT" VALUE="VOTE"><INPUT TYPE="RESET"></TD></TR>
 </FORM>
 </TABLE>
 
-<?
-} else {
+<?php } else {
 ?>
 
 <CENTER><B>You must be logged in to cast your votes </B></CENTER>
 
-<? }	include "base/footer.html";
+<?php }	include "base/footer.html";
 ?>
 

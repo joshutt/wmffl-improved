@@ -1,5 +1,4 @@
-<?
-session_start();
+<?php session_start();
 $title = "WMFFL Rule Proposals";
 
 ?>
@@ -10,7 +9,7 @@ $title = "WMFFL Rule Proposals";
 .ballot:hover {color: #e2a500; text-decoration: none;}
 </style>
 
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
 <h1 align=center>Current Rule Proposals</h1>
 <hr SIZE = "1"/>
@@ -62,4 +61,4 @@ Increase the number of free transactions from 5 to 15.  With limited rosters, in
 </p>
 
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

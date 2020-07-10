@@ -23,7 +23,7 @@ include "base/menu.php";
 if ($isin) {
     $thequery = "SELECT DATE_FORMAT(d.date, '%m%e'), DATE_FORMAT(d.date, '%W, %M %D'), d.attend ";
     $thequery .= "FROM draftdate d, user u WHERE d.userid=u.userid and u.username='$user' AND d.date BETWEEN '$currentSeason-07-01' AND '$currentSeason-10-01' ORDER BY d.date";
-    $results = mysqli_query($conn, $thequery);
+    $results = $conn->query( $thequery);
 
 ?>
 
@@ -39,7 +39,7 @@ if ($isin) {
 
 
             <?php
-while (list($date, $fulldate, $attend) = mysqli_fetch_row($results)) {
+while (list($date, $fulldate, $attend) = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
     ?>
     <div class="row m-1">
         <div class="col-2">
@@ -71,12 +71,11 @@ while (list($date, $fulldate, $attend) = mysqli_fetch_row($results)) {
         </div>
 </FORM>
 </P>
-<?
-} else {
+<?php } else {
 ?>
 
 <CENTER><B>You must be logged in to use this feature</B></CENTER>
 
-<? }
+<?php }
 include "base/footer.html";
 

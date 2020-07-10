@@ -1,5 +1,4 @@
-<?
-require_once "base/conn.php";
+<?php require_once "base/conn.php";
 require_once "base/useful.php";
 
 function getOtherGames($thisWeek, $thisSeason, $conn) {
@@ -8,9 +7,9 @@ function getOtherGames($thisWeek, $thisSeason, $conn) {
 	$getTeamSQL .= "FROM schedule s, team ta, team tb ";
     $getTeamSQL .= "WHERE s.Week=$thisWeek AND s.Season=$thisSeason ";
 	$getTeamSQL .= "AND s.teama=ta.teamid and s.teamb=tb.teamid ";
-    $results = mysqli_query($conn, $getTeamSQL) or die("AUUGH: " . mysqli_error($conn));
+    $results = $conn->query( $getTeamSQL) or die("AUUGH: " . $conn->error);
 	return $results;
-//    $row = mysqli_fetch_array($results);
+//    $row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED);
 //    return $row;
 }
 
@@ -25,7 +24,7 @@ if ($currentWeek == 16) {$thisWeek=16;}
 $gameresults = getOtherGames($thisWeek, $currentSeason, $conn);
 $gameCol = 0;
 $gamesPrint = array();
-while ($row = mysqli_fetch_array($gameresults)) {
+while ($row = $gameresults->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
 	if ($row['scorea'] < $row['scoreb']) {
 		$winName = $row['bname'];
 		$winScore = $row['scoreb'];

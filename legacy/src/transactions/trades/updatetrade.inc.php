@@ -1,5 +1,4 @@
-<?
-function checkDups(&$playArr, &$ptsArr, $pickArr) {
+<?php function checkDups(&$playArr, &$ptsArr, $pickArr) {
     $ptsAnArray = array();
     for ($i=0; $i<sizeof($ptsArr); $i++) {
         if (!isset($ptsAnArray[$ptsArr[$i]->getSeason()])) {

@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 $thisSeason = 2007;
 $thisWeek = 17;
 //$thisWeek = $currentWeek;
@@ -70,9 +69,9 @@ a.return {
 -->
 </style>
 
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
-<H1 Align=Center><? print $thisSeason;?> Schedule</H1>
+<H1 Align=Center><?php print $thisSeason;?> Schedule</H1>
 <HR size = "1"><CENTER>
 
 <A HREF="#Week1">Week 1</A> | <A HREF="#Week2">Week 2</A> |
@@ -86,12 +85,11 @@ a.return {
 <A HREF="#Championship">WMFFL Championship XVI</A><HR size = "1"></CENTER>
 
 
-<?
-$results = mysqli_query($conn, $sql) or die("Unable to get games: " . mysqli_error($conn));
+<?php $results = $conn->query( $sql) or die("Unable to get games: " . $conn->error);
 
 $listWeek = 0;
 $lastLabel = "";
-while ($row = mysqli_fetch_array($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($row[0] != $listWeek || $row[11] != $lastLabel) {
         if ($listWeek != 0) {
             print <<<EOD
@@ -104,7 +102,7 @@ EOD;
         }
 
 
-        $byes = mysqli_query($conn, $byeWeekQuery . $row[0]);
+        $byes = $conn->query( $byeWeekQuery . $row[0]);
         $anchorName = str_replace(" ","",$row[5]);
         $displayWeek = $row[5];
         if ($row[11] != "") {
@@ -133,7 +131,7 @@ EOD;
         if ($numByes > 0) {
             $byeCount = 1;
             $byeList = "";
-            while (list($byeTeam) = mysqli_fetch_row($byes)) {
+            while (list($byeTeam) = $byes->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
                 $byeList .= $byeTeam;
                 if ($byeCount+1 == $numByes) {
                     $byeList .= " and ";
@@ -189,4 +187,4 @@ print "</div><br/>";
 
 <a name="Playoffs"/><a name="Championship"/>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

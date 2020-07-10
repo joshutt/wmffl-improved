@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $sql = <<<EOD
 SELECT ex.playerid, t.name as 'teamid', concat(ex.firstname, ' ', ex.lastname) as 'name', ex.pos, if (el.num>=2 or exp.teamid is not null, 1, ep.protected) as 'protected', ex.cost, r.nflteamid
@@ -17,10 +16,9 @@ EOD;
 <select name="team"><option value="12">Matt</option><option value="13">Bill</option></select>
 
 <select name="player">
-<?
-$results = mysqli_query($conn, $sql) or die("Unable to get available: " . mysqli_error($conn));
+<?php $results = $conn->query( $sql) or die("Unable to get available: " . $conn->error);
 
-while ($player = mysqli_fetch_array($results)) {
+while ($player = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($player['protected'] == 1) {
         continue;
     }

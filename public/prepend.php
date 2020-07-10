@@ -1,5 +1,5 @@
 <?php
-echo "In the prepend";
+//echo "In the prepend";
 
 global $kernel;
 
@@ -15,7 +15,7 @@ set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 
 function query($conn, $sql) {
     if (get_class($conn) === "mysqli") {
-        return mysqli_query($conn, $sql);
+        return $conn->query( $sql);
     }
 
     if (get_class($conn) === \Doctrine\DBAL\Connection::class) {

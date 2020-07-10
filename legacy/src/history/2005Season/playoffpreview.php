@@ -1,12 +1,11 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $title = "Playoff Preview";
 ?>
 
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
-<h1 align="center"><? print $title; ?></h1>
+<h1 align="center"><?php print $title; ?></h1>
 <hr/>
 
 <p><h4>#1 Sacks on the Beach (10-4) vs #4 MeggaMen (9-5)</h4>
@@ -64,4 +63,4 @@ $title = "Playoff Preview";
 <li>LBC are favored by 3</li>
 </ul></p>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

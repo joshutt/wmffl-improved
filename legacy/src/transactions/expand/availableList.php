@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $protect = array();
 $pullback = array();
@@ -16,7 +15,7 @@ left join expansionpicks exp on exp.playerid=ex.playerid
     order by ex.teamid, pos, lastname
 EOD;
 
-$results = mysqli_query($conn, $sql) or die("Unable to get expansion protections: " . mysqli_error($conn));
+$results = $conn->query( $sql) or die("Unable to get expansion protections: " . $conn->error);
 
 
 $title = "Expansion Picks";
@@ -27,8 +26,7 @@ $title = "Expansion Picks";
 <script language="javascript" src="expandPick.js"></script>
 
 <body onLoad="load();">
-<?
-include "base/menu.php";
+<?php include "base/menu.php";
 ?>
 
 <h1 align="center"><?= $title; ?></h1>
@@ -45,10 +43,9 @@ include "base/menu.php";
 
 <div id="tableList">
 <table class="SLTables1 left" id="tblId">
-<?
-$currentTeam = "";
+<?php $currentTeam = "";
 $count =0;
-while ($player = mysqli_fetch_array($results)) {
+while ($player = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($player['protected'] == 1) {
         $class = 'protect';
     } else {
@@ -73,8 +70,7 @@ while ($player = mysqli_fetch_array($results)) {
 </div>
 
 
-<?
-
+<?php
 $sql = <<<EOD
     SELECT concat(p.firstname, ' ', p.lastname) as 'name', p.pos, nr.nflteamid, t.name as 'tname', ex.cost, ep.round
     FROM team t
@@ -87,15 +83,14 @@ $sql = <<<EOD
     ORDER BY t.teamid, p.pos, p.lastname
 EOD;
 
-$results = mysqli_query($conn, $sql) or die("Unable to get expansion rosters: " . mysqli_error($conn));
+$results = $conn->query( $sql) or die("Unable to get expansion rosters: " . $conn->error);
 ?>
 
 <div id="rosterList">
 <table class="SLTables1">
 
-<?
-$currentTeam = "";
-while ($player = mysqli_fetch_array($results)) {
+<?php $currentTeam = "";
+while ($player = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($player['tname'] != $currentTeam) {
         print "<tr></tr>";
         print "<tr class=\"bg1\"><th colspan=\"4\">${player['tname']}</th></tr>";
@@ -112,7 +107,6 @@ while ($player = mysqli_fetch_array($results)) {
 
 <div class="clearLine"></div>
 
-<?
-
+<?php
 include "base/footer.html";
 ?>

@@ -1,5 +1,4 @@
-<?
-include_once "base/conn.php";
+<?php include_once "base/conn.php";
 
 include "base/menu.php";
 
@@ -25,12 +24,11 @@ th {background-color: #006699; text-align: center;
     color: #ffa34f; padding: 0px 8px 0px 8px}
 </style>
 
-<?
-$results = mysqli_query($conn, $sql) or die("MySQL Error: " . mysqli_error($conn));
+<?php $results = $conn->query( $sql) or die("MySQL Error: " . $conn->error);
 print "<table>";
 print "<tr><th>Name</th><th>Team</th><th>NFL</th><th>Pts</th></tr>";
 $odd = true;
-while ($player = mysqli_fetch_array($results)) {
+while ($player = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
    if ($odd) $color="#f0f0f0"; else $color="#e0e0e0";
    $odd = !$odd;
    print "<tr bgcolor=\"$color\">";

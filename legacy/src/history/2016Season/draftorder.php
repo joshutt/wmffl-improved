@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $sql = "SELECT d.round, d.pick, (t.name) as 'name', ";
 $sql .= "if(d.teamid<>d.orgTeam, '*', '') as 'flag' ";
@@ -9,7 +8,7 @@ $sql .= "ORDER BY Round, Pick";
 
 $title = "2016 WMFFL Draft Order";
 ?>
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
 <H1 Align=Center>Draft Order</H1>
 <H5 ALIGN=Center><I>February 6, 2016</I></H5>
@@ -21,11 +20,10 @@ This is the official draft order for the 2016 Draft.  The order was determined b
 <P>
 <TABLE WIDTH=100%>
 
-<?
-$results = mysqli_query($conn, $sql) or die("Database error: " . mysqli_error($conn));
+<?php $results = $conn->query( $sql) or die("Database error: " . $conn->error);
 
 $round = 0;
-while ($pick = mysqli_fetch_array($results)) {
+while ($pick = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($round <> $pick["round"]) {
         if ($round > 0) {
             print "</ol></td>";

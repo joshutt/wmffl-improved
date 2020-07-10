@@ -5,7 +5,7 @@ $week = $currentWeek;
 $season = $currentSeason;
 ?>
 
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
 <H1 ALIGN=Center>Activations</H1>
 <HR size = "1">
@@ -19,8 +19,8 @@ $season = $currentSeason;
 <A NAME="Current">
 
 <CENTER>
-<? include "currentactivations.php"; ?>
+<?php include "currentactivations.php"; ?>
 </CENTER>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>
 

@@ -1,5 +1,4 @@
-<?
-$title="Playoff Scenarios";
+<?php $title="Playoff Scenarios";
 include "base/menu.php";
 ?>
 
@@ -60,4 +59,4 @@ include "base/menu.php";
 </ul>
 
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

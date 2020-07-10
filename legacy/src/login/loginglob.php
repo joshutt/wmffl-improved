@@ -1,3 +1,2 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 ?>

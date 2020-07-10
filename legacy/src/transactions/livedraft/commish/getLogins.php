@@ -10,9 +10,9 @@ left join config c2 on c2.key=concat('draft.team.', t.teamid)
 where o.season=2018
 order by t.name";
 
-$results = mysqli_query($conn, $query) or die("Unable to do query: " . mysqli_error($conn));
+$results = $conn->query( $query) or die("Unable to do query: " . $conn->error);
 $returnArray = array();
-while ($row = mysqli_fetch_array($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     array_push($returnArray, $row);
 }
 

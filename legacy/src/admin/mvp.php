@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 function singleCompare($scoreA, $scoreB) {
     if ($scoreA < 0) return $scoreA;
@@ -37,8 +36,8 @@ $posVal = array();
 $posCount = array();
 $allPlayers = array();
 $fullPlayers = array();
-$results = mysqli_query($conn, $playerSQL) or die("Can't query database: " . mysqli_error($conn));
-while ($rows = mysqli_fetch_assoc($results)) {
+$results = $conn->query( $playerSQL) or die("Can't query database: " . $conn->error);
+while ($rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
     $pos = $rows["pos"];
     $teamid = $rows["teamid"];
     $week = $rows["week"];
@@ -107,8 +106,8 @@ print "<tr><th colspan=4>Player of the Week</th></tr>";
 foreach ($finals as $playerid=>$score) {
     /*
     $playerInfoSQL = "SELECT concat(firstname, ' ', lastname) as 'name', team, pos FROM newplayers WHERE playerid=$playerid";
-    $playerResult = mysqli_query($conn, $playerInfoSQL) or die("Dead: ".mysqli_error($conn));
-    $playerInfo = mysqli_fetch_array($playerResult);
+    $playerResult = $conn->query( $playerInfoSQL) or die("Dead: ".$conn->error);
+    $playerInfo = $playerResult->fetch(\Doctrine\DBAL\FetchMode::MIXED);
     */
     $playerInfo = $fullPlayers[$playerid];
     $pos = $playerInfo['pos'];
@@ -127,8 +126,8 @@ print "<tr><th colspan=4>Defensive POW</th></tr>";
 foreach ($finals as $playerid=>$score) {
     /*
     $playerInfoSQL = "SELECT concat(firstname, ' ', lastname) as 'name', team, pos FROM newplayers WHERE playerid=$playerid";
-    $playerResult = mysqli_query($conn, $playerInfoSQL) or die("Dead: ".mysqli_error($conn));
-    $playerInfo = mysqli_fetch_array($playerResult);
+    $playerResult = $conn->query( $playerInfoSQL) or die("Dead: ".$conn->error);
+    $playerInfo = $playerResult->fetch(\Doctrine\DBAL\FetchMode::MIXED);
     */
     $playerInfo = $fullPlayers[$playerid];
     $pos = $playerInfo['pos'];

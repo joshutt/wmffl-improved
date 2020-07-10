@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 include "base/scoring.php";
 
 function getOtherTeam($thisTeamID, $thisWeek, $thisSeason, $conn) {
@@ -14,8 +13,8 @@ function getOtherTeam($thisTeamID, $thisWeek, $thisSeason, $conn) {
     $getTeamSQL .= "AND ta.teamid=tna.teamid AND tb.teamid=tnb.teamid ";
     $getTeamSQL .= "AND tna.season=s.Season AND tnb.season=s.season ";
 
-    $results = mysqli_query($conn, $getTeamSQL);
-    $row = mysqli_fetch_array($results);
+    $results = $conn->query( $getTeamSQL);
+    $row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED);
     return $row;
 }
 
@@ -27,9 +26,9 @@ function getOtherGames($thisTeamID, $thisWeek, $thisSeason, $conn) {
 //    $getTeamSQL .= "AND s.TeamA<>$thisTeamID and s.TeamB<>$thisTeamID ";
 	$getTeamSQL .= "AND s.teama=ta.teamid and s.teamb=tb.teamid ";
     $getTeamSQL .= "AND ta.season=s.season AND tb.season=s.season ";
-    $results = mysqli_query($conn, $getTeamSQL) or die("Database error: " . mysqli_error($conn));
+    $results = $conn->query( $getTeamSQL) or die("Database error: " . $conn->error);
 	return $results;
-//    $row = mysqli_fetch_array($results);
+//    $row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED);
 //    return $row;
 }
 
@@ -73,8 +72,7 @@ function playerJavaScript($row, $score) {
 ?>
 
 
-<?
-#$thisTeamID = $_GET['teamid'] ? $_GET['teamid'] : 2;
+<?php #$thisTeamID = $_GET['teamid'] ? $_GET['teamid'] : 2;
 //$thisTeamID = isset($teamid) ? $teamid : 2;
 $thisTeamID = isset($teamid) ? $teamid : 2;
 
@@ -91,9 +89,9 @@ if ($thisSeason == $currentSeason) {
 } else {
     $weekListSQL = "SELECT week, weekname FROM weekmap WHERE season=$thisSeason AND week<=16 AND week>=1 ORDER BY week";
 }
-$results = mysqli_query($conn, $weekListSQL);
+$results = $conn->query( $weekListSQL);
 $weekList = array();
-while ($row = mysqli_fetch_array($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     array_push($weekList, $row);
 }
 
@@ -101,7 +99,7 @@ $title = "Current Scores";
 $weekLabel = $weekList[$thisWeek-1][1];
 ?>
 
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
 <style>
 <!--
@@ -177,29 +175,27 @@ table.other {border-color: #aabbcc}
 
 <div class="statbox">
 <table class="liveTable">
-<tr><td colspan="6" align="center" class="othertitle"><? print $weekLabel; ?> Scores</td></tr>
+<tr><td colspan="6" align="center" class="othertitle"><?php print $weekLabel; ?> Scores</td></tr>
 <tr><td class="buffer">&nbsp;</td></tr>
 <tr><td>
-<?
-$teams = getOtherTeam($thisTeamID, $thisWeek, $thisSeason, $conn);
+<?php $teams = getOtherTeam($thisTeamID, $thisWeek, $thisSeason, $conn);
 $teams = array(2, 3, 'Werewolves', 'Norsemen');
 $thisWeek = 15;
 
 $javascriptString = "";
 for ($i = 0; $i<2; $i++) {
 ?>
-<?
-    $select = generateReserves($teams[$i], $thisSeason, $thisWeek);
+<?php     $select = generateReserves($teams[$i], $thisSeason, $thisWeek);
 	$printString[$i] = "";
 	$reserveString[$i] = "";
 
-    $results = mysqli_query($conn, $select) or die(mysqli_error($conn));
+    $results = $conn->query( $select) or die($conn->error);
 
     $totalPoints[$i] = 0;
     $offPoints[$i] = 0;
     $defPoints[$i] = 0;
     $penalty[$i] = 0;
-    while ($row = mysqli_fetch_array($results)) {
+    while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
         if ($row["teamcheck1"] != null && $row["teamcheck1"]!=$teams[$i]) {
             continue;
         }
@@ -314,10 +310,10 @@ $printString[1] = "<TR><TH>".$teams[3]."</TH><th>".$startPoints[1]."</th></TR>".
 
 <td width="5%" valign="top">
 </td><td width="40%" valign="top">
-    <table class="forumline"><? print $printString[0]; ?></table>
+    <table class="forumline"><?php print $printString[0]; ?></table>
 </td> <td width="25px" valign="top">
 </td> <td width="40%" valign="top">
-    <table class="forumline"><? print $printString[1]; ?></table>
+    <table class="forumline"><?php print $printString[1]; ?></table>
 </td> <td width="5%" valign="top">
 </td></tr>
 </table>
@@ -413,8 +409,7 @@ function ply (identifier, score, timeRem, name, position, nflteam, details)
 
 
 var player = new Object();
-<?
-    print $javascriptString;
+<?php     print $javascriptString;
 ?>
 
 var mugname   = document.getElementById("mugname").childNodes[0];
@@ -535,10 +530,9 @@ function Q (index)
 
 <tr><td class="othertitle" colspan="3" align="center">WMFFL Scores</td></tr>
 
-<?
-$gameresults = getOtherGames($thisTeamID, $thisWeek, $thisSeason, $conn);
+<?php $gameresults = getOtherGames($thisTeamID, $thisWeek, $thisSeason, $conn);
 $count = 0;
-while ($row = mysqli_fetch_array($gameresults)) {
+while ($row = $gameresults->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     $count++;
     if ($row["scorea"] >= $row["scoreb"]) {
         $winningName = $row["aname"];
@@ -561,32 +555,30 @@ while ($row = mysqli_fetch_array($gameresults)) {
         }
 ?>
     <tr><td class="buffer" colspan="3"></td></tr>
-    <div id="AA<? print $count; ?>">
-    <tr><td class="othername" align="left"><div class="othername"><? print $winningName; ?></div></td>
-    <td class="otherscore" align="center"><div class="otherscore"><? print $winningScore; ?></div></td>
+    <div id="AA<?php print $count; ?>">
+    <tr><td class="othername" align="left"><div class="othername"><?php print $winningName; ?></div></td>
+    <td class="otherscore" align="center"><div class="otherscore"><?php print $winningScore; ?></div></td>
     <td class="boxlink" align="center" rowspan="2">
-        <? print "<a href=\"?teamid=$linkId&week=$thisWeek&season=$thisSeason\" class=\"boxlink\">"; ?>
+        <?php print "<a href=\"?teamid=$linkId&week=$thisWeek&season=$thisSeason\" class=\"boxlink\">"; ?>
         Box Score</a>
-        <? if ($row["overtime"] > 0) { print "<div class=\"otherscore\">OT</div>"; } ?>
+        <?php if ($row["overtime"] > 0) { print "<div class=\"otherscore\">OT</div>"; } ?>
     </td></tr>
-    <tr><td class="othername" align="left"><div class="othername"><? print $losingName; ?></div></td>
-    <td class="otherscore" align="center"><div class="otherscore"><? print $losingScore; ?></div></td>
+    <tr><td class="othername" align="left"><div class="othername"><?php print $losingName; ?></div></td>
+    <td class="otherscore" align="center"><div class="otherscore"><?php print $losingScore; ?></div></td>
     </td></tr>
     </div>
-<?
-}
+<?php }
 ?>
 
 </table>
 
 <center><p><b>Previous Weeks</b>
 <form action="currentscore.php" method="post">
-<input type="hidden" name="season" value="<? print $thisSeason; ?>"/>
-<input type="hidden" name="teamid" value="<? print $thisTeamID; ?>"/>
+<input type="hidden" name="season" value="<?php print $thisSeason; ?>"/>
+<input type="hidden" name="teamid" value="<?php print $thisTeamID; ?>"/>
 <select name="week" onchange="submit();">
     <option value="" selected>Select Week</option>
-<?
-foreach ($weekList as $row) {
+<?php foreach ($weekList as $row) {
     $weekID = $row["week"];
     $thisWeekName = $row["weekname"];
     print "<option value=\"$weekID\">$thisWeekName</option>";
@@ -599,4 +591,4 @@ foreach ($weekList as $row) {
 </td></tr>
 </table>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

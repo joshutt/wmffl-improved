@@ -1,5 +1,4 @@
-<?
-require_once "loadTrades.inc.php";
+<?php require_once "loadTrades.inc.php";
 
 class Team {
     var $name;

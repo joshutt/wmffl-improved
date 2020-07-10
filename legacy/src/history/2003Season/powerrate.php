@@ -1,5 +1,4 @@
-<?
-require_once "base/conn.php";
+<?php require_once "base/conn.php";
 
 function powersort($a, $b) {
     $aar = array_reverse($a);
@@ -23,13 +22,13 @@ $sql .= "and r.playerid=p.playerid and r.teamid=t.teamid ";
 $sql .= "and ps.week=w.week and ps.season=w.season and ps.playerid=p.playerid ";
 $sql .= "order by w.week, t.name, p.position, ps.pts desc";
 
-$results = mysqli_query($conn, $sql);
+$results = $conn->query( $sql);
 $potPts = array();
 $actPts = array();
 
 $curTeam = "";
 $curPos = "";
-while ($row = mysqli_fetch_array($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     $week = $row["week"];
     $teamName = $row["name"];
     if ($curTeam != $teamName) {
@@ -96,10 +95,10 @@ $lineSQL = "SELECT t1.name, t2.name FROM schedule s, team t1, team t2 ";
 $lineSQL .= "WHERE s.teama=t1.teamid AND s.teamb=t2.teamid AND s.season=2003 ";
 $lineSQL .= "AND s.week=".($week+1);
 
-$results = mysqli_query($conn, $lineSQL);
+$results = $conn->query( $lineSQL);
 $arra = array();
 $arrb = array();
-while (list($ta, $tb) = mysqli_fetch_row($results)) {
+while (list($ta, $tb) = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
     array_push($arra, $ta);
     array_push($arrb, $tb);
 }
@@ -110,7 +109,7 @@ while (list($ta, $tb) = mysqli_fetch_row($results)) {
 <TITLE>Power Rankings</TITLE>
 </HEAD>
 
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
 <H1 ALIGN=Center>Power Rankings</H1>
 <H5 ALIGN=Center><I>Through Week <?print $week;?></I></H5>
@@ -129,8 +128,7 @@ purposes only.  </P>
 <TR><TH ALIGN="Left">Team</TH><TH></TH><TH>Current Rating</TH><TH></TH>
 <TH>Last Week</TH><TH></TH><TH>Week <?print ($week-2);?></TH></TR>
 
-<?
-foreach($powerArray as $team=>$finalPow) {
+<?php foreach($powerArray as $team=>$finalPow) {
     print "<TR><TD>$team</TD><TD>&nbsp;</TD>";
     printf ("<TD ALIGN=\"center\">%6.2f</TD><TD>&nbsp;</TD>", $finalPow[$week]);
     printf ("<TD ALIGN=\"center\">%6.2f</TD><TD>&nbsp;</TD>", $finalPow[$week-1]);
@@ -142,8 +140,7 @@ foreach($powerArray as $team=>$finalPow) {
 <TABLE ALIGN=Center>
 <TR><TH COLSPAN=5>Week <?print ($week+1);?> Lines</TH></TR>
 <TR><TH>Favorite</TH><TH></TH><TH>Line</TH><TH></TH><TH>Underdog</TH></TR>
-<?
-#$arra = array("War Eagles", "Werewolves", "Crusaders", "Freezer Burn", "Illuminati");
+<?php #$arra = array("War Eagles", "Werewolves", "Crusaders", "Freezer Burn", "Illuminati");
 #$arrb = array("Rednecks", "Norsemen", "Whiskey Tango", "Green Wave", "MeggaMen");
 
 for ($i=0; $i<sizeof($arra); $i++) {
@@ -167,4 +164,4 @@ if ($powerArray{$teama}[$week] > $powerArray{$teamb}[$week]) {
 ?>
 </TABLE>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

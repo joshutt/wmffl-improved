@@ -1,5 +1,4 @@
-<?
-require_once "DataObjects/Articles.php";
+<?php require_once "DataObjects/Articles.php";
 
 
 function printComment($comment, $depth=0) {

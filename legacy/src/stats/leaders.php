@@ -33,13 +33,13 @@ ORDER BY t.name, p.pos";
 
 $dateQuery = "SELECT max(week) FROM playerscores where season=$thisSeason and week<=14";
 
-$results = mysqli_query($conn, $sql) or die("$sql<br/>" . mysqli_error());
-$dateRes = mysqli_query($conn, $dateQuery);
+$results = $conn->query( $sql) or die("$sql<br/>" . mysqli_error());
+$dateRes = $conn->query( $dateQuery);
 
-list($week) = mysqli_fetch_row($dateRes);
+list($week) = $dateRes->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 
 $teamResults = array();
-while ($teams = mysqli_fetch_array($results)) {
+while ($teams = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if (!key_exists($teams["name"], $teamResults)) {
         $teamResults[$teams["name"]] = array("name" => $teams["name"], "HC" => 0, "QB" => 0, "RB" => 0, "WR" => 0,
             "TE" => 0, "K" => 0, "OL" => 0, "DL" => 0, "LB" => 0, "DB" => 0);
@@ -76,7 +76,7 @@ if ($format == "html" || !supportedFormat($format)) {
     <H1 ALIGN=Center>League Leaders</H1>
     <HR>
 
-    <? include "base/statbar.html"; ?>
+    <?php include "base/statbar.html"; ?>
 
     <div class="container mt-2">
         <span class="row justify-content-center my-2">Through Week <?= $week ?></span>

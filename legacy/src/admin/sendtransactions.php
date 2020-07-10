@@ -1,5 +1,4 @@
-<?
-//	require "../base/conn.php";
+<?php //	require "../base/conn.php";
     require "/home/wmffl/public_html/base/conn.php";
 	
 	// Determine time range
@@ -20,7 +19,7 @@ if (!isset($_GET["EndDate"]) || $_GET["EndDate"] == "") {
 	$checkQuery = "SELECT * FROM transactions WHERE Date BETWEEN $StartDate AND $EndDate";
 
 	// Check if any exist
-$result = mysqli_query($conn, $checkQuery);
+$result = $conn->query( $checkQuery);
 if (mysqli_num_rows($result) <= 0 && !$cronEnter) {
 		print "No Transactions to send";
 		exit();
@@ -45,8 +44,8 @@ if (mysqli_num_rows($result) <= 0 && !$cronEnter) {
 	$thequery .= "ORDER BY t.date, m.name, t.method, p.lastname";
 	
 	$body = "";
-$results = mysqli_query($conn, $thequery);
-while (list($date, $teamcode, $playercode, $method) = mysqli_fetch_row($results)) {
+$results = $conn->query( $thequery);
+while (list($date, $teamcode, $playercode, $method) = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
 		switch($method) {
 			case 'Cut':  
 			case 'Fire': $methodCode = 2; break;

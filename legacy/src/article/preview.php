@@ -1,10 +1,9 @@
-<?
-include "base/menu.php";
+<?php include "base/menu.php";
 
 ?>
 <table width="100%" border="0">
 <TR><TD VALIGN="top" width="100%">
-        <? include "article.php"; ?>
+        <?php include "article.php"; ?>
 </TD>
 
 <td align="right" valign="top" width="244">
@@ -23,6 +22,5 @@ include "base/menu.php";
 <input type="submit" name="Publish" value="Publish"/>
 </form>
 
-<?
-include "base/footer.html";
+<?php include "base/footer.html";
 ?>

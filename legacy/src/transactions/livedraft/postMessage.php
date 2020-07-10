@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $message = $_REQUEST["message"];
 //$last = $_REQUEST["last"];
@@ -20,7 +19,7 @@ if ($league == "true") {
 
 $sql = "INSERT INTO chat (userid, message) VALUES ($toUseId, '" . mysqli_real_escape_string($conn, $message) . "')";
 //print $sql;
-mysqli_query($conn, $sql) or die("Die: " + mysqli_error($conn));
+$conn->query( $sql) or die("Die: " + $conn->error);
 
 
 include "chat.php";

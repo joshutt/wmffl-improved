@@ -27,8 +27,8 @@ function getOtherTeam($thisTeamID, $thisWeek, $thisSeason, $conn)
     $getTeamSQL .= "AND ta.teamid=tna.teamid AND tb.teamid=tnb.teamid ";
     $getTeamSQL .= "AND tna.season=s.Season AND tnb.season=s.season ";
 
-    $results = mysqli_query($conn, $getTeamSQL);
-    $row = mysqli_fetch_array($results);
+    $results = $conn->query( $getTeamSQL);
+    $row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED);
     return $row;
 }
 
@@ -41,9 +41,9 @@ function getOtherGames($thisTeamID, $thisWeek, $thisSeason, $conn)
 //    $getTeamSQL .= "AND s.TeamA<>$thisTeamID and s.TeamB<>$thisTeamID ";
     $getTeamSQL .= "AND s.teama=ta.teamid and s.teamb=tb.teamid ";
     $getTeamSQL .= "AND ta.season=s.season AND tb.season=s.season ";
-    $results = mysqli_query($conn, $getTeamSQL) or die("Database error: " . mysqli_error($conn));
+    $results = $conn->query( $getTeamSQL) or die("Database error: " . $conn->error);
     return $results;
-//    $row = mysqli_fetch_array($results);
+//    $row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED);
 //    return $row;
 }
 

@@ -1,5 +1,4 @@
-<?
-
+<?php
 class Transaction {
     var $date;
     var $event;

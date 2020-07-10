@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 function numberName($num) {
     switch($num) {
@@ -60,14 +59,13 @@ In order to ensure that the draft order is fairly chosen randomly, we use a thir
 
 
 <p><b>Submit a word</b></p>
-<?
-if ($isin) {
+<?php if ($isin) {
 
     $query = "SELECT `key`, value FROM config WHERE `key` like 'draft.order.%'";
-    $results = mysqli_query($conn, $query) or die("Can't get config values: " . mysqli_error($conn));
+    $results = $conn->query( $query) or die("Can't get config values: " . $conn->error);
     $orderArray = array();
     $inArray = 0;
-    while ($row = mysqli_fetch_assoc($results)) {
+    while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
         if ($row["value"] == "") {
             continue;
         }
@@ -110,11 +108,10 @@ if ($isin) {
   <form action="wordsubmit.php" method="post" onsubmit="return checkSize(this);">
   <input type="text" size="8" maxlength="8" name="word" onkeypress="return inputLimiter(event, 'word')"/>
   <input type="submit" name="submit" value="submit" />
-  <input type="hidden" name="teamid" value="<? print $teamnum; ?>"/>
+  <input type="hidden" name="teamid" value="<?php print $teamnum; ?>"/>
   </form>
   
-<?
-    }
+<?php     }
     
 } else {
     print "Not Logged In";
@@ -191,6 +188,5 @@ Gallic Warriors<br/>
 
 </tr>
 </table>
-<?
-include "base/footer.html";
+<?php include "base/footer.html";
 ?>

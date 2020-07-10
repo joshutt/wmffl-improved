@@ -111,7 +111,7 @@ if ($updateFlag) {
 <TITLE>Trades</TITLE>
 </HEAD>
 
-<? 
+<?php
 //$teamid = 0;
 include "base/menu.php"; 
 ?>
@@ -134,17 +134,16 @@ change your mind about amending the trade, select "Cancel".  This option will
 not withdraw the trade, only cancel the changes you have made to it.</P>
 
 <FORM ACTION="edittrade.php" METHOD="POST">
-<INPUT TYPE="hidden" NAME="offerid" VALUE="<? print $offerid; ?>"/>
+<INPUT TYPE="hidden" NAME="offerid" VALUE="<?php print $offerid; ?>"/>
 
-<? include "ambigouserrors.inc.php"; ?>
+<?php include "ambigouserrors.inc.php"; ?>
 
 <TABLE WIDTH=100%>
 <TR><TD COLSPAN=2><H3 ALIGN="Center">Trade So Far</H3></TD></TR>
 <TR><TD></TD></TR>
 
-<TR><TD VALIGN="top"><B><? print $thisTeam->getName(); ?> Give Up:</B><BR>
-<?
-$playersFrom = $trade->getPlayersFrom();
+<TR><TD VALIGN="top"><B><?php print $thisTeam->getName(); ?> Give Up:</B><BR>
+<?php $playersFrom = $trade->getPlayersFrom();
 foreach ($playersFrom as $player) {
     print "<INPUT TYPE=\"checkbox\" NAME=\"you[]\" VALUE=\"play".$player->getID()."\" CHECKED>";
     print $player->getName()." (".$player->getPos()."-".$player->getNFLTeam().")<BR>";
@@ -160,9 +159,8 @@ foreach ($trade->getPointsFrom() as $pts) {
 ?>
 </TD>
 
-<TD VALIGN="top"><B><? print $otherTeam->getName();?> Give Up:</B><BR>
-<?
-$playersTo = $trade->getPlayersTo();
+<TD VALIGN="top"><B><?php print $otherTeam->getName();?> Give Up:</B><BR>
+<?php $playersTo = $trade->getPlayersTo();
 foreach ($playersTo as $player) {
     print "<INPUT TYPE=\"checkbox\" NAME=\"they[]\" VALUE=\"play".$player->getID()."\" CHECKED>";
     print $player->getName()." (".$player->getPos()."-".$player->getNFLTeam().")<BR>";
@@ -185,8 +183,7 @@ foreach ($trade->getPointsTo() as $pts) {
 
 
 <TR><TD VALIGN="top"><B>Your Roster:</B><BR>
-<?
-$roster = loadRoster($thisTeam);
+<?php $roster = loadRoster($thisTeam);
 foreach ($roster as $player) {
     if ($player->getPos() == "HC") {
         continue;
@@ -198,8 +195,7 @@ foreach ($roster as $player) {
 </TD>
 
 <TD VALIGN="top"><B>Their Roster:</B><BR>
-<?
-$roster = loadRoster($otherTeam);
+<?php $roster = loadRoster($otherTeam);
 foreach ($roster as $player) {
     if ($player->getPos() == "HC") {
         continue;
@@ -212,8 +208,7 @@ foreach ($roster as $player) {
 
 <TR><TD VALIGN="top">
 
-<?
-for ($i=1; $i<=$NUM_DRAFT_DISPLAY; $i++) {
+<?php for ($i=1; $i<=$NUM_DRAFT_DISPLAY; $i++) {
     print "<INPUT TYPE=\"checkbox\" NAME=\"you[]\" VALUE=\"draft$i\">Draft Pick:";
     print "<SELECT NAME=\"youdraftyear$i\">";
     for ($j=1; $j<=$NUM_DRAFT_YEARS; $j++) {
@@ -245,8 +240,7 @@ for ($i=1; $i<=$NUM_PTS_DISPLAY; $i++) {
 </TD>
 
 <TD VALIGN="top">
-<?
-for ($i=1; $i<=$NUM_DRAFT_DISPLAY; $i++) {
+<?php for ($i=1; $i<=$NUM_DRAFT_DISPLAY; $i++) {
     print "<INPUT TYPE=\"checkbox\" NAME=\"they[]\" VALUE=\"draft$i\">Draft Pick:";
     print "<SELECT NAME=\"theydraftyear$i\">";
     for ($j=1; $j<=$NUM_DRAFT_YEARS; $j++) {
@@ -291,6 +285,6 @@ for ($i=1; $i<=$NUM_PTS_DISPLAY; $i++) {
 
 </FORM>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>
 </BODY>
 </HTML>

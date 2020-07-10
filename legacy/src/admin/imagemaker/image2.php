@@ -1,5 +1,4 @@
-<?
-//$path = "http://static.nfl.com/static/content/public/image/getty/2007/75557821TL014_NEW_ORLEANS_S_20070906174925_gallery_600.jpg";
+<?php //$path = "http://static.nfl.com/static/content/public/image/getty/2007/75557821TL014_NEW_ORLEANS_S_20070906174925_gallery_600.jpg";
 //$path = "http://static.nfl.com/static/content/public/image/getty/2007/75557828DP015_ATLANTA_FALCO_20070909141521_gallery_600.jpg";
 
 $path = $_REQUEST["path"];
@@ -39,4 +38,4 @@ $fullName = "$rootLoc/$newDir/$newName";
 imagejpeg($thumb, $fullName);
 ?>
 
-<img src="http://wmffl.com/<? print "$newDir/$newName"; ?>">
+<img src="http://wmffl.com/<?php print "$newDir/$newName"; ?>">

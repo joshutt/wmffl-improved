@@ -1,6 +1,5 @@
 <table cellpadding="5" cellspacing="1">
-<?
-include "lib/Team.php";
+<?php include "lib/Team.php";
 
 //$thisSeason = 2004;
 //$thisWeek = 5;
@@ -48,10 +47,10 @@ AND s.week<=14
 EOD;
 
 
-$results = mysqli_query($conn, $query) or die("Error: " . mysqli_error($conn));
+$results = $conn->query( $query) or die("Error: " . $conn->error);
 $count =0;
 $teamArray = array();
-while ($row = mysqli_fetch_array($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     $t = new Team($row["team"], $row["division"], $row["teamid"]);
     $rec = array($row["win"], $row["lose"], $row["tie"]);
     $div = array($row["divwin"], $row["divlose"], $row["divtie"]);
@@ -68,8 +67,8 @@ while ($row = mysqli_fetch_array($results)) {
 
 //print_r($teamArray);
 
-$results = mysqli_query($conn, $secondQuery) or die("Second Error: " . mysqli_error($conn));
-while ($row = mysqli_fetch_array($results)) {
+$results = $conn->query( $secondQuery) or die("Second Error: " . $conn->error);
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     //print_r($row);
     $teamid = $row["teamid"];
     $opp = $row["oppid"];

@@ -16,11 +16,10 @@
 <HR size = "1">
 
 <CENTER>
-<P><B>Your activations have been submitted for Week <? print $Week; ?></B></P>
+<P><B>Your activations have been submitted for Week <?php print $Week; ?></B></P>
 
 <A NAME="Current">
-<?
-$_POST["week"] = $Week;
+<?php $_POST["week"] = $Week;
 	include "currentactivations.php";
 ?>
 </CENTER>

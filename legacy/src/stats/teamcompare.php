@@ -1,5 +1,4 @@
-<?
-function determineRecord(&$werRec, $werScore, $otherScore) {
+<?php function determineRecord(&$werRec, $werScore, $otherScore) {
     if ($werScore > $otherScore) {
         $werRec["win"]++;
     } else if ($werScore < $otherScore) {
@@ -19,9 +18,9 @@ $sql .= "AND r.dateoff is null and ps.playerid=p.playerid ";
 $sql .= "and ps.season=$currentSeason ";
 $sql .= "order by t.teamid, p.pos, ps.week, ps.pts DESC ";
 
-$results = mysqli_query($conn, $sql);
+$results = $conn->query( $sql);
 
-while ($resArry = mysqli_fetch_array($results)) {
+while ($resArry = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     $name = $resArry["name"];
     $pos = $resArry["pos"];
     $week = $resArry["week"];

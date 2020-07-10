@@ -1,6 +1,5 @@
 <table>
-<?
-
+<?php
 function printstats($player) {
     $returnString = "";
     
@@ -140,12 +139,12 @@ where a.season=$thisSeason and a.week=$thisWeek
 order by t.name, p.pos, p.lastname, p.firstname
 EOD;
 
-$results = mysqli_query($conn, $query) or die("Error: " . mysqli_error($conn));
+$results = $conn->query( $query) or die("Error: " . $conn->error);
 
 $actPlayers = array();
 $team = array();
 $currentTeam = "";
-while ($player = mysqli_fetch_array($results)) {
+while ($player = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
 //    print_r($player);
     if ($currentTeam != $player["name"]) {
         //print_r($team);

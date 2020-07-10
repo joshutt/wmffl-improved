@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 $thisSeason = $currentSeason;
 $thisWeek = $currentWeek;
 $thisSeason = 2005;
@@ -23,9 +22,9 @@ $byeWeekQuery = "SELECT t.name FROM nflstatus s, nflteams t WHERE status='B' AND
 $title = "WMFFL Schedule";
 ?>
 
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
-<H1 Align=Center><? print $thisSeason;?> Schedule</H1>
+<H1 Align=Center><?php print $thisSeason;?> Schedule</H1>
 <HR size = "1"><CENTER>
 
 <A HREF="#Week1">Week 1</A> | <A HREF="#Week2">Week 2</A> |
@@ -39,14 +38,13 @@ $title = "WMFFL Schedule";
 <A HREF="#Championship">WMFFL Championship XIV</A><HR size = "1"></CENTER>
 
 
-<?
-$results = mysqli_query($conn, $sql);
+<?php $results = $conn->query( $sql);
 
 $listWeek = 0;
 print "<TABLE BORDER=0>";
-while ($row = mysqli_fetch_array($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($row[0] != $listWeek) {
-        $byes = mysqli_query($conn, $byeWeekQuery . $row[0]);
+        $byes = $conn->query( $byeWeekQuery . $row[0]);
         print "</TABLE><P>";
         print "<A NAME=\"".str_replace(" ","",$row[5])."\"><H4>".$row[5]."</H4></A>";
         print "<H5>".$row[6]." ".$row[7]."-";
@@ -61,7 +59,7 @@ while ($row = mysqli_fetch_array($results)) {
         if ($numByes > 0) {
             print "<BR>NFL Byes: ";
             $byeCount = 1;
-            while (list($byeTeam) = mysqli_fetch_row($byes)) {
+            while (list($byeTeam) = $byes->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
                 print $byeTeam;
                 if ($byeCount+1 == $numByes) {
                     print " and ";
@@ -115,4 +113,4 @@ Playoff Winner #1 vs Playoff Winner #2
 <P>
 
 -->
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

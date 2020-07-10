@@ -45,6 +45,5 @@ include "base/menu.php";
 
 </TABLE>
 
-<?
-include "base/footer.html";
+<?php include "base/footer.html";
 ?>

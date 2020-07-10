@@ -104,11 +104,11 @@ foreach ($trade->getPointsFrom() as $point) {
 <TITLE>Trades</TITLE>
 </HEAD>
 
-<? 
+<?php 
 //$teamid = 0;
 include "base/menu.php"; ?>
 
-<H1 ALIGN=Center><? print $action;?> Trade Offer</H1>
+<H1 ALIGN=Center><?php print $action;?> Trade Offer</H1>
 <HR>
 
 <CENTER>
@@ -131,6 +131,6 @@ include "base/menu.php"; ?>
 </FORM>
 </CENTER>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>
 </BODY>
 </HTML>

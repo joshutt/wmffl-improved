@@ -1,5 +1,4 @@
-<?
-session_start();
+<?php session_start();
 
 print $weekName;
 

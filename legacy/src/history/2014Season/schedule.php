@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $thisSeason = 2014;
 $thisWeek = 17;
@@ -25,11 +24,11 @@ group by wm.week, t.nflteam
 order by wm.week, t.name
 EOD;
 
-$byeResults = mysqli_query($conn, $byeSQL);
+$byeResults = $conn->query( $byeSQL);
 $lastName = "";
 $lastWeek = 0;
 $byeList = array();
-while ($rows = mysqli_fetch_assoc($byeResults)) {
+while ($rows = $byeResults->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
     $week = $rows['week'];
     $teamName = $rows['name'];
     if ($teamName == 'New York') {
@@ -97,9 +96,9 @@ a.return {
 -->
 </style>
 
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
-<H1 Align=Center><? print $thisSeason;?> Schedule</H1>
+<H1 Align=Center><?php print $thisSeason;?> Schedule</H1>
 <HR size = "1"><CENTER>
 
 <A HREF="#Week1">Week 1</A> | <A HREF="#Week2">Week 2</A> |
@@ -113,12 +112,11 @@ a.return {
 <A HREF="#Championship">WMFFL Championship XXII</A><HR size = "1"></CENTER>
 
 
-<?
-$results = mysqli_query($conn, $sql);
+<?php $results = $conn->query( $sql);
 
 $listWeek = 0;
 $lastLabel = "";
-while ($row = mysqli_fetch_array($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($row[0] != $listWeek || $row[11] != $lastLabel) {
         if ($listWeek != 0) {
             print <<<EOD
@@ -204,4 +202,4 @@ print "</div><br/>";
 
 <a name="Playoffs"/><a name="Championship"/>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

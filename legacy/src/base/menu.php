@@ -12,7 +12,7 @@ if (!isset($title)) {
     <link rel="icon" href="/images/logo3.png" type="image/png"/>
     <link rel="SHORTCUT ICON" href="/images/logo3.png"/>
 
-    <?
+    <?php
     // Include any Javascript
     if (isset($javascriptList)) {
         foreach ($javascriptList as $sheet) {
@@ -22,8 +22,9 @@ if (!isset($title)) {
 
     // If no cssList then add it, otherwise add core.css
     if (isset($cssList)) {
-        array_unshift($cssList, "/base/css/core.css?v11");
+        array_unshift($cssList, "/base/css/core.css");
         array_unshift($cssList, "/transactions/livedraft/bootstrap.min.css");
+//        array_unshift($cssList, "/transactions/livedraft/bootstrap.min.css");
     } else {
         $cssList = array("/transactions/livedraft/bootstrap.min.css", "/base/css/core.css");
     }
@@ -58,7 +59,7 @@ if (!isset($title)) {
             <div class="sideButton"><a class="sideButton" href="/rules">Rules</a></div>
             <div class="sideButton"><a class="sideButton" href="/history">History</a></div>
 
-            <? include "login/logininc.php"; ?>
+            <?php include "login/logininc.php"; ?>
 
             <!--<IMG SRC="/images/blank.gif" WIDTH=180>-->
 

@@ -13,10 +13,12 @@ from weekmap wm
 JOIN (select wm.season, max(wm.week) as 'week'
       from weekmap wm
       WHERE (DATE_SUB(wm.DisplayDate, INTERVAL 12 HOUR) < now() or wm.week = 1)
-        and wm.season = $thisSeason) maxweek
+        and wm.season = ?) maxweek
 ON wm.Season=maxweek.season and wm.week=maxweek.week";
-$checRe = mysqli_query($conn, $check) or die("Dead: $check<br/>" . mysqli_error($conn));
-list($useWeek, $weekname) = mysqli_fetch_row($checRe);
+//$checRe = $conn->query( $check) or die("Dead: $check<br/>" . $conn->error);
+//list($useWeek, $weekname) = $checRe->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
+$checRe = $conn->executeQuery($check, array($thisSeason)) or die("Dead: $check<br/>" . $conn->error);
+list($useWeek, $weekname) = $checRe->fetch(\Doctrine\DBAL\FetchMode::MIXED);
 
 
 $sql = "SELECT wm.weekname, wm.week, s.teama, if(s.scorea>=s.scoreb,t1.name, t2.name) as 'leadname', 
@@ -24,13 +26,14 @@ if(s.scorea>=s.scoreb,s.scorea,s.scoreb) as 'leadscore', if(s.scorea>=s.scoreb,t
 if(s.scorea>=s.scoreb,s.scoreb,s.scorea) as 'trailscore', s.label, s.overtime  
 FROM weekmap wm, schedule s, team t1, team t2
 where (DATE_SUB(wm.displaydate, INTERVAL 12 HOUR) < now() OR wm.week=1)
-and wm.season=$thisSeason and s.season=wm.season and s.week=wm.week
+and wm.season=? and s.season=wm.season and s.week=wm.week
 and s.teama=t1.teamid and s.teamb=t2.teamid
-and wm.week=$useWeek
+and wm.week=?
 order by wm.week DESC, s.label, MD5(CONCAT(t1.name, t2.name)) ";
 //limit 5";
 
-$results = mysqli_query($conn, $sql) or die("Dead: $sql <br/>" . mysqli_error($conn));
+//$results = $conn->query( $sql) or die("Dead: $sql <br/>" . $conn->error);
+$results = $conn->executeQuery($sql, array($thisSeason, $useWeek)) or die("Dead: $sql <br/>" . $conn->error);
 
 ?>
 
@@ -38,7 +41,7 @@ $results = mysqli_query($conn, $sql) or die("Dead: $sql <br/>" . mysqli_error($c
 <div class="container">
     <?php
 
-    while (list($weekname, $week, $team1, $leader, $leadscore, $trail, $trailscore, $label, $ot) = mysqli_fetch_row($results)) {
+    while (list($weekname, $week, $team1, $leader, $leadscore, $trail, $trailscore, $label, $ot) = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
         ?>
         <div class="gameBox border-top border-bottom row py-1">
             <?php

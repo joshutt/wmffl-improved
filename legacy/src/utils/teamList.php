@@ -1,13 +1,12 @@
-<?
-require_once "start.php";
+<?php require_once "start.php";
 
 function getTeamList($season) {
     global $conn;
     $sql = "SELECT name, teamid, abbrev FROM teamnames WHERE season=$season ORDER BY name ASC";
     $season = intval($season);
-    $results = mysqli_query($conn, $sql) or die("Unable to run query: " . mysqli_error($conn));
+    $results = $conn->query( $sql) or die("Unable to run query: " . $conn->error);
     $teamArray = array();
-    while ($row = mysqli_fetch_array($results)) {
+    while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
 	$team = array("name" => $row["name"], "id" => $row["teamid"], "abbrev" => $row["abbrev"]);
         array_push($teamArray, $team);
     }

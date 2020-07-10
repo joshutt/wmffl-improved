@@ -1,5 +1,4 @@
-<?
-//$currentSeason = 2004;
+<?php //$currentSeason = 2004;
 $checkWeek = 17;
 if (array_key_exists('viewseasom', $_REQUEST)) {
     $viewseason = $_REQUEST['viewseasom'];
@@ -28,16 +27,15 @@ group by t.teamid) ts
 ON t.teamid=ts.teamid and t.season=ts.season
 ORDER BY t.name
 ";
-$res1 = mysqli_query($conn, $otherSeason);
+$res1 = $conn->query( $otherSeason);
 ?>
 
 <div align="right"><form action="teamschedule.php">
-<input type="hidden" name="viewteam" value="<? print $viewteam; ?>"/>
+<input type="hidden" name="viewteam" value="<?php print $viewteam; ?>"/>
 View other teams: 
 <select name="vsTeam" onChange="submit();">
 <option value=""></option>
-<?
-while (list($newName, $newTeamid) = mysqli_fetch_array($res1)) {
+<?php while (list($newName, $newTeamid) = $res1->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($newTeamid == $vsTeam) {
         $displayName = $newName;
     }
@@ -52,8 +50,7 @@ while (list($newName, $newTeamid) = mysqli_fetch_array($res1)) {
 
 <h3 align="center">Vs <?= $displayName ?></h3>
 
-<?
-$SQL = <<<EOD
+<?php $SQL = <<<EOD
 SELECT wm.season, if(isnull(s.label), wm.weekname, s.label) as 'weekname',
 t.name, wm.week,
 if(s.teama=$viewteam, s.scorea, s.scoreb) as 'score',
@@ -80,8 +77,8 @@ AND t.teamid=$vsTeam
 ORDER BY wm.season, wm.week
 EOD;
 
-$r2 = mysqli_query($conn, $SQL2) or die("Unable to complete query: ".mysqli_error($conn));
-list($win, $tie, $loss) = mysqli_fetch_array($r2);
+$r2 = $conn->query( $SQL2) or die("Unable to complete query: ".$conn->error);
+list($win, $tie, $loss) = $r2->fetch(\Doctrine\DBAL\FetchMode::MIXED);
 if ($win+$tie+$loss == 0) {
     $pct = 0.000;
 } else {
@@ -90,11 +87,11 @@ if ($win+$tie+$loss == 0) {
 
 printf("<h3 align=\"center\">(%d - %d - %d - %5.3f)</h3>", $win, $loss, $tie, $pct);
 
-$results = mysqli_query($conn, $SQL) or die("Unable to complete query: ".mysqli_error($conn));
+$results = $conn->query( $SQL) or die("Unable to complete query: ".$conn->error);
 
 print "<table class=\"table table-striped table-sm\">";
 $wins=0; $ties=0; $loss=0;
-while ($sched = mysqli_fetch_array($results)) {
+while ($sched = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($sched['score'] != null && ($sched['season'] < $currentSeason || $sched['week'] < $checkWeek)) {
         print "<tr>";
         print "<td>${sched['season']}</td>";

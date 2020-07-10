@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 if (isset($_REQUEST['teamid'])) {
     $team = $_REQUEST['teamid'];
@@ -38,23 +37,23 @@ group by p.playerid
 order by 4 desc;
 EOD;
 
-$results = mysqli_query($conn, $sql) or die("Error: " . mysqli_error($conn));
+$results = $conn->query( $sql) or die("Error: " . $conn->error);
 $numResults = mysqli_num_rows($results);
 if ($numResults == 0) {
-    $results = mysqli_query($conn, $sql2) or die("Error: " . mysqli_error($conn));
+    $results = $conn->query( $sql2) or die("Error: " . $conn->error);
 }
 
 include "base/menu.php";
 
 
 print "<table>";
-$row = mysqli_fetch_assoc($results);
+$row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
 print "<tr><th colspan=\"2\">${row[name]}</th></tr>";
 for ($i=1; $i<=10; $i++) {
     print "<tr><td>$i</td><td>${row[firstname]} ${row[lastname]}</td>";
     print "<td>${row[pos]}</td></tr>";
     //print_r($row);
-    $row = mysqli_fetch_assoc($results);
+    $row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
 
 }
 print "</table>";
@@ -65,9 +64,9 @@ SELECT teamid, name
 FROM team
 WHERE active=1
 EOD;
-$results = mysqli_query($conn, $sql) or die("Error: " . mysqli_error($conn));
+$results = $conn->query( $sql) or die("Error: " . $conn->error);
 
-while ($row = mysqli_fetch_assoc($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
     print "<a href=\"autodraft.php?teamid=${row[teamid]}\">${row[name]}</a> - ";
 }
 

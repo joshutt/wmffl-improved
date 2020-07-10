@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 if (!$isin) {
     header("Location: /history/2009Season/draftdate.php");
@@ -33,7 +32,7 @@ EOD;
         $thequery .= "AND userid = $usernum"; 
         
         #print $thequery."<BR>";
-        mysqli_query($conn, $thequery);
+        $conn->query( $thequery);
         
 
     }

@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $seasonArray = array();
 
@@ -16,9 +15,9 @@ WHERE $viewteam in (s.teama, s.teamb) and postseason=1
 group by playoffs desc
 EOD;
 
-$result = mysqli_query($conn, $recordQuery);
+$result = $conn->query( $recordQuery);
 
-while ($recordList = mysqli_fetch_array($result)) {
+while ($recordList = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     $newArray = array($recordList["event"], $recordList["win"], $recordList["lose"], $recordList["tie"]);
 
     if ($recordList["win"] + $recordList["tie"] + $recordList["lose"] == 0) {
@@ -47,9 +46,9 @@ GROUP BY s.season
 order by s.season desc
 EOD;
 
-$result = mysqli_query($conn, $recordQuery);
+$result = $conn->query( $recordQuery);
 
-while ($recordList = mysqli_fetch_array($result)) {
+while ($recordList = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     $newArray = array($recordList["season"], $recordList["win"], $recordList["lose"], $recordList["tie"]);
 
     if ($newArray[1]+$newArray[2]+$newArray[3] != 0) {
@@ -93,10 +92,10 @@ $playoffQuery =<<<EOD
     order by s.season asc, s.week asc
 EOD;
 
-$result = mysqli_query($conn, $playoffQuery) or die("Mysql error: " . mysqli_error());
+$result = $conn->query( $playoffQuery) or die("Mysql error: " . mysqli_error());
 $playoffResults = array();
 
-while ($recordList = mysqli_fetch_array($result)) {
+while ($recordList = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     $singleGame = array();
     
     if ($recordList["myscore"] > $recordList["otherscore"]) {
@@ -123,11 +122,11 @@ $titleQuery =<<<EOD
     order by t.season asc
 EOD;
 
-$result = mysqli_query($conn, $titleQuery) or die("Mysql error: " . mysqli_error());
+$result = $conn->query( $titleQuery) or die("Mysql error: " . mysqli_error());
 $leagueTitles = array();
 $divisionTitles = array();
 
-while ($titles = mysqli_fetch_array($result)) {
+while ($titles = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($titles["type"] == "League") {
         array_push($leagueTitles, $titles["season"]);
     } else if ($titles["type"] == "Division") {
@@ -142,10 +141,10 @@ while ($titles = mysqli_fetch_array($result)) {
  *********************************************************/
 $namedArray = array();
 $nameQuery = "select season, name from teamnames where teamid=$viewteam order by season asc";
-$result = mysqli_query($conn, $nameQuery);
+$result = $conn->query( $nameQuery);
 $prevName = "";
 $startSeason = 0;
-while ($nameSet = mysqli_fetch_array($result)) {
+while ($nameSet = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($nameSet["name"] != $prevName) {
         if ($startSeason != 0) {
             $oneName = array("start" => $startSeason, "end" => $nameSet["season"]-1, "name" => $prevName);
@@ -163,11 +162,11 @@ array_push($namedArray, $oneName);
  *********************************************************/
 $ownerArray = array();
 $ownerQuery = "SELECT u.name, o.season, o.primary from owners o, user u where o.userid=u.userid and o.teamid=$viewteam order by o.season asc, o.primary asc";
-$result = mysqli_query($conn, $ownerQuery) or die("Die: " . mysqli_error());
+$result = $conn->query( $ownerQuery) or die("Die: " . mysqli_error());
 $prevName = "";
 $finalName = "";
 $startSeason = 0;
-while ($ownerSet = mysqli_fetch_array($result)) {
+while ($ownerSet = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($ownerSet["primary"] == 0) {
         $finalName .= " and ".$ownerSet["name"];
         continue;

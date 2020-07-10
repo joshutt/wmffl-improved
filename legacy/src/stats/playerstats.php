@@ -1,5 +1,4 @@
-<?
-require_once "utils/connect.php";
+<?php require_once "utils/connect.php";
 include "utils/reportUtils.php";
 include_once "utils/teamList.php";
 $title = "Player Stats";
@@ -101,8 +100,8 @@ if (isset($firstSort) && $firstSort != "none") {
 
 //print "Last Name,First Name,Pos,NFL,Week,Pts\n";
 $newHold = array();
-$results = mysqli_query($conn, $sql) or die("There was an error in the query: " . mysqli_error());
-while ($playList = mysqli_fetch_array($results)) {
+$results = $conn->query( $sql) or die("There was an error in the query: " . mysqli_error());
+while ($playList = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     //print $playList[0].",".$playList[1].",".$playList[2].",";
     //print $playList[3].",".$playList[4].",".$playList[5];
     //print "\n";
@@ -138,7 +137,7 @@ if ($format == "html" || !supportedFormat($format)) {
 
     <h1 align="center">Player Stats</h1>
     <hr/>
-    <? include "base/statbar.html"; ?>
+    <?php include "base/statbar.html"; ?>
 
     <div id="tblblock" class="container">
 
@@ -164,7 +163,7 @@ if ($format == "html" || !supportedFormat($format)) {
     </div>
 
 
-    <? include "base/footer.html"; ?>
+    <?php include "base/footer.html"; ?>
 
 
     <?php

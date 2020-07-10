@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 if (isset($season)) {
     $lookseason = $season;
@@ -31,8 +30,8 @@ if (!isset($order) || $order=='team') {
 }
 
 $displayArray = array();
-$result = mysqli_query($conn, $query) or die("Error: " . mysqli_error($conn));
-while (list($team, $name, $pos, $nfl, $cost) = mysqli_fetch_row($result)) {
+$result = $conn->query( $query) or die("Error: " . $conn->error);
+while (list($team, $name, $pos, $nfl, $cost) = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
     if ($teamcheck) {
         $labels = array("Name", "Position", "NFL Team", "Cost");
         if ($oldteam != $team) {
@@ -56,8 +55,7 @@ while (list($team, $name, $pos, $nfl, $cost) = mysqli_fetch_row($result)) {
 $title = "WMFFL Protections";
 ?>
 
-<?
-        include "base/menu.php"; 
+<?php         include "base/menu.php"; 
 ?>      
 
 <H1 ALIGN=Center>Protections</H1>
@@ -70,8 +68,7 @@ $title = "WMFFL Protections";
 </P>
 
 <TABLE WIDTH=100%>
-<?
-$result = mysqli_query($conn, $query) or die("Error: " . mysqli_error($conn));
+<?php $result = $conn->query( $query) or die("Error: " . $conn->error);
 
 foreach ($displayArray as $key=>$teamArray) {
     print "<tr><th colspan=\"4\">$key (".sizeof($teamArray).")</th></tr>";
@@ -92,8 +89,7 @@ foreach ($displayArray as $key=>$teamArray) {
 ?>
 </TABLE>
 
-<?
-        include "base/footer.html";
+<?php         include "base/footer.html";
 ?>
 
 

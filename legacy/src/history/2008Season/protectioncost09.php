@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 $query = "SELECT p.firstname, p.lastname, pc.years, MAX(pos.cost)-MIN(pos.cost) as 'Extra', t.name ";
 $query .= "FROM newplayers p ";
 $query .= "JOIN protectioncost pc ON p.playerid=pc.playerid ";
@@ -10,9 +9,9 @@ $query .= "WHERE pc.season=2009 ";
 $query .= "GROUP BY p.playerid, pos.position ";
 $query .= "ORDER BY t.name, Extra desc, pc.years desc";
 
-$result = mysqli_query($conn, $query) or die("error: " . mysqli_error($conn));
+$result = $conn->query( $query) or die("error: " . $conn->error);
 $count = mysqli_num_rows($result);
-while ($aLine = mysqli_fetch_array($result)) {
+while ($aLine = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
 	$page[$aLine['name']] .= "<TR><TD>".$aLine['firstname']." ".$aLine['lastname'];
 	$page[$aLine['name']] .= "</TD><TD ALIGN=Center>".$aLine['years']."</TD>";
 	$page[$aLine['name']] .= "<TD ALIGN=Center>+".$aLine['Extra']."</TD></TR>";
@@ -25,7 +24,7 @@ while ($aLine = mysqli_fetch_array($result)) {
 <TITLE>2009 WMFFL Protection Costs</TITLE>
 </HEAD>
 
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
 <H1 Align=Center>Protection Costs</H1>
 <HR size = "1">
@@ -63,8 +62,7 @@ be able to find out how much each player will cost to protect.</P>
 
 <TABLE ALIGN="Center">
 
-<?
-$sumup = 0;
+<?php $sumup = 0;
 foreach ($page as $teamName=>$val) {
     if ($teamName == '') continue;
     if ($sumup > ($count+33)/2) {
@@ -74,26 +72,24 @@ foreach ($page as $teamName=>$val) {
 </TD><TD WIDTH=*></TD><TD WIDTH=50% VALIGN=Top>
 
 <TABLE ALIGN=Right VALIGN=Top>
-<?
-        $sumup = 0;
+<?php         $sumup = 0;
     }
 ?>
 
-<TR><TH COLSPAN=3><? print $teamName; ?></TH></TR>
+<TR><TH COLSPAN=3><?php print $teamName; ?></TH></TR>
 <TR><TH>Player Name</TH><TH>Years Protected</TH><TH>Extra Cost</TH></TR>
-<? print $val; ?>
+<?php print $val; ?>
 <TR><TD>&nbsp;</TD></TR>
 
-<?
-$sumup += $countall[$teamName] + 3;
+<?php $sumup += $countall[$teamName] + 3;
 }
 $teamName = '';
 ?>
 <TR><TH COLSPAN=3>Not on a Roster</TH></TR>
 <TR><TH>Player Name</TH><TH>Years Protected</TH><TH>Extra Cost</TH></TR>
-<? print $page['']; ?>
+<?php print $page['']; ?>
 <TR><TD>&nbsp;</TD></TR>
 
 </TABLE>
 </TD></TR></TABLE>
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

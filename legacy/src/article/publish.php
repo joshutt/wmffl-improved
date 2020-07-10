@@ -1,5 +1,4 @@
-<?
-$title = "Publish Article";
+<?php $title = "Publish Article";
 
 include "base/menu.php";
 
@@ -29,8 +28,7 @@ tinyMCE.init({
 });
     </script>
 
-<?
-if (isset($errors)) {
+<?php if (isset($errors)) {
     foreach ($errors as $name) {
         print "<span style=\"color: red; weight: bold\">$name</span><br/>";
     }
@@ -63,6 +61,5 @@ if (!isset($article)) {
 </table>
 
 
-<?
-include "base/footer.html";
+<?php include "base/footer.html";
 ?>

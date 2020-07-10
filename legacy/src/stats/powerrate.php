@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 if ($currentWeek >= 1) {
     $thisSeason = $currentSeason;
 } else {
@@ -29,13 +28,13 @@ where wm.Season=$thisSeason and wm.EndDate < now()
 order by wm.week, t.name, p.pos, ps.pts desc";
 
 
-$results = mysqli_query($conn, $sql);
+$results = $conn->query( $sql);
 $potPts = array();
 $actPts = array();
 
 $curTeam = "";
 $curPos = "";
-while ($row = mysqli_fetch_array($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     $week = $row["week"];
     $teamName = $row["name"];
     if ($curTeam != $teamName) {
@@ -117,10 +116,10 @@ $lineSQL = "SELECT t1.name, t2.name FROM schedule s, team t1, team t2 ";
 $lineSQL .= "WHERE s.teama=t1.teamid AND s.teamb=t2.teamid AND s.season=$thisSeason ";
 $lineSQL .= "AND s.week=".($week+1);
 
-$results = mysqli_query($conn, $lineSQL);
+$results = $conn->query( $lineSQL);
 $arra = array();
 $arrb = array();
-while (list($ta, $tb) = mysqli_fetch_row($results)) {
+while (list($ta, $tb) = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
     array_push($arra, $ta);
     array_push($arrb, $tb);
 }
@@ -128,12 +127,12 @@ while (list($ta, $tb) = mysqli_fetch_row($results)) {
 $title = "Power Rankings";
 ?>
 
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
 <H1 ALIGN=Center>Power Rankings</H1>
 <H5 ALIGN=Center><I>Through Week <?print $week;?></I></H5>
 <HR>
-<? include "base/statbar.html"; ?>
+<?php include "base/statbar.html"; ?>
 
 <P>The current power rankings as well as the rankings for the previous two
 weeks are listed below.  Power rankings are intended to be an indication of
@@ -146,8 +145,7 @@ purposes only.  </P>
 <CENTER>
 <TABLE>
 <TR><TH ALIGN="Left">Team</TH><TH></TH><TH>Current Rating</TH>
-<?
-if ($week >= 2) {
+<?php if ($week >= 2) {
     print "<th></th><th>Last Week</th>";
 }
 if ($week >= 3) {
@@ -156,8 +154,7 @@ if ($week >= 3) {
 ?>
 </TR>
 
-<?
-foreach($powerArray as $team=>$finalPow) {
+<?php foreach($powerArray as $team=>$finalPow) {
     print "<TR><TD>$team</TD><TD>&nbsp;</TD>";
     printf ("<TD ALIGN=\"center\">%6.2f</TD><TD>&nbsp;</TD>", $finalPow[$week]);
     if ($week >= 2) {
@@ -173,8 +170,7 @@ foreach($powerArray as $team=>$finalPow) {
 <TABLE ALIGN=Center>
 <TR><TH COLSPAN=5>Week <?print ($week+1);?> Lines</TH></TR>
 <TR><TH>Favorite</TH><TH></TH><TH>Line</TH><TH></TH><TH>Underdog</TH></TR>
-<?
-
+<?php
 for ($i=0; $i<sizeof($arra); $i++) {
 $teama = $arra[$i];
 $teamb = $arrb[$i];

@@ -9,9 +9,9 @@ FROM team t, division d
 WHERE t.divisionid=d.divisionid and $currentSeason between d.startYear and d.endYear
 ORDER BY d.name, t.name";
 
-$results = mysqli_query($conn, $divisionSQL) or die("Error in query: " . mysqli_error($conn));
+$results = $conn->query( $divisionSQL) or die("Error in query: " . $conn->error);
 $teamList = array();
-while ($teamInfo = mysqli_fetch_array($results)) {
+while ($teamInfo = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if (!array_key_exists($teamInfo['division'], $teamList)) {
         $teamList[$teamInfo['division']] = array();
     }
@@ -27,8 +27,7 @@ while ($teamInfo = mysqli_fetch_array($results)) {
 <tr valign="TOP">
             
 
-<?
-ksort($teamList);
+<?php ksort($teamList);
 foreach ($teamList as $divisionName => $division) {
     print "<td>";
     print "<table><th>$divisionName</th>";
@@ -54,4 +53,4 @@ foreach ($teamList as $divisionName => $division) {
 
 </tr></table>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 #require_once "base/conn.php";
 #require_once "base/useful.php";
 
@@ -14,9 +13,9 @@ group by wm.week, t.teamid
 order by `count(r.playerid)` DESC";
 
 //print $sql;
-$results = mysqli_query($conn, $sql) or die("Error: " . mysqli_error($conn));
+$results = $conn->query( $sql) or die("Error: " . $conn->error);
 $empty = true;
-while ($teams = mysqli_fetch_array($results)) {
+while ($teams = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($teams[2] <=26) {
         break;
     }

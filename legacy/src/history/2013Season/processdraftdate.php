@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 if (!$isin) {
     header("Location: /history/2013Season/draftdate.php");
@@ -34,13 +33,13 @@ EOD;
         $thequery .= "AND userid = $usernum"; 
         
         #print $thequery."<BR>";
-        mysqli_query($conn, $thequery) or die("Error: " . mysqli_error($conn));
+        $conn->query( $thequery) or die("Error: " . $conn->error);
         
 
     }
 
     $newQuery = "UPDATE draftvote SET lastUpdate=now() where season=$season and userid=$usernum";
-    mysqli_query($conn, $newQuery) or die("Error: " . mysqli_error($conn));
+    $conn->query( $newQuery) or die("Error: " . $conn->error);
 
     $draftMessage = <<<EOD
     Your draft request has been recorded.</p>

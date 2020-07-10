@@ -11,27 +11,26 @@ if (!$isin) {
     <TITLE>Trades</TITLE>
     </HEAD>
 
-<?  include "base/menu.php"; ?>
+<?php  include "base/menu.php"; ?>
 
 <H1 ALIGN=Center>Trade Screen</H1>
 <HR>
 
 <b>You must be logged in to use this feature</b>
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>
 </BODY>
 </HTML>
-<?
-exit;
+<?php exit;
 }
 
 $teamID = $teamnum;
 
 $sql = "select * from offer where status='Pending' and $teamID in (TeamAID, TeamBID)";
-$results = mysqli_query($conn, $sql) or die("UG");
+$results = $conn->query( $sql) or die("UG");
 
 $tradeArray = array();
 $thisTeam = loadTeam($teamID);
-while ($arr = mysqli_fetch_array($results)) {
+while ($arr = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     $newTrade = loadTradeByID($arr["OfferID"], $thisTeam);
     array_push($tradeArray, $newTrade);
 }
@@ -44,7 +43,7 @@ while ($arr = mysqli_fetch_array($results)) {
 <TITLE>Trades</TITLE>
 </HEAD>
 
-<? 
+<?php 
 //$teamid=0;
 include "base/menu.php"; ?>
 
@@ -70,8 +69,7 @@ Trade" section below.  </P>
 <TH>Actions</TH></TR>
 -->
 
-<?
-foreach($tradeArray as $trade) {
+<?php foreach($tradeArray as $trade) {
     $team = $trade->getOtherTeam();
     $teamName = $team->getName();
     if ($trade->getOfferedTeam() == $team) {
@@ -83,14 +81,13 @@ foreach($tradeArray as $trade) {
     }
 ?>
 <TR BGCOLOR="#CCCCCC"><TD COLSPAN=2><B><?print $teamName;?></B></TD>
-<TD COLSPAN=2><B>Offered: <? printf("%s", date("n/j/Y", $trade->getDateOffered()));?></B></TD>
-<TD COLSPAN=2><B>Expires: <? printf("%s", date("n/j/Y", $trade->getDateExpires()));?></B></TD>
+<TD COLSPAN=2><B>Offered: <?php printf("%s", date("n/j/Y", $trade->getDateOffered()));?></B></TD>
+<TD COLSPAN=2><B>Expires: <?php printf("%s", date("n/j/Y", $trade->getDateExpires()));?></B></TD>
 <TR><TD COLSPAN=6><B>Status: </B><?print $status;?></TD></TR>
 <TR><TD COLSPAN=3 VALIGN=top>
 You Would Receive:
 <UL>
-<?
-//foreach ($playerToArray as $player) {
+<?php //foreach ($playerToArray as $player) {
 foreach ($trade->getPlayersTo() as $player) {
     print "<LI>".$player->getName()." (".$player->getPos()."-".$player->getNFLTeam().")";
 }
@@ -106,8 +103,7 @@ foreach ($trade->getPointsTo() as $points) {
 </TD><TD COLSPAN=3 VALIGN=top>
 They Would Receive:
 <UL>
-<?
-//foreach ($playerFromArray as $player) {
+<?php //foreach ($playerFromArray as $player) {
 foreach ($trade->getPlayersFrom() as $player) {
     print "<LI>".$player->getName()." (".$player->getPos()."-".$player->getNFLTeam().")";
 }
@@ -126,8 +122,7 @@ foreach ($trade->getPointsFrom() as $points) {
 <INPUT TYPE="hidden" NAME="offerid" VALUE="<?print $trade->getID();?>">
 <TR>
 
-<?
-foreach ($buttons as $buttonName) {
+<?php foreach ($buttons as $buttonName) {
     printf ("<TD ALIGN=\"Center\" COLSPAN=\"%d\">", 6/sizeof($buttons));
     printf ("<INPUT TYPE=\"submit\" NAME=\"action\" VALUE=\"%s\"></TD>", $buttonName);
 }
@@ -135,22 +130,19 @@ foreach ($buttons as $buttonName) {
 
 </FORM></TR>
 <TR><TD>&nbsp;</TD></TR>
-<?
-}
+<?php }
 ?>
 </TABLE>
 
 
-<?
-$sql2 = "SELECT name, teamid FROM team WHERE active=1 ORDER BY name";
-$results = mysqli_query($conn, $sql2);
+<?php $sql2 = "SELECT name, teamid FROM team WHERE active=1 ORDER BY name";
+$results = $conn->query( $sql2);
 ?>
 
 <H3 ALIGN=Center>Offer New Trade</H3>
 <FORM ACTION="edittrade.php" METHOD="POST">
 Offer Trade To: <SELECT NAME="teamto">
-<?
-while ($teamarr = mysqli_fetch_array($results)) {
+<?php while ($teamarr = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     printf ("<OPTION VALUE=\"%d\">%s</OPTION>", $teamarr["teamid"], $teamarr["name"]);
 }
 ?>
@@ -158,6 +150,6 @@ while ($teamarr = mysqli_fetch_array($results)) {
 <INPUT TYPE="Submit" VALUE="Make Offer">
 </FORM>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>
 </BODY>
 </HTML>

@@ -1,3 +1,2 @@
-<?
-mail("josh@wmffl.com", "Test", "Test Test Test");
+<?php mail("josh@wmffl.com", "Test", "Test Test Test");
 ?>

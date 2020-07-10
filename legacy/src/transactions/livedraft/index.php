@@ -272,8 +272,7 @@ $draftPicks->find();
                     </tr>
                     </thead>
                     <tbody>
-                    <?
-
+                    <?php 
                     while ($draftPicks->fetch()) {
                         $roundDist = sprintf("%02d", $draftPicks->Round);
                         $pickDist = sprintf("%02d", $draftPicks->Pick);

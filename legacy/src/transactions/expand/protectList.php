@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $protect = array();
 $pullback = array();
@@ -11,9 +10,9 @@ $sql = <<<EOD
     select playerid, type from expansionprotections where teamid=$teamnum order by type
 EOD;
 
-    $results = mysqli_query($conn, $sql) or die("Unable to get expansion protections: " . mysqli_error($conn));
+    $results = $conn->query( $sql) or die("Unable to get expansion protections: " . $conn->error);
 
-    while (list($playerid, $type) = mysqli_fetch_array($results)) {
+    while (list($playerid, $type) = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($type == "protect") {
         array_push($protect, $playerid);
     } else if ($type == "pullback") {
@@ -68,8 +67,7 @@ function rotate(playerRow) {
 
 
 function loadPlayers() {
-<?
-    foreach ($protect as $playerid) {
+<?php     foreach ($protect as $playerid) {
         print "protect.push($playerid);";
     }
     foreach ($pullback as $playerid) {
@@ -269,16 +267,14 @@ function remove(anArray, aValue) {
 
 </script>
 
-<body <? if ($isin) { print "onload=\"loadPlayers()\""; } ?>>
-<?
-include "base/menu.php";
+<body <?php if ($isin) { print "onload=\"loadPlayers()\""; } ?>>
+<?php include "base/menu.php";
 ?>
 
 <h1 align="center"><?= $title; ?></h1>
 <hr size="1"/>
 
-<?
-//if ($isin) {
+<?php //if ($isin) {
 if (1==2) {
 
 $sql = <<<EOD
@@ -292,12 +288,12 @@ ORDER BY p.pos, p.lastname
 
 EOD;
 
-    $teamResults = mysqli_query($conn, $sql) or die("Unable to get team list: " . mysqli_error($conn));
+    $teamResults = $conn->query( $sql) or die("Unable to get team list: " . $conn->error);
 
 print "<form action=\"processProtect.php\" method=\"post\" onsubmit=\"return checkform();\"/>";
 print "<div id=\"roster\">";
 print "<table><tr><th><a title=\"Protection - Limit 5\">P</a></th><th><a title=\"Pull-Back - Limit 2\">PB<a></th><th><a title=\"Alternate - Limit 1\">A</a></th><th>Player</th><th>Pos</th><th>NFL Team</th></tr>";
-    while ($player = mysqli_fetch_assoc($teamResults)) {
+    while ($player = $teamResults->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
     print "<tr id=\"${player["playerid"]}\" onclick=\"rotate(this)\">";
     print "<td><input type=\"checkbox\" name=\"pro[]\" value=\"${player["playerid"]}\" onclick=\"saveClick(this)\" id=\"pro${player["playerid"]}\"/></td>";
     print "<td><input type=\"checkbox\" name=\"pb[]\" value=\"${player["playerid"]}\" onclick=\"saveClick(this)\" id=\"pb${player["playerid"]}\"/></td>";
@@ -340,15 +336,13 @@ print "</div>";
 
 <div style="float: left"/>
 
-<?
-} else {
+<?php } else {
 ?>
 
 <!--<center><b>You must be logged in to protect players</b></center>-->
 <center><b>The Expansion Draft has started you can not change protections</b></center>
 
-<?
-}
+<?php }
 
 include "base/footer.html";
 ?>

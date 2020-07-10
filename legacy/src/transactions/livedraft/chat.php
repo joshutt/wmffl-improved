@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 if (isset($_REQUEST['last'])) {
     $last = $_REQUEST['last'];
@@ -19,7 +18,7 @@ LIMIT 25
 
 EOD;
 
-$results = mysqli_query($conn, $sql) or die("Error: " . mysqli_error($conn));
+$results = $conn->query( $sql) or die("Error: " . $conn->error);
 $body = "<table class=\"draft_picks_header report\" cellspacing=\"1\" align=\"center\" id=\"chat\">";
 $body .= "<tbody><tr><th class=\"byName\">By</th>";
 $body .= "<th class=\"message\">Message</th></tr>";
@@ -29,7 +28,7 @@ $maxPick = 0;
 $count = 0;
 $xmlOutput = "";
 $text = "";
-while ($row = mysqli_fetch_assoc($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
 
     if ($count % 2) {
         $class = "oddtablerow";

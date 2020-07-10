@@ -27,12 +27,12 @@ group by wm.week, t.nflteam
 order by wm.week, t.name
 EOD;
 
-$byeResults = mysqli_query($conn, $byeSQL);
+$byeResults = $conn->query( $byeSQL);
 $lastName = "";
 $lastWeek = 0;
 $byeList = array();
 $string = "";
-while ($rows = mysqli_fetch_assoc($byeResults)) {
+while ($rows = $byeResults->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
     $week = $rows['week'];
     $teamName = $rows['name'];
     if ($teamName == 'New York' or $teamName == 'Los Angeles') {
@@ -55,15 +55,14 @@ $cssList = array("/base/css/schedule.css");
 include "base/menu.php";
 ?>
 
-<H1 Align=Center><? print $thisSeason;?> Schedule</H1>
+<H1 Align=Center><?php print $thisSeason;?> Schedule</H1>
 <HR size = "1"><CENTER>
 
-<?
-$results = mysqli_query($conn, $sql);
+<?php $results = $conn->query( $sql);
 
 $listWeek = 0;
 $lastLabel = "";
-while ($row = mysqli_fetch_array($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($row[0] != $listWeek || $row[11] != $lastLabel) {
         if ($listWeek != 0) {
             ?>
@@ -148,4 +147,4 @@ while ($row = mysqli_fetch_array($results)) {
 </tbody></table>
 </div><br/>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

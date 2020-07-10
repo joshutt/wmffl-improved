@@ -11,8 +11,8 @@ GROUP BY p.playerid, pos.position
 ORDER BY t.name, Extra desc, pc.years desc";
 
 $page = array();
-$result = mysqli_query($conn, $query);
-while ($aLine = mysqli_fetch_array($result)) {
+$result = $conn->query( $query);
+while ($aLine = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if (!array_key_exists($aLine['name'], $page)) {
         $page[$aLine['name']] = "";
     }

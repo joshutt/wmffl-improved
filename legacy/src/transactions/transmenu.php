@@ -20,26 +20,26 @@
 <!--<IMG SRC="/images/football.jpg" BORDER=0>-->Recent Transactions</A>
 </TD>
 
-<TD WIDTH=34%><A HREF="transactions.php?year=<? print $theyear; ?>&month=12">
+<TD WIDTH=34%><A HREF="transactions.php?year=<?php print $theyear; ?>&month=12">
 <!--<IMG SRC="/images/football.jpg" BORDER=0>-->December Transactions</A>
 </TD>
 
-<TD WIDTH=33%><A HREF="transactions.php?year=<? print $theyear; ?>&month=11">
+<TD WIDTH=33%><A HREF="transactions.php?year=<?php print $theyear; ?>&month=11">
 <!--<IMG SRC="/images/football.jpg" BORDER=0>-->November Transactions</A>
 </TD>
 
 </TR>
 
 <TR>
-<TD WIDTH=33%><A HREF="transactions.php?year=<? print $theyear; ?>&month=10">
+<TD WIDTH=33%><A HREF="transactions.php?year=<?php print $theyear; ?>&month=10">
 <!--<IMG SRC="/images/football.jpg" BORDER=0>-->October Transactions</A>
 </TD>
 
-<TD WIDTH=34%><A HREF="transactions.php?year=<? print $theyear; ?>&month=9">
+<TD WIDTH=34%><A HREF="transactions.php?year=<?php print $theyear; ?>&month=9">
 <!--<IMG SRC="/images/football.jpg" BORDER=0>-->September Transactions</A>
 </TD>
 
-<TD WIDTH=34%><A HREF="transactions.php?year=<? print $theyear; ?>&month=8">
+<TD WIDTH=34%><A HREF="transactions.php?year=<?php print $theyear; ?>&month=8">
 <!--<IMG SRC="/images/football.jpg" BORDER=0>-->Pre-Season Transactions</A></TD>
 </TR>
 

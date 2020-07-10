@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $thisSeason = 2018;
 $thisWeek = $currentWeek;

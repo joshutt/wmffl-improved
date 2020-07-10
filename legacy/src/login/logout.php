@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 unset($_SESSION["teamnum"]);
 unset($_SESSION["user"]);

@@ -21,8 +21,12 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+global $kernel;
+$doctrine = $kernel->getContainer()->get('doctrine');
+
 // Establish database connections
-$conn = mysqli_connect('localhost', $ini['userName'], $ini['password'], $ini['dbName']);
+//$conn = mysqli_connect('localhost', $ini['userName'], $ini['password'], $ini['dbName']);
+$conn = $doctrine->getConnection();
 
 // Determine the current season and current week, but not every time, use cachin
 //if (!isset($_SESSION["lastFetch"]) || time() > $lastFetch + 60 * 60) {
@@ -32,8 +36,11 @@ WHERE now() BETWEEN w1.startDate and w1.endDate
 and IF(w1.week=0, w2.season=w1.season-1 and w2.week=16, w2.week=w1.week-1 and w2.season=w1.season) 
 EOD;
 
-$dateResult = mysqli_query($conn, $dateQuery);
-list($_SESSION["currentSeason"], $_SESSION["currentWeek"], $_SESSION["weekName"], $_SESSION["previousWeekName"]) = mysqli_fetch_row($dateResult);
+//$dateResult = $conn->query( $dateQuery);
+//list($_SESSION["currentSeason"], $_SESSION["currentWeek"], $_SESSION["weekName"], $_SESSION["previousWeekName"]) = $dateResult->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
+$dateResult = $conn->query($dateQuery);
+list($_SESSION["currentSeason"], $_SESSION["currentWeek"], $_SESSION["weekName"], $_SESSION["previousWeekName"]) = $dateResult->fetch(\Doctrine\DBAL\FetchMode::MIXED);
+
 if ($_SESSION["currentWeek"] == 0) {
     $_SESSION["previousWeekSeason"] = $_SESSION["currentSeason"] - 1;
     $_SESSION["previousWeek"] = 16;

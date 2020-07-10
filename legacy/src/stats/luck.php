@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 if ($currentWeek < 1) {
     $thisSeason = $currentSeason - 1;
 } else {
@@ -20,9 +19,9 @@ $ptSql .= "order by ps.week, t.name ";
 
 
 // Get potential offense and defense scores
-$results = mysqli_query($conn, $ptSql);
+$results = $conn->query( $ptSql);
 $potArray = array();
-while ($pot = mysqli_fetch_array($results)) {
+while ($pot = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     $potArray[$pot["week"]][$pot["name"]]["off"] = $pot["off"];
     $potArray[$pot["week"]][$pot["name"]]["def"] = $pot["def"];
 }
@@ -70,8 +69,8 @@ $sql .= "order by s.week, t1.name";
 
 // Get actual wins and losses
 $actual = array();
-$final = mysqli_query($conn, $sql);
-while ($score = mysqli_fetch_array($final)) {
+$final = $conn->query( $sql);
+while ($score = $final->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if (!array_key_exists($score["name"], $actual)) {
         $actual[$score["name"]] = array("wins" => 0, "lose" => 0, "tie" => 0);
     }
@@ -112,12 +111,12 @@ if ($week > 0) {
 $title = "Schedule Luck";
 ?>
 
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
 <H1 ALIGN=Center>Schedule Luck</H1>
 <H5 ALIGN=Center><I>Through Week <?print $week;?></I></H5>
 <HR>
-<? include "base/statbar.html"; ?>
+<?php include "base/statbar.html"; ?>
 
 <P>Schedule Luck is an evaluation of how a team's record compares to what it
 "should be".  It is determined by calculating what a team's record would be
@@ -130,12 +129,11 @@ schedule has been.  Any team whose luck is within the statistical significance
 has a fairly accurate record.  These numbers are updated every Tuesday 
 afternoon.</P>
 
-<P>Current statistical significance: +/- <? printf("%5.1f",$statSig);?></P>
+<P>Current statistical significance: +/- <?php printf("%5.1f",$statSig);?></P>
 
 <TABLE ALIGN=Center>
 <TR><TH ALIGN=Left>Team</TH><TH ALIGN=Left>Luck Rating</TH></TR>
-<?
-arsort($luckRe);
+<?php arsort($luckRe);
 foreach ($luckRe as $name=>$diff) {
 //    printf("%s = %5.1f<BR>", $name, ($diff["act"]-$diff["pot"])*100);
 //    printf("%s = %5.1f<BR>", $name, $diff*100);
@@ -150,4 +148,4 @@ foreach ($luckRe as $name=>$diff) {
 ?>
 </TABLE>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

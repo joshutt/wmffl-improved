@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 function cmp($a, $b) {
     if ($a["pct"] > $b["pct"]) {
@@ -67,10 +66,10 @@ EOD;
     $groupBy = "group by t.teamid";
 
     $finalQuery = $alltimeQuery." ".$addWhere." ".$groupBy;
-    $result = mysqli_query($conn, $finalQuery) or die("Dead alltime query: " . $finalQuery . "<br/>Error: " . mysqli_error($conn));
+    $result = $conn->query( $finalQuery) or die("Dead alltime query: " . $finalQuery . "<br/>Error: " . $conn->error);
 
     $recordsArray = array();
-    while ($team = mysqli_fetch_array($result)) {
+    while ($team = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
         $pct = ($team["wins"] + $team["ties"]/2.0) / $team["games"];
         $team["pct"]=$pct;
         array_push($recordsArray, $team);
@@ -91,12 +90,11 @@ $toiletBowlArray = getRecList("and postseason=1 and playoffs=0", $currentSeason)
 $title = "WMFFL ALL-Time Records";
 ?>
 
-<?
-include "base/menu.php";
+<?php include "base/menu.php";
 ?>
 
 <H1 ALIGN=CENTER>All-Time Win Loss Records</H1>
-<H5 ALIGN=CENTER>Through <? print $currentSeason-1; ?> Season</H5>
+<H5 ALIGN=CENTER>Through <?php print $currentSeason-1; ?> Season</H5>
 <HR size = "1">
 
 <div class="text-center font-weight-bold ">Overall Records</div>
@@ -112,7 +110,7 @@ include "base/menu.php";
 </tr>
 </thead>
 <tbody>
-<? displayBlock($allTimeArray); ?>
+<?php displayBlock($allTimeArray); ?>
 </tbody>
 </TABLE>
 
@@ -129,7 +127,7 @@ include "base/menu.php";
 </tr>
 </thead>
 <tbody>
-<? displayBlock($regSeasonArray); ?>
+<?php displayBlock($regSeasonArray); ?>
 </TABLE>
 
 <div class="text-center font-weight-bold ">Post-Season Records</div>
@@ -144,7 +142,7 @@ include "base/menu.php";
 </tr>
 </thead>
 <tbody>
-<? displayBlock($postSeasonArray, false); ?>
+<?php displayBlock($postSeasonArray, false); ?>
 </tbody>
 </TABLE>
 
@@ -160,7 +158,7 @@ include "base/menu.php";
 </tr>
 </thead>
 <tbody>
-<? displayBlock($playoffArray, false); ?>
+<?php displayBlock($playoffArray, false); ?>
 </tbody>
 </table>
 
@@ -176,7 +174,7 @@ include "base/menu.php";
 </tr>
 </thead>
 <tbody>
-<? displayBlock($championshipArray, false); ?>
+<?php displayBlock($championshipArray, false); ?>
 </tbody>
 </table>
 
@@ -193,8 +191,8 @@ include "base/menu.php";
 </tr>
 </thead>
 <tbody>
-<? displayBlock($toiletBowlArray, false); ?>
+<?php displayBlock($toiletBowlArray, false); ?>
 </tbody>
 </table>
 
-<? include "base/footer.html" ?>
+<?php include "base/footer.html" ?>

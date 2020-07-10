@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $title = "Determine Draft Date";
 
@@ -24,11 +23,10 @@ include "base/menu.php";
 <H1 ALIGN=Center>Draft Date Open</H1>
 <HR size = "1"/>
 
-<?
-if ($isin) {
+<?php if ($isin) {
     $thequery = "SELECT DATE_FORMAT(d.date, '%m%e'), DATE_FORMAT(d.date, '%W, %M %D'), d.attend ";
     $thequery .= "FROM draftdate d, user u WHERE d.userid=u.userid and u.username='$user' AND d.date BETWEEN '2007-07-01' AND '2007-10-01' ORDER BY d.date";
-    $results = mysqli_query($conn, $thequery);
+    $results = $conn->query( $thequery);
 
 ?>
 
@@ -36,15 +34,14 @@ if ($isin) {
 <p>The 2006 draft has been selected for August 26th.  The exact time and location will be announced at a future time.  If you are unable to attend on this day, please let Josh know.  Thanks.</p>
 -->
 
-<p><? print $draftMessage; ?></p>
+<p><?php print $draftMessage; ?></p>
 
 <P><FORM ACTION="processdraftdate.php" METHOD="POST">
 
 <TABLE BORDER=1>
 <TR><TH WIDTH=30%>Can Attend?</TH><TH WIDTH=70%>Date</TH></TR>
 
-<?
-while (list($date, $fulldate, $attend) = mysqli_fetch_row($results)) {
+<?php while (list($date, $fulldate, $attend) = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
         print "<TR><TD><INPUT TYPE=\"radio\" NAME=\"$date\" VALUE=\"Y\" ";
         if ($attend == 'Y') print "CHECKED ";
         print "/>Yes<INPUT TYPE=\"radio\" NAME=\"$date\" VALUE=\"N\" ";
@@ -58,13 +55,12 @@ while (list($date, $fulldate, $attend) = mysqli_fetch_row($results)) {
 </TABLE>
 </FORM>
 </P>
-<?
-} else {
+<?php } else {
 ?>
 
 <CENTER><B>You must be logged in to use this feature</B></CENTER>
 
-<? }
+<?php }
 include "base/footer.html";
 ?>
 

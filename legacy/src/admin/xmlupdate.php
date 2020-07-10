@@ -1,5 +1,4 @@
-<?
-
+<?php
 print "start<br/>";
 require_once "utils/start.php";
 
@@ -106,18 +105,18 @@ foreach ($xml->player as $player) {
 
 $timeSql = "SELECT value FROM config WHERE `key`='player.update.timestamp'";
 echo "$timeSql<br/>";
-$result = mysqli_query($conn, $timeSql) or die("Unable to select: " . mysqli_error($conn));
+$result = $conn->query( $timeSql) or die("Unable to select: " . $conn->error);
 $numReturn = mysqli_num_rows($result);
 if ($numReturn == 0) {
     $setSql = sprintf("INSERT INTO config (`key`, value) VALUES ('player.update.timestamp', '%d')", $timeStamp);
-    mysqli_query($conn, $setSql) or die("Unable to insert: " . mysqli_error($conn));
+    $conn->query( $setSql) or die("Unable to insert: " . $conn->error);
 
 } else {
-    $config = mysqli_fetch_assoc($result);
+    $config = $result->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
     $thisStamp = intval($config["value"]);
     if ($thisStamp < $timeStamp) {
         $setSql = sprintf("UPDATE config SET value='%d' WHERE `key`='player.update.timestamp'", $timeStamp);
-        mysqli_query($conn, $setSql) or die("Unable to update: " . mysqli_error($conn));
+        $conn->query( $setSql) or die("Unable to update: " . $conn->error);
     } else {
         echo "Here<br/>";
         return;
@@ -158,22 +157,22 @@ EOD;
 // Save or update the players
 foreach ($playerList as &$player) {
     $query = sprintf($selectSQL, $player["flmid"]);
-    $result = mysqli_query($conn, $query);
+    $result = $conn->query( $query);
 
     $numReturn = mysqli_num_rows($result);
     if ($numReturn == 0) {
         //Insert Here
         $query2 = sprintf($insertSQL, $player["flmid"], $player["lastName"], $player["firstName"], $player["pos"], $player["team"]);
-        mysqli_query($conn, $query2);
+        $conn->query( $query2);
         $player["playerid"] = mysqli_insert_id($conn);
     } else {
         // Update if necessary
-        $row = mysqli_fetch_assoc($result);
+        $row = $result->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
         if ($row["lastname"] != $player["lastName"]  || $row["firstname"] != $player["firstName"]
             || $row["pos"] != $player["pos"] || $row["team"] != $player["team"])    {
 
             $query2 = sprintf($updateSQL, $player["lastName"], $player["firstName"], $player["pos"], $player["team"], $player["flmid"]);
-            mysqli_query($conn, $query2);
+            $conn->query( $query2);
 
         }
         $player["playerid"] = $row["playerid"];
@@ -207,12 +206,12 @@ $closeBase = "";
 
 foreach ($playerList as $player) {
     $query = sprintf($currentSql, $player["playerid"]);
-    $result = mysqli_query($conn, $query) or die("Unable to get current roster: " . mysqli_error($conn));
+    $result = $conn->query( $query) or die("Unable to get current roster: " . $conn->error);
     $numRows = mysqli_num_rows($result);
 
     if ($player["team"] != "") {
         if ($numRows > 0) {
-            $row = mysqli_fetch_assoc($result);
+            $row = $result->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
             if ($row["team"] != $player["team"]) {
                 // matches, do nothing
             } else {
@@ -250,14 +249,14 @@ foreach ($playerList as $player) {
 
 if ($insertBase != "") {
     $insertQuery = "INSERT INTO nflrosters (playerid, nflteamid, dateon, dateoff) VALUES $insertBase";
-    mysqli_query($conn, $insertQuery) or die ("Unable to insert: " . mysqli_error($conn));
+    $conn->query( $insertQuery) or die ("Unable to insert: " . $conn->error);
     $affectedRows = mysqli_affected_rows($conn);
     print "Inserted $affectedRows rows<br/>";
 }
 
 if ($closeBase != "") {
     $closeQuery = "UPDATE nflrosters SET dateoff=now() WHERE dateoff is null AND playerid in ($closeBase)";
-    mysqli_query($conn, $closeQuery) or die ("Unable to update: " . mysqli_error($conn));
+    $conn->query( $closeQuery) or die ("Unable to update: " . $conn->error);
     $affectedRows = mysqli_affected_rows($conn);
     print "Updated $affectedRows rows<br/>";
 }

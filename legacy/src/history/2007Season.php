@@ -1,5 +1,4 @@
-<?
-$title = "2007 WMFFL Season";
+<?php $title = "2007 WMFFL Season";
 include "base/menu.php"; 
 ?>
 
@@ -75,8 +74,7 @@ include "base/menu.php";
 
 <br/>
 
-<?
-$thisSeason = 2007;
+<?php $thisSeason = 2007;
 $thisWeek = 17;
 include "base/footer.html";
 ?>

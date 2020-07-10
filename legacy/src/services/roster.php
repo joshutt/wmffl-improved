@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 if (isset($_GET['id'])) {
     $teamCrit = "AND t.teamid=".$_GET['id'];
@@ -18,13 +17,13 @@ ORDER BY t.name, p.pos, p.lastname
 
 EOD;
 
-$results = mysqli_query($conn, $sql) or die("Error: " . mysqli_error($conn));
+$results = $conn->query( $sql) or die("Error: " . $conn->error);
 $team = "";
 $first = true;
 
 $result_array = array();
 // For each item in the Query
-while ($row = mysqli_fetch_assoc($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
     // If it's a new team add the team array
     if ($row["teamname"] != $team) {
         $first = false;

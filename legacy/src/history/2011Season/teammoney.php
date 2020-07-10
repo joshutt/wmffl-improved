@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $title = "2011 WMFFL Financial Statements";
 
@@ -290,4 +289,4 @@ include "base/menu.php";
 </table>
 </div>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

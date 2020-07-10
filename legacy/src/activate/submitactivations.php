@@ -86,10 +86,10 @@ EOD;
 
 $weekSql = "SELECT week, weekname FROM weekmap WHERE Season=$season AND EndDate>now()";
 
-$weekResults = mysqli_query($conn, $weekSql) or die("Unable to get Weeks: " . mysqli_error($conn));
+$weekResults = $conn->query( $weekSql) or die("Unable to get Weeks: " . $conn->error);
 
 $weekList = "";
-while ($theWeek = mysqli_fetch_assoc($weekResults)) {
+while ($theWeek = $weekResults->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
     $checked = "";
     if ($week == $theWeek['week']) {
         $checked = "selected=\"true\"";
@@ -107,7 +107,7 @@ include "base/menu.php";
 $actingHC = false;
 if ($isin) {
 
-    $results = mysqli_query($conn, $sql) or die("Ug: " . mysqli_error($conn));
+    $results = $conn->query( $sql) or die("Ug: " . $conn->error);
 
     $starters = array();
     $reserve = array();
@@ -118,7 +118,7 @@ if ($isin) {
     $reserveCount = 0;
     $reserveIds = array();
     $gpOption = "<option value=\"-1\">None</option>";
-    while ($rowSet = mysqli_fetch_assoc($results)) {
+    while ($rowSet = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
         #print_r($rowSet);
         #print "<br/>";
 
@@ -190,8 +190,8 @@ if ($isin) {
     }
 
 
-    $noActiveResults = mysqli_query($conn, $noActivateSql) or die("Die on No activate: " . mysqli_error($conn));
-    while ($rowSet = mysqli_fetch_assoc($noActiveResults)) {
+    $noActiveResults = $conn->query( $noActivateSql) or die("Die on No activate: " . $conn->error);
+    while ($rowSet = $noActiveResults->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
         $key = array_search($rowSet["playerid"], $reserveIds);
         if ($key !== FALSE) {
             $player = $reserve[$key];
@@ -201,8 +201,8 @@ if ($isin) {
     }
 
     $oppGPOption = "<option value='-1'>None</option>";
-    $oppRosterResults = mysqli_query($conn, $opponentRoster) or die("Die on opponent roster: " . mysqli_error($conn));
-    while ($rowSet = mysqli_fetch_assoc($oppRosterResults)) {
+    $oppRosterResults = $conn->query( $opponentRoster) or die("Die on opponent roster: " . $conn->error);
+    while ($rowSet = $oppRosterResults->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
         $player = array();
         $player["name"] = $rowSet["name"];
         $player["pos"] = $rowSet["pos"];
@@ -219,9 +219,9 @@ if ($isin) {
 }
 
 if ($actingHC) {
-    $HCResults = mysqli_query($conn, $actingHCsql) or die("Unable to get active HC: " . mysqli_error($conn));
+    $HCResults = $conn->query( $actingHCsql) or die("Unable to get active HC: " . $conn->error);
     $hcArray = array();
-    while ($rowSet = mysqli_fetch_assoc($HCResults)) {
+    while ($rowSet = $HCResults->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
         $player = array();
         $player["name"] = $rowSet["name"];
         $player["pos"] = $rowSet["pos"];
@@ -260,28 +260,25 @@ if ($actingHC) {
 </tr></table>
 
 <hr size = "1">
-<?
-if ($isin) {
+<?php if ($isin) {
 
 ?>
 <a name="Submit"/>
 
 <form action="processActivations.php" method="POST" name="activeForm">
 
-<?
-if (isset($activeMessage) && $activeMessage != "") {
+<?php if (isset($activeMessage) && $activeMessage != "") {
     print "<div class=\"alert\">$activeMessage</div>";
 }
 ?>
 
 <table align="center" id="subAct">
 
-<tr><td colspan="5" align="center">Week: <select name="week" onChange="swapActivations(this);"><? print $weekList; ?></select></td></tr>
+<tr><td colspan="5" align="center">Week: <select name="week" onChange="swapActivations(this);"><?php print $weekList; ?></select></td></tr>
 <tr><th colspan="5">Starters</th></tr>
 
 
-<?
-if ($actingHC) {
+<?php if ($actingHC) {
     print "<tr>";
     print "<td><input name=\"actHC\" value=\"on\" type=\"checkbox\" checked=\"true\" /></td>";
     print "<td>{$player["pos"]}</td><td colspan=\"3\"><select name=\"actHCid\">";
@@ -338,8 +335,7 @@ foreach ($starters as $player) {
 <tr><td>&nbsp;</td></tr>
 <tr><th colspan="5">Reserves</th></tr>
 
-<?
-foreach ($reserve as $player) {
+<?php foreach ($reserve as $player) {
     $lock = $player["lock"];
     if ($allLock) {
         $lock = true;

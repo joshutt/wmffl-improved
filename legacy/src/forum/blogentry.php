@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 ?>
 
 <html>
@@ -17,17 +16,15 @@ tinyMCE.init({
 
 </head>
 
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
 <h1 align="center">Enter Comment</h1>
 <hr/>
 
-<?
-if (!$isin) {
+<?php if (!$isin) {
 ?>
 <b>You must be logged in to submit a Trash Talk entry</b>
-<?
-} else {
+<?php } else {
 ?>
 
 <form action="processEntry.php" method="post">
@@ -42,8 +39,7 @@ if (!$isin) {
 
 </form>
 
-<?
-}
+<?php }
 ?>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

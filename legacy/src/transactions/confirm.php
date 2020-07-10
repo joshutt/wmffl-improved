@@ -1,5 +1,4 @@
-<?
-function process($array, $word="pick") {
+<?php function process($array, $word="pick") {
     $playerlist = array();
 	if(is_array($array)) {
 //		print("<ul>\n");
@@ -36,8 +35,8 @@ if (!isset($ErrorMessage)) {$ErrorMessage = "";}
 $waiverSQL = "SELECT IF(now()>ActivationDue,1,0) AS 'WaiverPeriod', ";
 $waiverSQL .= "season, week ";
 $waiverSQL .= "FROM weekmap WHERE now() BETWEEN startdate AND enddate";
-$result = mysqli_query($conn, $waiverSQL) or die("Error: " . mysqli_error($conn));
-list($isWaiver, $season, $week) = mysqli_fetch_row($result);
+$result = $conn->query( $waiverSQL) or die("Error: " . $conn->error);
+list($isWaiver, $season, $week) = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 if ($week==0) {$isWaiver = 1;}
 
 $displayWaiver = false;
@@ -92,8 +91,8 @@ if($submit == "Confirm") {
 FROM transpoints tp
 JOIN paid p on tp.teamid=p.teamid and tp.season=p.season
 WHERE tp.teamid=$teamnum and tp.season=$season";
-    $aResult = mysqli_query($conn, $allowedTran) or die("Unable to get transactions: " . mysqli_error($conn));
-    list($paid, $remainTrans) = mysqli_fetch_row($aResult);
+    $aResult = $conn->query( $allowedTran) or die("Unable to get transactions: " . $conn->error);
+    list($paid, $remainTrans) = $aResult->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 
     //$paid = true;
     //$remainTrans = 994;
@@ -115,9 +114,9 @@ WHERE tp.teamid=$teamnum and tp.season=$season";
 
 		$first = TRUE;
 		for ($i=0; $i<sizeof($playlist); $i++) {
-            $result = mysqli_query($conn, $checkquery . $playlist[$i]) or die ("Check Query Failed: " . $playlist[$i]);
+            $result = $conn->query( $checkquery . $playlist[$i]) or die ("Check Query Failed: " . $playlist[$i]);
             if (mysqli_num_rows($result) != 0) {
-                $rst = mysqli_fetch_row($result);
+                $rst = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 				$ErrorMessage .= $rst[2]." ".$rst[1]." is already on a roster!!<BR>";
 			} else {
 				if (!$first) {
@@ -156,21 +155,21 @@ WHERE tp.teamid=$teamnum and tp.season=$season";
         // Actually Do queries here
         //print "Any Errors? $ErrorMessage<br>";
 		if (!isset($ErrorMessage) || $ErrorMessage == "") {
-            mysqli_query($conn, $dropquery) or die ("Drop Query Failed");
+            $conn->query( $dropquery) or die ("Drop Query Failed");
 			if (!$nopicks) {
-                mysqli_query($conn, $thequery) or die ("Insert Query Failed");
-                mysqli_query($conn, $ptsquery) or die ("Pts Query Failed");
+                $conn->query( $thequery) or die ("Insert Query Failed");
+                $conn->query( $ptsquery) or die ("Pts Query Failed");
 			}
 			if (!$first) {
-                mysqli_query($conn, $transquery) or die ("Transaction Query Failed");
+                $conn->query( $transquery) or die ("Transaction Query Failed");
 			}
           //  print "In other queries<br>";
             //if ($isWaiver == 1) {
             if ($displayWaiver) {
             //    print "Doing this query<br>";
-                mysqli_query($conn, $waiveClear) or die ("Clearing Waiver Failed: " . mysqli_error($conn));
+                $conn->query( $waiveClear) or die ("Clearing Waiver Failed: " . $conn->error);
                 if (!$firstW) {
-                    mysqli_query($conn, $waivequery) or die ("Waiver Query Failed<br/>$waivequery<br/>" . mysqli_error($conn));
+                    $conn->query( $waivequery) or die ("Waiver Query Failed<br/>$waivequery<br/>" . $conn->error);
                 }
             }
 			// Forward to completion page
@@ -193,9 +192,9 @@ $waiverSQL .= "p.pos, w.priority FROM waiverpicks w, newplayers p ";
 $waiverSQL .= "WHERE w.playerid=p.playerid AND teamid=$teamnum ";
 $waiverSQL .= "AND season=$season AND week=$week ";
 $waiverSQL .= "ORDER BY w.priority ";
-$result = mysqli_query($conn, $waiverSQL) or die("Dead: " + mysqli_error($conn));
+$result = $conn->query( $waiverSQL) or die("Dead: " + $conn->error);
 $waveCount = 0;
-while ($wavePlayers[$waveCount] = mysqli_fetch_row($result)) {
+while ($wavePlayers[$waveCount] = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
     $waveCount++;
     $displayWaiver = true;
 }
@@ -215,10 +214,10 @@ EOD;
 
     //$waiverSQL = "SELECT DISTINCT playerid FROM roster r, weekmap w WHERE r.dateoff BETWEEN w.startdate and now() AND w.season=$season AND w.week=$week";
 //    $waiverSQL .= " AND r.dateoff > '2004-09-07 11:00:00' ";
-$result = mysqli_query($conn, $waiverSQL) or die("Dead: " + mysqli_error($conn));
+$result = $conn->query( $waiverSQL) or die("Dead: " + $conn->error);
 $wavePlayCount = 1;
 $waiveElgPlayers = array();
-while ($row = mysqli_fetch_row($result)) {
+while ($row = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
     //error_log("Row: ".print_r($row, true));
     $waiveElgPlayers[$wavePlayCount] = $row[0];
     //error_log("Array: ".is_array($waiveElgPlayers));
@@ -236,9 +235,9 @@ for ($i=0; $i<sizeof($playlist); $i++) {
 $thequery .= ")";
 
 // Get info about players to pickup
-$result = mysqli_query($conn, $thequery) or die ("Query 1 Failed");
+$result = $conn->query( $thequery) or die ("Query 1 Failed");
 $i = 0;
-while ($pickups[$i] = mysqli_fetch_row($result)) {
+while ($pickups[$i] = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
     if ($isWaiver == 1) {
         $pickups[$i][5] = 1;
         $waveCount++;
@@ -265,9 +264,9 @@ while ($pickups[$i] = mysqli_fetch_row($result)) {
 
 // Get info about current roster
 $thequery = "select p.playerid, p.lastname, p.firstname, p.team, p.pos from newplayers p, roster r, team t where p.playerid=r.playerid and r.teamid=t.teamid and r.dateoff is null and t.teamid=$teamnum order by p.pos, p.lastname";
-$result = mysqli_query($conn, $thequery) or die ("Query 2 Failed");
+$result = $conn->query( $thequery) or die ("Query 2 Failed");
 $i = 0;
-while ($currentroster[$i] = mysqli_fetch_row($result)) {
+while ($currentroster[$i] = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
 	$i++;
 }
 
@@ -275,8 +274,8 @@ while ($currentroster[$i] = mysqli_fetch_row($result)) {
 // Get team info
 //$thequery = "select count(*), t.preptsleft-t.ptsleft from roster r, players p, transpoints t where r.playerid=p.playerid and r.teamid=t.teamid and r.teamid=$teamnum and r.dateoff is null and p.position<>'HC' group by t.teamid";
 $thequery = "select count(*), t.totalpts-t.protectionpts-t.transpts from roster r, newplayers p, transpoints t where r.playerid=p.playerid and r.teamid=t.teamid and r.teamid=$teamnum and r.dateoff is null and p.pos<>'HC' and t.season=$season group by t.teamid";
-$result = mysqli_query($conn, $thequery) or die ("Query 3 Failed");
-list($numplayers, $ptsleft) = mysqli_fetch_row($result);
+$result = $conn->query( $thequery) or die ("Query 3 Failed");
+list($numplayers, $ptsleft) = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 ?>
 
 
@@ -285,17 +284,16 @@ list($numplayers, $ptsleft) = mysqli_fetch_row($result);
 <TITLE>Confirm Transaction</TITLE>
 </HEAD>
 
-<? include  "base/menu.php"; ?>
+<?php include  "base/menu.php"; ?>
 
 <H1 ALIGN=Center>Confirm Transaction</H1>
 <HR size = "1">
 
-<?
-if ($isin) {
+<?php if ($isin) {
 ?>
 
 <P>Step 4: Check your available roster room and transaction points.  You will not
-be allowed to exceed the roster limit of <? print $MAXPLAYERS; ?>.  If you use
+be allowed to exceed the roster limit of <?php print $MAXPLAYERS; ?>.  If you use
 more transaction points then you have the $1 fee will automaticlly be debited
 from your account.</P>
 
@@ -311,19 +309,18 @@ of the transactions requested will take place.</P>
 
 <HR>
 
-<P><FONT COLOR="Red"><B><? print $ErrorMessage; ?></B></FONT></P>
+<P><FONT COLOR="Red"><B><?php print $ErrorMessage; ?></B></FONT></P>
 
-<P>You currently have <? print $numplayers; ?> players on your roster.
-That leaves you with <? print $MAXPLAYERS-$numplayers; ?> available slots.<BR>
-You have <? print $ptsleft; ?> points left.</P>
+<P>You currently have <?php print $numplayers; ?> players on your roster.
+That leaves you with <?php print $MAXPLAYERS-$numplayers; ?> available slots.<BR>
+You have <?php print $ptsleft; ?> points left.</P>
 
 <P>Confirm that these are the players you would like to pick up</P>
 
 <TABLE>
 <FORM METHOD="POST" ACTION="confirm.php">
 <TR><TD><B>Add</B></TD><TD><B>Last Name</B></TD><TD><B>First Name</B></TD><TD><B>NFL Team</B></TD><TD><B>Pos</B></TD></TR>
-<?
-$i = 0;
+<?php $i = 0;
 $j = 0;
 //print count($wavePlayers);
 while (list($id, $last, $first, $team, $pos, $isWaive) = $pickups[$i]) {
@@ -359,16 +356,14 @@ while (list($id, $last, $first, $team, $pos, $isWaive) = $pickups[$i]) {
 <tr><td colspan="5"><A HREF="list.php">Return to Player List</A></td></tr>
 <tr><td>&nbsp;</td></tr>
 
-<?
-//if ($isWaiver == 1) {
+<?php //if ($isWaiver == 1) {
 if ($displayWaiver) {
 //    print_r ($wavePlayers);
 ?>
 
 <tr><th align="center" colspan="5">WAVIER LIST</th></tr>
 <TR><TD><B>Status</B></TD><TD><B>Last Name</B></TD><TD><B>First Name</B></TD><TD><B>NFL Team</B></TD><TD><B>Pos</B></TD></TR>
-<?
-$i = 0;
+<?php $i = 0;
 for ($i=0; $i<count($wavePlayers); $i++) {
 //while (list($id, $last, $first, $team, $pos, $priority) = $wavePlayers[$i]) {
     list($id, $last, $first, $team, $pos, $priority) = $wavePlayers[$i];
@@ -390,13 +385,12 @@ for ($i=0; $i<count($wavePlayers); $i++) {
 }
 ?>
 <tr><td>&nbsp;</td></tr>
-<? } ?>
+<?php } ?>
 
 
 <TR><TH ALIGN=Center COLSPAN=5>CURRENT ROSTER</TH></TR>
 <TR><TD><B>Status</B></TD><TD><B>Last Name</B></TD><TD><B>First Name</B></TD><TD><B>NFL Team</B></TD><TD><B>Pos</B></TD></TR>
-<?
-$i = 0;
+<?php $i = 0;
 while (list($id, $last, $first, $team, $pos) = $currentroster[$i]) {
 	print "<TR><TD>";
 	if ($pos != "HC") {
@@ -418,12 +412,11 @@ while (list($id, $last, $first, $team, $pos) = $currentroster[$i]) {
 </FORM>
 </TABLE>
 
-<?
-} else {
+<?php } else {
 ?>
 
 <CENTER><B>You must be logged in to perform transactions</B></CENTER>
 
-<? }
+<?php }
 	include  "base/footer.html";
 ?>

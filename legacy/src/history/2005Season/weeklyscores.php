@@ -1,6 +1,5 @@
 <table cellpadding="2">
-<?
-$weekQuery = <<<EOD
+<?php $weekQuery = <<<EOD
 SELECT t1.name as 'namea', s.scorea, t2.name as 'nameb', s.scoreb, s.label
 FROM schedule s, teamnames t1, teamnames t2
 WHERE s.teama = t1.teamid
@@ -9,11 +8,11 @@ AND s.season=$thisSeason AND t1.season=$thisSeason AND t2.season=$thisSeason
 AND s.week=$thisWeek
 ORDER BY s.label, MD5(CONCAT(t1.name, t2.name))
 EOD;
-$results = mysqli_query($conn, $weekQuery) or die("SQL Error: " . mysqli_error($conn));
+$results = $conn->query( $weekQuery) or die("SQL Error: " . $conn->error);
 
 $count = 0;
 $gameArray = array();
-while ($row = mysqli_fetch_array($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($count % 2 == 0) {
         $bgcolor="dddddd";
     } else {

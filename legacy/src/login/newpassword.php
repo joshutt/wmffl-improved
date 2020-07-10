@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 if (!$isin) {
     header("Location: http://wmffl.com");
     exit();
@@ -17,17 +16,17 @@ if (isset($change)) {
 
         // Make sure that the old password matches entered password
         $theQuery = "SELECT name, email FROM user WHERE username='$username' AND (password=PASSWORD('$oldpassword') or password=MD5('$oldpassword'))";
-        $result = mysqli_query($conn, $theQuery);
+        $result = $conn->query( $theQuery);
         $numrow = mysqli_num_rows($result);
 
         if ($numrow != 1) {
             $errorMessage = "Old password does not equal current password";
         } else {
-            list($name, $email) = mysqli_fetch_row($result);
+            list($name, $email) = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
             
             // Save password in database
             $theQuery = "UPDATE user SET password=MD5('$newpassword1') WHERE username='$user'";
-            $result = mysqli_query($conn, $theQuery) or die("An error occured: " . mysqli_error($conn));
+            $result = $conn->query( $theQuery) or die("An error occured: " . $conn->error);
 
             // Send email confirming change
             $body = "$name,
@@ -48,20 +47,20 @@ $title = "Change Password";
 ?>
 
 
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
 <h1 align="center">Change WMFFL Password</h1>
 <hr size="1"/>
 
 <p><font color="red" size="+1" align="center">
-<? print $errorMessage; ?></font></p>
+<?php print $errorMessage; ?></font></p>
 
 <form method="post" action="newpassword.php">
     <input type="hidden" name="change" value="true"/>
     <table>
         <tr>
             <td>Username:</td>
-            <td><input type="text" name="username" value="<? print $user; ?>"/></td>
+            <td><input type="text" name="username" value="<?php print $user; ?>"/></td>
         </tr>
 
         <tr>
@@ -88,4 +87,4 @@ $title = "Change Password";
 </form>
 
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

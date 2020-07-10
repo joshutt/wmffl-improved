@@ -1,10 +1,9 @@
-<?
-	require_once "conn.php";
+<?php 	require_once "conn.php";
 
 	$thequery = "SELECT UNIX_TIMESTAMP(ActivationDue-INTERVAL 30 MINUTE)-UNIX_TIMESTAMP(), weekname FROM weekmap WHERE now() BETWEEN StartDate AND EndDate";
 
-$results = mysqli_query($conn, $thequery);
-$row = mysqli_fetch_row($results);
+$results = $conn->query( $thequery);
+$row = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 	$event = $row[1]." Activations due in  ";
 	$eventPast = $row[1]." Activations are Past Due";
 //	$eventPath = "The Draft is Taking Place Now";

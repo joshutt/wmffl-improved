@@ -17,9 +17,9 @@ if (!isset($userName) || !isset($password)) {
 
 
 $query = "SELECT teamid, name, userid, commish FROM user WHERE username='" . mysqli_real_escape_string($conn, $userName) . "' AND password=md5('" . mysqli_real_escape_string($conn, $password) . "') AND active='Y'";
-$result = mysqli_query($conn, $query);
+$result = $conn->query( $query);
 $numRows = mysqli_num_rows($result);
-$count = mysqli_fetch_assoc($result);
+$count = $result->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
 
 if ($numRows != 1) {
     print json_encode(array("code"=>-1, "msg"=>"ERROR: Invalid username/password combination"));
@@ -36,8 +36,8 @@ $sql = "SELECT CONCAT(p.lastname, ', ', p.firstname, ' - ', p.pos, ' - ', r.nflt
 FROM draftPickHold d JOIN newplayers p ON d.playerid=p.playerid
 JOIN nflrosters r on r.playerid=d.playerid and r.dateoff is null
 WHERE d.teamid={$count["teamid"]}";
-$result2 = mysqli_query($conn, $sql);
-$playerArray = mysqli_fetch_array($result2);
+$result2 = $conn->query( $sql);
+$playerArray = $result2->fetch(\Doctrine\DBAL\FetchMode::MIXED);
 
 //print json_encode($count);
 print json_encode(array("code"=>1, "results"=>$_SESSION, "pre"=>$playerArray));

@@ -6,8 +6,8 @@ if (isset($Username)) {
 
     // Make sure that old password matches password passed in
     $thequery = "select name, email from user where username='" . $Username . "'";
-    $result = mysqli_query($conn, $thequery);
-    $email = mysqli_fetch_row($result);
+    $result = $conn->query( $thequery);
+    $email = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
     $numrow = mysqli_num_rows($result);
     if ($numrow == 0) {
         $ErrorMessage = "Invalid Account";
@@ -19,7 +19,7 @@ if (isset($Username)) {
         // Save password in db
         // Sent confirmation mail
         $thequery = "UPDATE user SET password=md5('" . $newPass . "') WHERE username='" . $Username . "'";
-        $result = mysqli_query($conn, $thequery);
+        $result = $conn->query( $thequery);
 
         $body = $email[0] . ",\n\nYour request for a new password has been completed.  Your new password is ";
         $body = $body . "" . $newPass . "\n\nThis password must be entered exactly as it appears, the login is case sensitive.\n\n";
@@ -68,5 +68,5 @@ include "base/menu.php";
 </CENTER>
 <P>
 
-    <? include "base/footer.html"; ?>
+    <?php include "base/footer.html"; ?>
 

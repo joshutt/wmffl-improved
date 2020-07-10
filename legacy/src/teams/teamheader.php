@@ -21,11 +21,11 @@ ORDER BY u.primaryowner DESC, u.name
 //print $teaminfoSQL;
 //exit(1);
 
-$results = mysqli_query($conn, $teaminfoSQL) or die("Error in query: " . mysqli_error($conn));
+$results = $conn->query( $teaminfoSQL) or die("Error in query: " . $conn->error);
 $ownerList = null;
 $ownCount = 1;
 $teamname = "";
-while ($teaminfo = mysqli_fetch_array($results)) {
+while ($teaminfo = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     $teamname = $teaminfo['teamname'];
     if ($ownerList != null) {
         $ownerList .= " and ";
@@ -50,9 +50,9 @@ if ($ownCount > 1) {
 }
 
 $titleSQL = "SELECT season FROM titles WHERE teamid=$viewteam AND type='League'";
-$results = mysqli_query($conn, $titleSQL) or die("Error: " . mysqli_error($conn));
+$results = $conn->query( $titleSQL) or die("Error: " . $conn->error);
 $champyear = array();
-while (list($newSeason) = mysqli_fetch_array($results)) {
+while (list($newSeason) = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     array_push($champyear, $newSeason);
 }
 
@@ -61,8 +61,7 @@ $javascriptList = array("//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min
 include "base/menu.php";
 ?>
 
-<?
-if (isset($fulllogo) && $fulllogo == 1) {
+<?php if (isset($fulllogo) && $fulllogo == 1) {
 ?>
 
     <center><img src="/teams/<?= $logo; ?>" align="center" alt="<?= $teamname; ?>"/>
@@ -76,13 +75,13 @@ if (isset($fulllogo) && $fulllogo == 1) {
 <div id="teamLogoBlock">
 <?php if ($logo != null) { ?>
     <div id="logo-left"><img src="/teams/<?= $logo; ?>" alt="<?= $teamname; ?>"/></div>
-<? } ?>
+<?php } ?>
 <div id="team-name">
     <span id="big-name"><?= $teamname; ?></span>
     <span id="est">Established <?= $teamsince; ?></span>
     <span id="ownName"><?= $ownername; ?><BR>Since <?= $ownerSince; ?></span>
 </div>
-<? if ($logo != null) { ?>
+<?php if ($logo != null) { ?>
     <div id="logo-right"><img src="/teams/<?= $logo; ?>" alt="<?= $teamname; ?>"/></div>
 <?php } ?>
 </div></div>

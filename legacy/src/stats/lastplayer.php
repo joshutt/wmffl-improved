@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 function getOrd($num) {
 
@@ -241,13 +240,13 @@ AND ps.active >= $tMin
 ORDER BY ps.active DESC, ps.week
 EOD;
 
-    $results = mysqli_query($conn, $query) or die("Error: " . mysqli_error($conn));
+    $results = $conn->query( $query) or die("Error: " . $conn->error);
 
 $count = 1;
 $adj = 0;
 $softAdj = 0;
 $lastChange = 999;
-    while ($rank = mysqli_fetch_array($results)) {
+    while ($rank = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     //print "{$rank["name"]}<br/>";
 //    print "Adding: {$rank["name"]} - {$rank["pts"]} - **$pos**<br/>";
     for ($i = $count; $i<=sizeof($list); $i++) {
@@ -297,13 +296,13 @@ HAVING `pts` >= $sMin
 ORDER BY `pts` DESC
 EOD;
 
-    $results = mysqli_query($conn, $totalQuery) or die("Error: " . mysqli_error($conn));
+    $results = $conn->query( $totalQuery) or die("Error: " . $conn->error);
 
 $count = 1;
 $adj = 0;
 $softAdj = 0;
 $lastChange = 999;
-    while ($rank = mysqli_fetch_array($results)) {
+    while ($rank = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     //print "{$rank["name"]}<br/>";
     //print "Adding: {$rank["name"]} - {$rank["pts"]} - **$pos**<br/>";
     for ($i = $count; $i<=sizeof($list); $i++) {
@@ -334,23 +333,22 @@ $lastChange = 999;
 
 }
 $dateQuery = "SELECT max(week) FROM playerscores where season=2005 and week<=16";
-$dateRes = mysqli_query($conn, $dateQuery);
-list($week) = mysqli_fetch_row($dateRes);
+$dateRes = $conn->query( $dateQuery);
+list($week) = $dateRes->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 
 $title = "Player Records";
 include "base/menu.php";
 ?>
 
-<h1 align="center"><? print $title; ?></h1>
-<h5 align="center"><i>Through Week <? print $week; ?></i></h5>
+<h1 align="center"><?php print $title; ?></h1>
+<h5 align="center"><i>Through Week <?php print $week; ?></i></h5>
 <hr/>
 
-<? include "base/statbar.html"; ?>
+<?php include "base/statbar.html"; ?>
 
 <p>This is a list of individual player performances this season, that rank among the top 10 ever at a given position.</p>
 
-<?
-$seasonFirst = true;
+<?php $seasonFirst = true;
 foreach ($seaRecs as $record) {
     if ($record[3] > 1) {
         continue;
@@ -378,8 +376,7 @@ if (!$seasonFirst) {
 </table>
 </center>
 </p>
-<?
-}
+<?php }
 
 
 $first = true;
@@ -410,19 +407,16 @@ if (!$first) {
 </table>
 </center>
 </p>
-<?
-}
+<?php }
 ?>
 
-<?
-if (sizeof($seaRecs) > 0) {
+<?php if (sizeof($seaRecs) > 0) {
 ?>
 <p><center>
 <table border="1">
 <tr><th colspan="5">Single Season Top Ten</th></tr>
 <tr><th>Pos</th><th>Player</th><th>Pts</th><th>Rank</th></tr>
-<?
-foreach ($seaRecs as $record) {
+<?php foreach ($seaRecs as $record) {
     if ($record[3] == 1) continue;
     $ordinal = getOrd($record[4]);
     print <<<EOD
@@ -438,15 +432,13 @@ EOD;
 
 
 
-<?
-if (sizeof($newRecs) > 0) {
+<?php if (sizeof($newRecs) > 0) {
 ?>
 <center>
 <table border="1">
 <tr><th colspan="5">Single Game Top Ten</th></tr>
 <tr><th>Pos</th><th>Player</th><th>Week</th><th>Pts</th><th>Rank</th></tr>
-<?
-foreach ($newRecs as $record) {
+<?php foreach ($newRecs as $record) {
     if ($record[4] == 1) continue;
     $ordinal = getOrd($record[4]);
     print <<<EOD
@@ -460,6 +452,5 @@ EOD;
 </center>
 <?}?>
 
-<?
-include "base/footer.html";
+<?php include "base/footer.html";
 ?>

@@ -10,11 +10,11 @@ WHERE pc.season=2006
 GROUP BY p.playerid, pos.position
 ORDER BY t.name, Extra desc, pc.years desc";
 
-$result = mysqli_query($conn, $query) or die("Error: " . mysqli_error($conn));
+$result = $conn->query( $query) or die("Error: " . $conn->error);
 $count = mysqli_num_rows($result);
 $page = array();
 $countall = array();
-while ($aLine = mysqli_fetch_array($result)) {
+while ($aLine = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if (!array_key_exists($aLine['name'], $page)) {
         $page[$aLine['name']] = "";
         $countall[$aLine['name']] = 0;
@@ -118,8 +118,7 @@ include "base/menu.php";
 
             <TABLE ALIGN="Center">
 
-                <?
-                $sumup = 0;
+                <?php                 $sumup = 0;
                 foreach ($page
 
                 as $teamName => $val) {
@@ -133,26 +132,24 @@ include "base/menu.php";
         <TD WIDTH=50% VALIGN=Top>
 
             <TABLE ALIGN=Right VALIGN=Top>
-                <?
-                $sumup = 0;
+                <?php                 $sumup = 0;
                 }
                 ?>
 
                 <TR>
-                    <TH COLSPAN=3><? print $teamName; ?></TH>
+                    <TH COLSPAN=3><?php print $teamName; ?></TH>
                 </TR>
                 <TR>
                     <TH>Player Name</TH>
                     <TH>Years Protected</TH>
                     <TH>Extra Cost</TH>
                 </TR>
-                <? print $val; ?>
+                <?php print $val; ?>
                 <TR>
                     <TD>&nbsp;</TD>
                 </TR>
 
-                <?
-                $sumup += $countall[$teamName] + 3;
+                <?php                 $sumup += $countall[$teamName] + 3;
                 }
                 $teamName = '';
                 ?>
@@ -164,7 +161,7 @@ include "base/menu.php";
                     <TH>Years Protected</TH>
                     <TH>Extra Cost</TH>
                 </TR>
-                <? print $page['']; ?>
+                <?php print $page['']; ?>
                 <TR>
                     <TD>&nbsp;</TD>
                 </TR>

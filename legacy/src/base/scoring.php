@@ -1,5 +1,4 @@
-<?
-function scoreHC($scoreArray) {
+<?php function scoreHC($scoreArray) {
 	$pts = 0;
 	if ($scoreArray['played'] > 0) {
 		if ($scoreArray['ptdiff'] == 0) 

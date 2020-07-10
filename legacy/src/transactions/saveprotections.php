@@ -1,5 +1,4 @@
-<?
-require_once "utils/connect.php";
+<?php require_once "utils/connect.php";
 
 if (!isset($_POST["submit"])) {
 		header("Location: protections");
@@ -70,19 +69,19 @@ $title = "WMFFL Protections";
 <H1 ALIGN=Center>Protections</H1>
 <HR size = "1">
 	
-<?	
+<?php
 if ($isin) {
 	
 	// Gather costs
 //	print "<P>$checkQuery</P>";
-    $result = mysqli_query($conn, $checkQuery);
+    $result = $conn->query( $checkQuery);
 	$totalCost = 0;
-    while (list($thiscost) = mysqli_fetch_row($result)) {
+    while (list($thiscost) = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
 		$totalCost += $thiscost;
 	}
 	//print "<P>$checkCost</P>";
-    $result = mysqli_query($conn, $checkCost);
-    $thiscost = mysqli_fetch_row($result);
+    $result = $conn->query( $checkCost);
+    $thiscost = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 	if ($totalCost > $thiscost[1]) {
 		print "<P><B>You spent too many protection points<BR>";
 		print "Spent: $totalCost<BR>";
@@ -91,27 +90,27 @@ if ($isin) {
 	
 		// Remove old and insert new protections
 //	print "<P>$delQuery</P>";
-        mysqli_query($conn, $delQuery) or die("Delete Query");
+        $conn->query( $delQuery) or die("Delete Query");
 //	print "<P>$insQuery</P>";
-        mysqli_query($conn, $insQuery) or die("Insert Query: " . mysqli_error($conn));
+        $conn->query( $insQuery) or die("Insert Query: " . $conn->error);
 		
 		// Determine the new cost
 //	print "<P>$detCost</P>";
-//		$result = mysqli_query($conn, $detCost) or die("Cost Query");
-//		$cost = mysqli_fetch_row($result);
+//		$result = $conn->query( $detCost) or die("Cost Query");
+//		$cost = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 //		$updCost .= $cost[0];
 		$updCost .= $totalCost;
 		$updCost .= " WHERE teamid=$teamnum and season=$currentSeason";
 //		print "<P>$updCost</P>";
-        mysqli_query($conn, $updCost) or die("Update Cost Query");
+        $conn->query( $updCost) or die("Update Cost Query");
 		
 		print "<P><B>Your protections have been saved.  ";
 		print "You may revise them anytime until the deadline.</B></P>";
 
 		print "<TABLE>";
 		print "<TR><TH>Player</TH><TH></TH><TH>Cost</TH></TR>";
-        $results = mysqli_query($conn, $display);
-        while (list($player, $pos, $team, $cost) = mysqli_fetch_row($results)) {
+        $results = $conn->query( $display);
+        while (list($player, $pos, $team, $cost) = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
 			print "<TR><TD>$player ($pos-$team)</TD><TD>&nbsp;</TD><TD>$cost</TD></TR>";
 		}
 		print "<TR><TH>TOTAL</TH><TH></TH><TH>$totalCost</TH></TR>";

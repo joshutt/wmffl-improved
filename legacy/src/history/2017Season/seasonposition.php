@@ -1,5 +1,4 @@
-<?
-$title = "2017 WMFFL Draft Order";
+<?php $title = "2017 WMFFL Draft Order";
 
 include "base/menu.php";
 ?>
@@ -31,6 +30,5 @@ table of every team's draft positions.</P>
 
 * - Penalized 4 positions due to failing to pay 2016 entry fee by week 8.
 
-<?
-include "base/footer.html";
+<?php include "base/footer.html";
 ?>

@@ -6,8 +6,7 @@ if (!$isin || $usernum != 2) {
 
     <h2>Please log in to use commish tools</h2>
 
-    <?
-    return -1;
+    <?php     return -1;
 }
 
 
@@ -33,7 +32,7 @@ left join config c2 on c2.key=concat('draft.team.', t.teamid)
 where o.season=$currentSeason
 order by t.name";
 
-$results = mysqli_query($conn, $query) or die("Unable to do query: " . mysqli_error($conn));
+$results = $conn->query( $query) or die("Unable to do query: " . $conn->error);
 ?>
 
 <div class="container">
@@ -48,7 +47,7 @@ $results = mysqli_query($conn, $query) or die("Unable to do query: " . mysqli_er
                     <th>Auto Pick</th>
                 </tr>
                 <?php
-                while ($row = mysqli_fetch_array($results)) {
+                while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
                     if ($row[4] == "In") {
                         $png = "green.png";
                     } else {

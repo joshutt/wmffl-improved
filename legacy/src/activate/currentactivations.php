@@ -1,5 +1,4 @@
-<?
-require_once "base/conn.php";
+<?php require_once "base/conn.php";
 require_once "utils/start.php";
 
 // Set Week variable
@@ -46,7 +45,7 @@ EOD;
 
 #print $select;
 
-$result = mysqli_query($conn, $select) or die("Select: " . mysqli_error($conn));
+$result = $conn->query( $select) or die("Select: " . $conn->error);
 
 // Popuolate records
 $lastTeam = "";
@@ -57,7 +56,7 @@ $i = 0;
 //print "<br/>";
 $actDue = null;
 $lastName = "";
-while ($row = mysqli_fetch_assoc($result)) {
+while ($row = $result->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
     if ($row["remain"] < -30*60) {
         $lock = false;
     } else {

@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $word = $_POST["word"];
 $teamid = $_POST["teamid"];
@@ -13,10 +12,10 @@ if (!$isin) {
 
 
 $query = "select `key` from config where `key` like 'draft.order.word.%' and value=''";
-$results = mysqli_query($conn, $query) or die("Ugg " . mysqli_error($conn));
+$results = $conn->query( $query) or die("Ugg " . $conn->error);
 
 $query2 = "select `key`, value from config where `key` like 'draft.order.team.%' and value='$teamid'";
-$result2 = mysqli_query($conn, $query2) or die("Ugg " . mysqli_error($conn));
+$result2 = $conn->query( $query2) or die("Ugg " . $conn->error);
 $count = mysqli_num_rows($result2);
 
 if ($count > 0) {
@@ -24,7 +23,7 @@ if ($count > 0) {
 }
 
 $min = 9;
-while ($row = mysqli_fetch_assoc($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
     $key = $row["key"]; 
     if (substr($key, -1) < $min) {
         $min = substr($key, -1);
@@ -33,9 +32,9 @@ while ($row = mysqli_fetch_assoc($results)) {
 
 if ($count == 0) {
     $query = "update config set value = '$word' where `key`='draft.order.word.$min'";
-    mysqli_query($conn, $query) or die("Unable to set word " . mysqli_error($conn));
+    $conn->query( $query) or die("Unable to set word " . $conn->error);
     $query = "update config set value = '$teamid' where `key`='draft.order.team.$min'";
-    mysqli_query($conn, $query) or die("Unable to set team " . mysqli_error($conn));
+    $conn->query( $query) or die("Unable to set team " . $conn->error);
     $message2 = "Your word has been submited as '$word' and will be the $min word in the identifier";
 
     if ($min == 4) {
@@ -51,8 +50,8 @@ include "base/menu.php";
 <h1 align="center">Draft Order Determination</h1>
 <hr size = "1" />
 
-<p><? print $message2; ?></p>
+<p><?php print $message2; ?></p>
 
 <p>Return to <a href="index.php">word submit</a> page</p>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

@@ -21,7 +21,8 @@ class LegacyBridge
         $kernel->getEnvironment();
 
 
-        $fileLoc = $publicDirectory . "/../legacy/src" . $request->getRequestUri();
+//        $basePath = $kernel->getProjectDir();
+        $fileLoc = $kernel->getProjectDir() . "/legacy/src" . $request->getRequestUri();
         if (file_exists($fileLoc)) {
             return $fileLoc;
         }
@@ -30,6 +31,7 @@ class LegacyBridge
             return $fileLoc.".php";
         }
 
+        return null;
         /*
          * TODO: Figure out how to map the needed script file from the existing application
          */

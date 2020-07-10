@@ -1,5 +1,4 @@
-<?
-$title = "2014 WMFFL Draft Order";
+<?php $title = "2014 WMFFL Draft Order";
 
 include "base/menu.php";
 ?>
@@ -29,6 +28,5 @@ table of every team's draft positions.</P>
 <TR><TD>Crusaders</TD><TD>11th or 12th</TD></TR>
 </TABLE></P>
 
-<?
-include "base/footer.html";
+<?php include "base/footer.html";
 ?>

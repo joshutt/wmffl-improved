@@ -1,5 +1,4 @@
-<?
-	// Include the file that defines the connection information
+<?php 	// Include the file that defines the connection information
 // establish connection
 require "base/conn.php";
 
@@ -13,11 +12,11 @@ $thequery .= "where i.issueid=b.issueid and ";
 $thequery .="i.startDate<=now() and (i.deadline is null or i.deadline>=now()) ";
 $thequery .= "group by i.issuenum";
 
-$result = mysqli_query($conn, $thequery);
+$result = $conn->query( $thequery);
 
 print "<P><TABLE BORDER=1><TR><TH>Issue Number</TH><TH>For</TH><TH>For %</TH><TH>Against</TH><TH>Against %</TH><TH>Abstain</TH><TH>No Vote</TH></TR>";
 
-while (list($issuenum, $yes, $no, $maybe, $novote, $pass, $fail) = mysqli_fetch_row($result)) {
+while (list($issuenum, $yes, $no, $maybe, $novote, $pass, $fail) = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
     print "<TR><TD>$issuenum</TD><TD>$yes</TD><TD>$pass</TD><TD>$no</TD><TD>$fail</TD><TD>$maybe</TD><TD>$novote</TD></TR>";
 }
 print "</TABLE></P>";
@@ -30,13 +29,13 @@ $thequery .= "and i.startDate<=now() ";
 $thequery .= "and (i.deadline is null or i.deadline>=now()) ";
 $thequery .= "order by i.issuenum, b.vote, t.name";
 
-$result = mysqli_query($conn, $thequery);
+$result = $conn->query( $thequery);
 
 print "<P><TABLE BORDER=1>";
 
 print "Rows: " + mysqli_num_rows($result);
 $oldissue = "";
-while (list($issuenum, $team, $vote) = mysqli_fetch_row($result)) {
+while (list($issuenum, $team, $vote) = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
     if ($issuenum != $oldissue) {
         print "<TR><TH COLSPAN=2>$issuenum</TH></TR>";
         $oldissue=$issuenum;

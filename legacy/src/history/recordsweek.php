@@ -35,10 +35,10 @@ function printPlayer($player, $count, $hlSeason) {
 
 function printRankList($sql, $pos, $hlSeason=2016, $extraList = array()) {
     global $conn;
-    $result = mysqli_query($conn, sprintf($sql, $pos)) or die("Unable to run query: " . mysqli_error($conn));
+    $result = $conn->query( sprintf($sql, $pos)) or die("Unable to run query: " . $conn->error);
 
     $posArray = array();
-    while ($players = mysqli_fetch_array($result)) {
+    while ($players = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
         $name = $players['firstname']." ".$players['lastname'];
         $season = $players['season'];
         $week = $players['week'];
@@ -117,14 +117,14 @@ include "base/menu.php";
 <h1 align="center">Player Single Game Records</h1>
 <hr size="1"/>
 
-<div class="posList"><? printRankList($sql, "QB", $currentSeason, $qbList); ?></div>
-<div class="posList"><? printRankList($sql, "RB", $currentSeason, $rbList); ?></div>
-<div class="posList"><? printRankList($sql, "WR", $currentSeason, $wrList); ?></div>
-<div class="posList"><? printRankList($sql, "TE", $currentSeason, $teList); ?></div>
-<div class="posList"><? printRankList($sql, "K", $currentSeason, $kList); ?></div>
-<div class="posList"><? printRankList($sql, "OL", $currentSeason, $olList); ?></div>
-<div class="posList"><? printRankList($sql, "DL", $currentSeason, $dlList); ?></div>
-<div class="posList"><? printRankList($sql, "LB", $currentSeason, $lbList); ?></div>
-<div class="posList"><? printRankList($sql, "DB", $currentSeason, $dbList); ?></div>
+<div class="posList"><?php printRankList($sql, "QB", $currentSeason, $qbList); ?></div>
+<div class="posList"><?php printRankList($sql, "RB", $currentSeason, $rbList); ?></div>
+<div class="posList"><?php printRankList($sql, "WR", $currentSeason, $wrList); ?></div>
+<div class="posList"><?php printRankList($sql, "TE", $currentSeason, $teList); ?></div>
+<div class="posList"><?php printRankList($sql, "K", $currentSeason, $kList); ?></div>
+<div class="posList"><?php printRankList($sql, "OL", $currentSeason, $olList); ?></div>
+<div class="posList"><?php printRankList($sql, "DL", $currentSeason, $dlList); ?></div>
+<div class="posList"><?php printRankList($sql, "LB", $currentSeason, $lbList); ?></div>
+<div class="posList"><?php printRankList($sql, "DB", $currentSeason, $dbList); ?></div>
 
 <?php include "base/footer.html"; ?>

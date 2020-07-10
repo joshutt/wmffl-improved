@@ -1,5 +1,4 @@
-<?
-$title = "2010 WMFFL Draft Weights and Schedule";
+<?php $title = "2010 WMFFL Draft Weights and Schedule";
 
 include "base/menu.php";
 ?>
@@ -44,6 +43,5 @@ extra game matchups for next season.</P>
 <li>Lindbergh Baby Casserole - Crusaders</li>
 </ul></p>
 
-<?
-include "base/footer.html";
+<?php include "base/footer.html";
 ?>

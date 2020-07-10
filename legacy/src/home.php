@@ -1,8 +1,10 @@
 <?php
 $title = "The WMFFL Fantasy Football League";
 
-$cssList = array("base/css/index.css");
-$javascriptList = array("base/js/front.js");
+$cssList = array("/base/css/index.css");
+$javascriptList = array("/base/js/front.js");
+//$cssList = array("/legacy/css/index.css");
+//$javascriptList = array("/legacy/js/front.js");
 include "base/menu.php";
 
 ?>
@@ -19,7 +21,7 @@ include "base/menu.php";
         <TD VALIGN="top" width="*">
 
             <div class="card m-1">
-                <?php include "article.php" ?>
+<!--                --><?php //include "article.php" ?>
             </div>
             <div class="card m-1">
                 <?php include "quicklinks.php"; ?>
@@ -35,7 +37,7 @@ include "base/menu.php";
                 <?php include "standings.php" ?>
             </div>
             <div class="card m-1">
-                <?php include "forum/commentlist.php" ?>
+<!--                --><?php //include "forum/commentlist.php" ?>
             </div>
         </td>
 
@@ -45,6 +47,6 @@ include "base/menu.php";
 
 </TABLE>
 
-<?
+<?php
 include "base/footer.html";
 ?>

@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 if (isset($_REQUEST["season"])) {
     $season = $_REQUEST["season"];
@@ -15,7 +14,7 @@ $sql .= "ORDER BY Round, Pick";
 
 $title = "$season WMFFL Draft Order";
 ?>
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
 <H1 Align=Center><?=$season?> Draft Order</H1>
 <HR size = "1">
@@ -26,11 +25,10 @@ This is the official draft order for the <?=$season?> Draft.  The order was dete
 <P>
 <TABLE WIDTH=100%>
 
-<?
-$results = mysqli_query($conn, $sql) or die("Database error: " . mysqli_error($conn));
+<?php $results = $conn->query( $sql) or die("Database error: " . $conn->error);
 
 $round = 0;
-while ($pick = mysqli_fetch_array($results)) {
+while ($pick = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($round <> $pick["round"]) {
         if ($round > 0) {
             print "</ol></td>";

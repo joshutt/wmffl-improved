@@ -32,10 +32,10 @@ GROUP BY d.name, tn.name
 
 EOD;
 
-    $results = mysqli_query($conn, $query) or die("Error: " . mysqli_error($conn));
+    $results = $conn->query( $query) or die("Error: " . $conn->error);
 $count =0;
 $teamArray = array();
-    while ($row = mysqli_fetch_array($results)) {
+    while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
 #    print_r($row);
    // $divRar = 
 

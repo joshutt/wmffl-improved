@@ -113,12 +113,12 @@ if (isset($oppGP) && $oppGP != -1) {
 }
 */
 
-mysqli_query($conn, $deleteSql) or die("Unable to clear old activations: " . mysqli_error($conn));
-//mysqli_query($conn, $deleteGPs) or die("Unable to clear old gameplan: " . mysqli_error($conn));
-mysqli_query($conn, $insertSql) or die("Unable to add new activations: " . mysqli_error($conn));
+$conn->query( $deleteSql) or die("Unable to clear old activations: " . $conn->error);
+//$conn->query( $deleteGPs) or die("Unable to clear old gameplan: " . $conn->error);
+$conn->query( $insertSql) or die("Unable to add new activations: " . $conn->error);
 /*
 if ($useGp) {
-    mysqli_query($conn, $gameplanSql) or die("Unable to add new gameplan: " . mysqli_error($conn));
+    $conn->query( $gameplanSql) or die("Unable to add new gameplan: " . $conn->error);
 }
 */
 

@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 $query = "SELECT p.firstname, p.lastname, pc.years, CEILING(if(p.pos in ('QB', 'RB', 'WR', 'TE'), pc.years, pc.years/2)) as 'Extra', t.name, p.pos ";
 $query .= "FROM newplayers p ";
 $query .= "JOIN protectioncost pc ON p.playerid=pc.playerid ";
@@ -11,10 +10,10 @@ $query .= "ORDER BY t.name, Extra desc, pc.years desc";
 
 $base = array('HC' => 0, 'QB' => 10, 'RB' => 12, 'WR' => 10, 'TE'=>4, 'K'=>1, 'OL'=>1, 'DL'=>3, 'LB'=>5, 'DB'=>4);
 
-$result = mysqli_query($conn, $query) or die("error: " . mysqli_error($conn));
+$result = $conn->query( $query) or die("error: " . $conn->error);
 $count = mysqli_num_rows($result);
 $page = array();
-while ($aLine = mysqli_fetch_array($result)) {
+while ($aLine = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     $totCost = $base[$aLine['pos']] + $aLine['Extra'];
 	$page[$aLine['name']] .= "<TR><TD>".$aLine['firstname']." ".$aLine['lastname'];
     $page[$aLine['name']] .= "</TD><TD ALIGN=Center>".$aLine['pos'];
@@ -27,7 +26,7 @@ while ($aLine = mysqli_fetch_array($result)) {
 $title = "2013 Protection Costs";
 ?>
 
-<? include "base/menu.php"; ?>
+<?php include "base/menu.php"; ?>
 
 <H1 Align=Center>Protection Costs</H1>
 <HR size = "1">
@@ -59,8 +58,7 @@ the base of their position.</p>
 
 <TABLE ALIGN="Center">
 
-<?
-$sumup = 0;
+<?php $sumup = 0;
 foreach ($page as $teamName=>$val) {
     if ($teamName == '') continue;
     if ($sumup > ($count+33)/2) {
@@ -70,26 +68,24 @@ foreach ($page as $teamName=>$val) {
 </TD><TD WIDTH=*></TD><TD WIDTH=50% VALIGN=Top>
 
 <TABLE ALIGN="Center" VALIGN=Top>
-<?
-        $sumup = 0;
+<?php         $sumup = 0;
     }
 ?>
 
-<TR><TH COLSPAN=4><? print $teamName; ?></TH></TR>
+<TR><TH COLSPAN=4><?php print $teamName; ?></TH></TR>
 <TR><TH>Player Name</TH><TH>Pos</TH><TH>Years</TH><TH>Extra</TH><th>Total Cost</th></TR>
-<? print $val; ?>
+<?php print $val; ?>
 <TR><TD>&nbsp;</TD></TR>
 
-<?
-$sumup += $countall[$teamName] + 3;
+<?php $sumup += $countall[$teamName] + 3;
 }
 $teamName = '';
 ?>
 <TR><TH COLSPAN=4>Not on a Roster</TH></TR>
 <TR><TH>Player Name</TH><TH>Pos</TH><TH>Years</TH><TH>Extra</TH><th>Total Cost</th></TR>
-<? print $page['']; ?>
+<?php print $page['']; ?>
 <TR><TD>&nbsp;</TD></TR>
 
 </TABLE>
 </TD></TR></TABLE>
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

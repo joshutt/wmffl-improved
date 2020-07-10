@@ -34,8 +34,8 @@ $dateQuery .= "WHERE now() BETWEEN w1.startDate and w1.endDate ";
 $dateQuery .= "and IF(w1.week=0, w2.season=w1.season-1 and w2.week=16, w2.week=w1.week-1 and w2.season=w1.season) ";
 
 if (get_class($conn) === "mysqli") {
-    $dateResult = mysqli_query($conn, $dateQuery);
-    list($_SESSION["currentSeason"], $_SESSION["currentWeek"], $_SESSION["weekName"], $_SESSION["previousWeekName"]) = mysqli_fetch_row($dateResult);
+    $dateResult = $conn->query( $dateQuery);
+    list($_SESSION["currentSeason"], $_SESSION["currentWeek"], $_SESSION["weekName"], $_SESSION["previousWeekName"]) = $dateResult->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 } else {
     $dateResult = $conn->executeQuery($dateQuery);
     $r = $dateResult->fetch();

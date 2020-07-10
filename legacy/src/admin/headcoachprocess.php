@@ -1,5 +1,4 @@
-<?
-// establish connection
+<?php // establish connection
 require "base/conn.php";
 
 $updateQuery1 = <<<EOD
@@ -29,10 +28,10 @@ EOD;
 
 
 #print $updateQuery;
-mysqli_query($conn, $updateQuery1) or die("Dead: " . mysqli_error($conn));
-mysqli_query($conn, $updateQuery2) or die("Dead: " . mysqli_error($conn));
-mysqli_query($conn, $updateQuery3) or die("Dead: " . mysqli_error($conn));
-mysqli_query($conn, $updateQuery4) or die("Dead: " . mysqli_error($conn));
+$conn->query( $updateQuery1) or die("Dead: " . $conn->error);
+$conn->query( $updateQuery2) or die("Dead: " . $conn->error);
+$conn->query( $updateQuery3) or die("Dead: " . $conn->error);
+$conn->query( $updateQuery4) or die("Dead: " . $conn->error);
 
 ?>
 <b>Head Coach Changed</b><br/>

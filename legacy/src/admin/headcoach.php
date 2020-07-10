@@ -1,9 +1,8 @@
-<?
-// establish connection
+<?php // establish connection
 require "base/conn.php";
 
 $teamsql = "SELECT t.teamid, t.name FROM team t ORDER BY t.name";
-$teamResults = mysqli_query($conn, $teamsql);
+$teamResults = $conn->query( $teamsql);
 
 $coachsql = <<<EOD
 SELECT p.playerid, CONCAT(p.firstname, ' ', p.lastname) as 'name', p.team, 
@@ -15,19 +14,19 @@ WHERE p.pos='HC' and (p.team<>'' or t.name is not null) and p.active=1
 ORDER BY p.lastname
 EOD;
 
-$results = mysqli_query($conn, $coachsql);
+$results = $conn->query( $coachsql);
 print "<form action=\"headcoachprocess.php\">";
 print "<table>";
 
 print "<tr><td colspan=\"4\" align=\"center\">";
 print "<select name=\"team\">";
-while ($team = mysqli_fetch_array($teamResults)) {
+while ($team = $teamResults->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     print "<option value=\"{$team["teamid"]}\">{$team["name"]}</option>";
 }
 print "</select>";
 print "</td></tr>";
 
-while ($coach = mysqli_fetch_array($results)) {
+while ($coach = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     print <<<EOD
 <tr>
     <td><input type="radio" name="player" value="{$coach["playerid"]}"/></td>

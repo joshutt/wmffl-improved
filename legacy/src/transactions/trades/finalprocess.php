@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 require_once "loadTrades.inc.php";
 //$teamid = 2;
@@ -72,12 +71,12 @@ print $comments;
 
         // Send email
         $addyGet = "SELECT email, teamid FROM user WHERE teamid in (".$teamA->getID().", ".$teamB->getID().") AND Active='Y'";
-        $addyResults = mysqli_query($conn, $addyGet);
+        $addyResults = $conn->query( $addyGet);
         $first = true;
         $replyFirst = true;
         $address = "";
         $replyTo = "Reply-To: ";
-        while (list($emailAdd, $mailTeam) = mysqli_fetch_array($addyResults)) {
+        while (list($emailAdd, $mailTeam) = $addyResults->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
             if (!$first) {
                 $address .= ", ";
             }
@@ -122,12 +121,12 @@ print $comments;
 
         // Send email
         $addyGet = "SELECT email, teamid FROM user WHERE teamid in (".$teamA->getID().", ".$teamB->getID().") AND active='Y'";
-        $addyResults = mysqli_query($conn, $addyGet);
+        $addyResults = $conn->query( $addyGet);
         $first = true;
         $replyFirst = true;
         $address = "";
         $replyTo = "Reply-To: ";
-        while (list($emailAdd, $mailTeam) = mysqli_fetch_array($addyResults)) {
+        while (list($emailAdd, $mailTeam) = $addyResults->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
             if (!$first) {
                 $address .= ", ";
             }

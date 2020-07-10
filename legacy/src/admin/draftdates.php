@@ -1,5 +1,4 @@
-<?
-require_once "base/conn.php";
+<?php require_once "base/conn.php";
 
 $nflStartDate = '2019-09-05';
 $season=2019;
@@ -10,11 +9,11 @@ WHERE u.userid = d.userid AND u.teamid=t.teamid AND d.date >  '$season-01-01'
 GROUP  BY u.teamid, d.date
 ORDER BY d.date";
 
-$results = mysqli_query($conn, $query);
+$results = $conn->query( $query);
 $date = "";
 $dateList = array();
 
-while ($arrayList = mysqli_fetch_array($results)) {
+while ($arrayList = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($date != $arrayList["date"]) {
         $date = $arrayList["date"];
         $dateArray = array();
@@ -53,10 +52,10 @@ group by o.teamid
 having max(dv.lastUpdate) is null
 EOD;
 
-$results = mysqli_query($conn, $secondQuery) or die("Error: " . mysqli_error($conn));
+$results = $conn->query( $secondQuery) or die("Error: " . $conn->error);
 
 $teamArray = array();
-while ($arrayList = mysqli_fetch_array($results)) {
+while ($arrayList = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     array_push($teamArray, $arrayList["name"]);
 }
 

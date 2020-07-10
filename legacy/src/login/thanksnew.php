@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $title = "Password Created";
 include "base/menu.php";
@@ -11,4 +10,4 @@ include "base/menu.php";
 <p>Your password has been changed.  You will recieve an email shortly with
 your new password.</p>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>

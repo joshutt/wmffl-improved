@@ -1,5 +1,4 @@
-<?
-$playerid = 5449;
+<?php $playerid = 5449;
 
 require_once "utils/start.php";
 include_once "DataObjects/Newplayers.php";

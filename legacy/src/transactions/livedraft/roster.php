@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $sql = <<<EOD
 
@@ -12,12 +11,12 @@ ORDER BY t.name, p.pos, p.lastname
 
 EOD;
 
-$results = mysqli_query($conn, $sql) or die("Error: " . mysqli_error($conn));
+$results = $conn->query( $sql) or die("Error: " . $conn->error);
 $body = "";
 $team = "";
 $first = true;
 $maxPick = 0;
-while ($row = mysqli_fetch_assoc($results)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
     if ($row["name"] != $team) {
         if (!$first) {
             $body .= "</team>";

@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $title = "WMFFL Rule Proposals";
 include "base/menu.php";
@@ -9,8 +8,7 @@ include "base/menu.php";
 <H1 ALIGN=Center>Rule Proposals</H1>
 <HR size = "1">
 
-<?
-if ($isin) {
+<?php if ($isin) {
 ?>
 <P>This form is provided to allow for year round rule proposals.
 If at any point you have a rule that you would like to propose
@@ -27,12 +25,10 @@ found <A HREF="ballot.php">here</A>.</P>
 <INPUT TYPE="Submit" VALUE="Send Proposal">
 </FORM>
 
-<?
-} else {
+<?php } else {
 ?>
 You must be logged in to submit rule proposals.
-<?
-}
+<?php }
 
 include "base/footer.html";
 ?>

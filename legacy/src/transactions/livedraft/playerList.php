@@ -12,10 +12,10 @@ if ($nfl != "*") {
 }
 $sql .= "order by p.lastname, p.firstname ";
 
-$result = mysqli_query($conn, $sql) or die("Ug I died: " . mysqli_error($conn));
+$result = $conn->query( $sql) or die("Ug I died: " . $conn->error);
 
 $returnArray = array();
-while ($playerList = mysqli_fetch_array($result)) {
+while ($playerList = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     //print "{$playerList["playerid"]} - {$playerList["lastname"]}, {$playerList["firstname"]} - {$playerList["pos"]} - {$playerList["team"]}";
 //    print "<option value=\"{$playerList["playerid"]}\">{$playerList["lastname"]}, {$playerList["firstname"]} - {$playerList["pos"]} - {$playerList["nflteamid"]}</option>";
     $returnArray["id-".$playerList["playerid"]] = "{$playerList["lastname"]}, {$playerList["firstname"]} - {$playerList["pos"]} - {$playerList["nflteamid"]}";

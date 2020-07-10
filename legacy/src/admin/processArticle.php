@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 $title = $_REQUEST["title"];
 $imagePath = $_REQUEST["image"];
@@ -138,13 +137,13 @@ llpic1.gif');
 <table>
     <tr>
         <td class="row c1 rap">
-            <div class="row c1 C titleLine1"><? print $article->title; ?></div>
-            <div class="row c1 C"><img src="http://wmffl.com/<? print $article->link; ?>" alt="<? print $article->caption; ?>" class="headline_photo" />
+            <div class="row c1 C titleLine1"><?php print $article->title; ?></div>
+            <div class="row c1 C"><img src="http://wmffl.com/<?php print $article->link; ?>" alt="<?php print $article->caption; ?>" class="headline_photo" />
             </div>
-            <div class="row c1 C caption rap"><? print $article->caption; ?></div>
+            <div class="row c1 C caption rap"><?php print $article->caption; ?></div>
             <div class="mainStory">
-                <p><span class="newsdate"><? print $article->location; ?></span> - <? print $article->articleText; ?></p>
-            <div class="inelig"><? print $dateString; ?></div>
+                <p><span class="newsdate"><?php print $article->location; ?></span> - <?php print $article->articleText; ?></p>
+            <div class="inelig"><?php print $dateString; ?></div>
             </div>
         </td>
     </tr>

@@ -1,6 +1,5 @@
 <table>
-<?
-$query = <<<EOD
+<?php $query = <<<EOD
 SELECT s.label, t1.name as 'teama', t2.name as 'teamb'
 FROM schedule s, teamnames t1, teamnames t2
 WHERE s.season=$thisSeason AND s.week=$thisWeek+1
@@ -8,10 +7,10 @@ AND t1.teamid=s.teama AND t2.teamid=s.teamb
 AND t1.season=s.season AND t2.season=s.season
 ORDER BY MD5(CONCAT(t1.name, t2.name))
 EOD;
-$results = mysqli_query($conn, $query) or die("Error: " . mysqli_error($conn));
+$results = $conn->query( $query) or die("Error: " . $conn->error);
 
 $count = 0;
-while ($games = mysqli_fetch_array($results)) {
+while ($games = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($count % 2 == 0) {
         $bgcolor = "dddddd";
     } else {

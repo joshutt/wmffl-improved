@@ -1,3 +1,2 @@
-<?
-$thisSeason=2015;
+<?php $thisSeason=2015;
 include "../common/leaders.php";

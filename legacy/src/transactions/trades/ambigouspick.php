@@ -1,5 +1,4 @@
-<?
-session_start();
+<?php session_start();
 require_once "checkambigous.inc.php";
 require_once "loadTrades.inc.php";
 
@@ -26,22 +25,21 @@ $mapping = array($teamto => $otherTeam->getName(), $teamnum => $myTeam->getName(
 <TITLE>Trades</TITLE>
 </HEAD>
 
-<? 
+<?php 
 include "base/menu.php"; 
 ?>
 
 <H1 ALIGN=Center>Edit Offer</H1>
 
 <form action="edittrade.php" method="post">
-<?
-foreach ($they as $value) {
+<?php foreach ($they as $value) {
     print "<input type=\"hidden\" name=\"they[]\" value=\"$value\">";
 }
 foreach ($you as $value) {
     print "<input type=\"hidden\" name=\"you[]\" value=\"$value\">";
 }
 ?>
-<input type="hidden" name="offerid" value="<? print $offerid;?>">
+<input type="hidden" name="offerid" value="<?php print $offerid;?>">
 <input type="hidden" name="edit" value="1"/>
 
 <HR>
@@ -62,15 +60,13 @@ which pick to use.</P>
 <INPUT TYPE="submit" VALUE="Edit Trade">
 
 
-<?
-if (count($transArray) > 0) {
+<?php if (count($transArray) > 0) {
 ?>
 
 <hr/>
 <font color="red">Invalid Transaction Points</font><br/>
 
-<?
-foreach ($transArray as $invalidTran) {
+<?php foreach ($transArray as $invalidTran) {
     $teamName = $mapping[$invalidTran->team];
     $ptsGiven = $invalidTran->pts;
     $seasonUp = $invalidTran->year;
@@ -80,12 +76,11 @@ foreach ($transArray as $invalidTran) {
 
 ?>
 <input type="submit" value="Edit Trade">
-<?
-}
+<?php }
 ?>
 
 </form>
 
-<? include "base/footer.html"; ?>
+<?php include "base/footer.html"; ?>
 </BODY>
 </HTML>

@@ -1,4 +1,4 @@
-<?
+<?php
 #require_once "/home/wmffl/public_html/base/conn.php";
 #include "/home/wmffl/public_html/base/useful.php";
 #include "/home/wmffl/public_html/base/scoring.php";
@@ -28,14 +28,14 @@ EOD;
 
 function determinePoints($teamid, $season, $week, $conn) {
     $statSelect = generateSelect($teamid, $season, $week);
-    $results = mysqli_query($conn, $statSelect) or die ("Dead: " . mysqli_error($conn));
+    $results = $conn->query( $statSelect) or die ("Dead: " . $conn->error);
 
     $totalPoints = 0;
     $offPoints = 0;
     $defPoints = 0;
     $penalty = 0;
     $secRemain = 0;
-    while ($row = mysqli_fetch_array($results)) {
+    while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
         $pts = 0;
 
         // Add game planning factor
@@ -111,7 +111,7 @@ function updateScore($teamA, $teamB, $season, $week, $aScore, $bScore, $conn) {
     $update = "UPDATE schedule SET scorea=$aScore, scoreb=$bScore ";
     $update .= "WHERE season=$season and week=$week and ";
     $update .= "teama=$teamA and teamb=$teamB";
-    mysqli_query($conn, $update);
+    $conn->query( $update);
 }
 
 
@@ -131,9 +131,9 @@ if (!empty($week)) {
     $gameSelect .= "and now() between w.startdate and w.enddate ";
 }
 //print $gameSelect;
-$gameResults = mysqli_query($conn, $gameSelect);
+$gameResults = $conn->query( $gameSelect);
 
-while ($gameRow = mysqli_fetch_array($gameResults)) {
+while ($gameRow = $gameResults->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     $aPts = determinePoints($gameRow['teama'], $gameRow['season'], $gameRow['week'], $conn);
     $bPts = determinePoints($gameRow['teamb'], $gameRow['season'], $gameRow['week'], $conn);
     $aFinal = $aPts[1] - $bPts[2] - $aPts[3];

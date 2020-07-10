@@ -1,5 +1,4 @@
-<?
-require_once "utils/start.php";
+<?php require_once "utils/start.php";
 
 class Clock {
 
@@ -10,8 +9,8 @@ function getPreviousPickTime() {
     global $conn;
     // Get the previous pick time
     $sql = "SELECT max(pickTime) as 'pickTime', max(c.value) as 'startTime'  FROM draftpicks p JOIN config c ON c.key='draft.full.start'";
-    $results = mysqli_query($conn, $sql) or die ("Unable to get max time: " . mysqli_error($conn));
-    $rows = mysqli_fetch_assoc($results);
+    $results = $conn->query( $sql) or die ("Unable to get max time: " . $conn->error);
+    $rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
     $pickTime = strtotime($rows["pickTime"]);
     $startTime = $rows["startTime"];
     return max($pickTime, $startTime);
@@ -26,9 +25,9 @@ function getExtraTime($season, $round, $pick) {
     //   CONVERT_TZ(timeStopped,'SYSTEM','GMT') as timeStopped FROM draftclockstop
     //    WHERE season=$season AND round=$round and pick=$pick";
     $sql = "SELECT * FROM draftclockstop WHERE season=$season AND round=$round and pick=$pick";
-    $results = mysqli_query($conn, $sql) or die ("Unable to get clock stop: " . mysqli_error($conn));
+    $results = $conn->query( $sql) or die ("Unable to get clock stop: " . $conn->error);
     $totalExtra = 0;
-    while ($rows = mysqli_fetch_assoc($results)) {
+    while ($rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
         //error_log(print_r($rows,true), 3, "check.log");
         $timeStopped = strtotime($rows["timeStopped"]);
         $timeStarted = strtotime($rows["timeStarted"]);
@@ -50,8 +49,8 @@ function getExtraTime($season, $round, $pick) {
 function getCurrentPick($season) {
     global $conn;
     $sql = "SELECT round, pick FROM draftpicks WHERE season=$season and playerid is null ORDER BY round, pick";
-    $results = mysqli_query($conn, $sql) or die ("Unable to get current pick: " . mysqli_error($conn));
-    $rows = mysqli_fetch_assoc($results);
+    $results = $conn->query( $sql) or die ("Unable to get current pick: " . $conn->error);
+    $rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
     $returnArray = array($rows["round"], $rows["pick"]);
     return $returnArray;
 }
@@ -59,8 +58,8 @@ function getCurrentPick($season) {
 function getTimeAvail($team) {
     global $conn;
     $sql = "SELECT value FROM config WHERE `key`='draft.team.$team' ";
-    $results = mysqli_query($conn, $sql) or die ("Unable to get time available: " . mysqli_error($conn));
-    $rows = mysqli_fetch_assoc($results);
+    $results = $conn->query( $sql) or die ("Unable to get time available: " . $conn->error);
+    $rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
     $remainTime = $rows["value"];
     return $remainTime;
 }
@@ -68,8 +67,8 @@ function getTimeAvail($team) {
 function clockRunning() {
     global $conn;
     $sql = "SELECT value from config WHERE `key`='draft.clock.run' ";
-    $results = mysqli_query($conn, $sql) or die ("Unable to get time available: " . mysqli_error($conn));
-    $rows = mysqli_fetch_assoc($results);
+    $results = $conn->query( $sql) or die ("Unable to get time available: " . $conn->error);
+    $rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
     $clockRun = $rows["value"];
     return $clockRun;
 }
