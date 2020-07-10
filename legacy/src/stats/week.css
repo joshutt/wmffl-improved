@@ -1,0 +1,10 @@
+/* @import url("stats.css"); */
+
+select#team {
+    display: none;
+}
+
+select#pos {
+    display: none;
+}
+

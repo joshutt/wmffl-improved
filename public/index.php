@@ -1,6 +1,7 @@
 <?php
 
 use App\Kernel;
+use App\LegacyBridge;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
@@ -8,6 +9,12 @@ use Symfony\Component\HttpFoundation\Request;
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 (new Dotenv())->bootEnv(dirname(__DIR__) . '/.env');
+
+
+/*
+ * Making kernel global so that it is accessible in legacy code
+ */
+global $kernel;
 
 if ($_SERVER['APP_DEBUG']) {
     umask(0000);
@@ -26,5 +33,22 @@ if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? false) {
 $kernel = new Kernel($_SERVER['APP_ENV'], (bool)$_SERVER['APP_DEBUG']);
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
-$response->send();
+
+//$kernel->getContainer()->get("monolog.logger");
+
+//$log = $kernel->getContainer()->get("monolog.logger.debug");
+//$log = new Logger("Index");
+//$log->warning("Hello");
+
+/*
+ * TODO: LegacyBridge should do it's thing here
+ */
+$scriptFile = LegacyBridge::prepareLegacyScript($request, $response, __DIR__);
+if ($scriptFile !== null) {
+    require "prepend.php";
+    require $scriptFile;
+} else {
+    $response->send();
+}
+
 $kernel->terminate($request, $response);

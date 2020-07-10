@@ -1,0 +1,37 @@
+Array
+(
+    [season] => 2019
+    [round] => 1
+    [pick] => 5
+    [timeStopped] => 2019-08-26 23:30:29
+    [timeStarted] => 
+)
+Time Started: 1566877855 *** Time Stopped: 1566876629
+Extra Time: 1226Array
+(
+    [season] => 2019
+    [round] => 1
+    [pick] => 5
+    [timeStopped] => 2019-08-26 23:30:05
+    [timeStarted] => 2019-08-26 23:30:18
+)
+Time Started: 1566876618 *** Time Stopped: 1566876605
+Extra Time: 1239Array
+(
+    [season] => 2019
+    [round] => 1
+    [pick] => 5
+    [timeStopped] => 2019-08-26 23:00:38
+    [timeStarted] => 2019-08-26 23:29:53
+)
+Time Started: 1566876593 *** Time Stopped: 1566874838
+Extra Time: 2994Array
+(
+    [season] => 2019
+    [round] => 1
+    [pick] => 8
+    [timeStopped] => 2019-08-26 23:51:35
+    [timeStarted] => 2019-08-26 23:52:08
+)
+Time Started: 1566877928 *** Time Stopped: 1566877895
+Extra Time: 33
