@@ -21,12 +21,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-global $kernel;
-$doctrine = $kernel->getContainer()->get('doctrine');
-
-// Establish database connections
-//$conn = mysqli_connect('localhost', $ini['userName'], $ini['password'], $ini['dbName']);
-$conn = $doctrine->getConnection();
+require_once "base/conn.php";
 
 // Determine the current season and current week, but not every time, use cachin
 //if (!isset($_SESSION["lastFetch"]) || time() > $lastFetch + 60 * 60) {

@@ -16,7 +16,7 @@ $body = "";
 $team = "";
 $first = true;
 $maxPick = 0;
-while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
     if ($row["name"] != $team) {
         if (!$first) {
             $body .= "</team>";

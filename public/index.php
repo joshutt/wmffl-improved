@@ -43,8 +43,9 @@ $response = $kernel->handle($request);
 /*
  * TODO: LegacyBridge should do it's thing here
  */
-$scriptFile = LegacyBridge::prepareLegacyScript($request, $response, __DIR__);
+list($scriptFile, $locChange) = LegacyBridge::prepareLegacyScript($request, $response, __DIR__);
 if ($scriptFile !== null) {
+    $response->headers->set('Location', $scriptFile);
     require "prepend.php";
     require $scriptFile;
 } else {

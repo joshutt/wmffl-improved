@@ -78,7 +78,6 @@ order by p.pos, p.lastname";
                 "pts" => $player["pts"]);
             array_push($hold, $newItem);
         }
-        mysqli_close($conn);
 
         $proSeason = $currentSeason + 1;
         $ptsSeason = $currentSeason;

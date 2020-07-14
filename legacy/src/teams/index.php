@@ -6,10 +6,10 @@ include "base/menu.php";
 
 $divisionSQL = "SELECT t.teamid, t.name as 'team', d.name as 'division'
 FROM team t, division d
-WHERE t.divisionid=d.divisionid and $currentSeason between d.startYear and d.endYear
+WHERE t.divisionid=d.divisionid and ? between d.startYear and d.endYear
 ORDER BY d.name, t.name";
 
-$results = $conn->query( $divisionSQL) or die("Error in query: " . $conn->error);
+$results = $conn->executeQuery( $divisionSQL, [$currentSeason]) or die("Error in query: " . $conn->error);
 $teamList = array();
 while ($teamInfo = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if (!array_key_exists($teamInfo['division'], $teamList)) {
@@ -32,7 +32,7 @@ foreach ($teamList as $divisionName => $division) {
     print "<td>";
     print "<table><th>$divisionName</th>";
     foreach ($division as $teamInfo) {
-        print "<tr><td><a href=\"teamroster.php?viewteam=${teamInfo['teamid']}\">";
+        print "<tr><td><a href=\"/teams/teamroster.php?viewteam=${teamInfo['teamid']}\">";
         print "${teamInfo['team']}</a></td></tr>";
     }
     print "</table></td>";
@@ -41,14 +41,14 @@ foreach ($teamList as $divisionName => $division) {
 
 <td><table>
 <th>Defunct Teams</th>
-<tr><td><a href="squirrels.php">The Fighting Squirrels</a></td></tr>
+<tr><td><a href="/teams/squirrels.php">The Fighting Squirrels</a></td></tr>
 <tr><td>Kingsmen</td></tr>
 </table></td>
 
 </tr><tr>
 <td>&nbsp;</td></tr>
 <tr><td colspan=3><b>Other Features</b></td></tr>
-<tr><td><a href="compareteams.php">Compare Rosters</a></td>
+<tr><td><a href="/teams/compareteams.php">Compare Rosters</a></td>
 <td><a href="/transactions/displayWaiverOrder.php">Waiver Wire Order</a></td>
 
 </tr></table>

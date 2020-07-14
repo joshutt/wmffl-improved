@@ -20,7 +20,7 @@ $body = "";
 $team = "";
 $first = true;
 $count = 0;
-while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
     if ($first) {
         $body .= "<tr><th colspan=\"4\">{$row["name"]}</th></tr>";
         $first = false;

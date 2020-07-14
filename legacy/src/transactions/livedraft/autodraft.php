@@ -47,13 +47,13 @@ include "base/menu.php";
 
 
 print "<table>";
-$row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
+$row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE);
 print "<tr><th colspan=\"2\">${row[name]}</th></tr>";
 for ($i=1; $i<=10; $i++) {
     print "<tr><td>$i</td><td>${row[firstname]} ${row[lastname]}</td>";
     print "<td>${row[pos]}</td></tr>";
     //print_r($row);
-    $row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
+    $row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE);
 
 }
 print "</table>";
@@ -66,7 +66,7 @@ WHERE active=1
 EOD;
 $results = $conn->query( $sql) or die("Error: " . $conn->error);
 
-while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
     print "<a href=\"autodraft.php?teamid=${row[teamid]}\">${row[name]}</a> - ";
 }
 

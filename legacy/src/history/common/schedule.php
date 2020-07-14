@@ -32,7 +32,7 @@ $lastName = "";
 $lastWeek = 0;
 $byeList = array();
 $string = "";
-while ($rows = $byeResults->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+while ($rows = $byeResults->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
     $week = $rows['week'];
     $teamName = $rows['name'];
     if ($teamName == 'New York' or $teamName == 'Los Angeles') {

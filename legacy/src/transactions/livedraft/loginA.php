@@ -16,10 +16,10 @@ if (!isset($userName) || !isset($password)) {
 }
 
 
-$query = "SELECT teamid, name, userid, commish FROM user WHERE username='" . mysqli_real_escape_string($conn, $userName) . "' AND password=md5('" . mysqli_real_escape_string($conn, $password) . "') AND active='Y'";
-$result = $conn->query( $query);
+$query = "SELECT teamid, name, userid, commish FROM user WHERE username=? AND password=md5(?) AND active='Y'";
+$result = $conn->executeQuery( $query, array($userName, $password));
 $numRows = mysqli_num_rows($result);
-$count = $result->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
+$count = $result->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE);
 
 if ($numRows != 1) {
     print json_encode(array("code"=>-1, "msg"=>"ERROR: Invalid username/password combination"));

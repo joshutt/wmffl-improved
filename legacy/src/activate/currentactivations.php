@@ -56,7 +56,7 @@ $i = 0;
 //print "<br/>";
 $actDue = null;
 $lastName = "";
-while ($row = $result->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+while ($row = $result->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
     if ($row["remain"] < -30*60) {
         $lock = false;
     } else {

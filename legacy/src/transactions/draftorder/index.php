@@ -65,7 +65,7 @@ In order to ensure that the draft order is fairly chosen randomly, we use a thir
     $results = $conn->query( $query) or die("Can't get config values: " . $conn->error);
     $orderArray = array();
     $inArray = 0;
-    while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+    while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
         if ($row["value"] == "") {
             continue;
         }

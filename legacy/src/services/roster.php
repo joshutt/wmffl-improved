@@ -23,7 +23,7 @@ $first = true;
 
 $result_array = array();
 // For each item in the Query
-while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
     // If it's a new team add the team array
     if ($row["teamname"] != $team) {
         $first = false;
@@ -41,4 +41,3 @@ while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
 
 header("Content-type: text/json");
 print json_encode($result_array);
-?>

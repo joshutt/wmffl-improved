@@ -112,7 +112,7 @@ if ($numReturn == 0) {
     $conn->query( $setSql) or die("Unable to insert: " . $conn->error);
 
 } else {
-    $config = $result->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
+    $config = $result->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE);
     $thisStamp = intval($config["value"]);
     if ($thisStamp < $timeStamp) {
         $setSql = sprintf("UPDATE config SET value='%d' WHERE `key`='player.update.timestamp'", $timeStamp);
@@ -167,7 +167,7 @@ foreach ($playerList as &$player) {
         $player["playerid"] = mysqli_insert_id($conn);
     } else {
         // Update if necessary
-        $row = $result->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
+        $row = $result->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE);
         if ($row["lastname"] != $player["lastName"]  || $row["firstname"] != $player["firstName"]
             || $row["pos"] != $player["pos"] || $row["team"] != $player["team"])    {
 
@@ -211,7 +211,7 @@ foreach ($playerList as $player) {
 
     if ($player["team"] != "") {
         if ($numRows > 0) {
-            $row = $result->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
+            $row = $result->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE);
             if ($row["team"] != $player["team"]) {
                 // matches, do nothing
             } else {

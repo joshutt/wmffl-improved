@@ -28,7 +28,7 @@ $maxPick = 0;
 $count = 0;
 $xmlOutput = "";
 $text = "";
-while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
 
     if ($count % 2) {
         $class = "oddtablerow";

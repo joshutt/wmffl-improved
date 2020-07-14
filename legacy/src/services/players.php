@@ -30,7 +30,7 @@ $first = true;
 
 $result_array = array();
 // For each item in the Query
-while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
     array_push($result_array, $row);
 }
 

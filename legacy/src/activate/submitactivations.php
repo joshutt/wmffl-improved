@@ -89,7 +89,7 @@ $weekSql = "SELECT week, weekname FROM weekmap WHERE Season=$season AND EndDate>
 $weekResults = $conn->query( $weekSql) or die("Unable to get Weeks: " . $conn->error);
 
 $weekList = "";
-while ($theWeek = $weekResults->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+while ($theWeek = $weekResults->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
     $checked = "";
     if ($week == $theWeek['week']) {
         $checked = "selected=\"true\"";
@@ -118,7 +118,7 @@ if ($isin) {
     $reserveCount = 0;
     $reserveIds = array();
     $gpOption = "<option value=\"-1\">None</option>";
-    while ($rowSet = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+    while ($rowSet = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
         #print_r($rowSet);
         #print "<br/>";
 
@@ -191,7 +191,7 @@ if ($isin) {
 
 
     $noActiveResults = $conn->query( $noActivateSql) or die("Die on No activate: " . $conn->error);
-    while ($rowSet = $noActiveResults->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+    while ($rowSet = $noActiveResults->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
         $key = array_search($rowSet["playerid"], $reserveIds);
         if ($key !== FALSE) {
             $player = $reserve[$key];
@@ -202,7 +202,7 @@ if ($isin) {
 
     $oppGPOption = "<option value='-1'>None</option>";
     $oppRosterResults = $conn->query( $opponentRoster) or die("Die on opponent roster: " . $conn->error);
-    while ($rowSet = $oppRosterResults->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+    while ($rowSet = $oppRosterResults->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
         $player = array();
         $player["name"] = $rowSet["name"];
         $player["pos"] = $rowSet["pos"];
@@ -221,7 +221,7 @@ if ($isin) {
 if ($actingHC) {
     $HCResults = $conn->query( $actingHCsql) or die("Unable to get active HC: " . $conn->error);
     $hcArray = array();
-    while ($rowSet = $HCResults->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+    while ($rowSet = $HCResults->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
         $player = array();
         $player["name"] = $rowSet["name"];
         $player["pos"] = $rowSet["pos"];

@@ -23,7 +23,7 @@ if ($count > 0) {
 }
 
 $min = 9;
-while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
     $key = $row["key"]; 
     if (substr($key, -1) < $min) {
         $min = substr($key, -1);

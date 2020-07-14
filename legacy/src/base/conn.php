@@ -1,5 +1,9 @@
 <?php
 require_once "utils/setup.php";
 
-// Database connection information
-$conn = mysqli_connect('localhost', $ini['userName'], $ini['password'], $ini['dbName']);
+global $kernel;
+$doctrine = $kernel->getContainer()->get('doctrine');
+
+// establish Database connection information
+//$conn = mysqli_connect('localhost', $ini["userName"], $ini['password'], $ini["dbName"]);
+$conn = $doctrine->getConnection();

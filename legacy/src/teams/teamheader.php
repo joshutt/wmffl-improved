@@ -6,7 +6,7 @@ if (array_key_exists('viewteam', $_REQUEST)) {
 } else {
     $viewteam = 2;
 }
-$viewteam = $conn->real_escape_string($viewteam);
+//$viewteam = $conn->real_escape_string($viewteam);
 
 $teaminfoSQL = "SELECT t.name as 'teamname', t.member, u.name,
 t.logo, t.fulllogo, t.motto, t.teamid, min(o.season) as 'season'
@@ -14,14 +14,15 @@ FROM team t LEFT JOIN user u
 ON t.teamid=u.teamid
 AND u.active='Y'
 LEFT JOIN owners o on t.teamid=o.teamid and u.userid=o.userid
-WHERE REPLACE(LOWER('$viewteam'), ' ', '') IN (LOWER(t.teamid), LOWER(t.abbrev), replace(LOWER(t.name),' ',''))
+WHERE REPLACE(LOWER(?), ' ', '') IN (LOWER(t.teamid), LOWER(t.abbrev), replace(LOWER(t.name),' ',''))
 ORDER BY u.primaryowner DESC, u.name
 ";
 
 //print $teaminfoSQL;
 //exit(1);
+$results = $conn->executeQuery($teaminfoSQL, [$viewteam]) or die("Error in query: ".$conn->error);
+//$results = $conn->query($teaminfoSQL) or die("Error in query: " . $conn->error);
 
-$results = $conn->query( $teaminfoSQL) or die("Error in query: " . $conn->error);
 $ownerList = null;
 $ownCount = 1;
 $teamname = "";

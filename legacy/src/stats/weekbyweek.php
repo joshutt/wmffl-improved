@@ -1,4 +1,5 @@
-<?php require_once "utils/start.php";
+<?php
+require_once "utils/start.php";
 include "utils/reportUtils.php";
 
 

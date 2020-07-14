@@ -30,11 +30,9 @@ if (isset($Username)) {
         error_log("Mail From: webmaster@" . $_SERVER['SERVER_NAME']);
         error_log("Mail Body: $body");
         mail($email[1], "WMFFL New Password", $body, "From: webmaster@" . $_SERVER['SERVER_NAME']);
-        mysqli_close($conn);
         header("Location: thanksnew.php");
     }
 
-    mysqli_close($conn);
 }
 
 $title = "Generate New Password";

@@ -67,14 +67,14 @@ include "base/menu.php";
 Round: <select name="round"><option value="ALL">ALL</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select>
 Pick: <select name="pick"><option value="ALL">ALL</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select>
 Team: <select name="team"><option value="ALL">ALL</option><?php 
-        while ($row = $teamResult->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+        while ($row = $teamResult->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
     print "<option value=\"{$row["teamid"]}\">{$row["name"]}</option>";
 }
 
 ?></select>
 Pos: <select name="pos"><option value="ALL">ALL</option><option value="QB">QB</option><option value="RB">RB</option><option value="WR">WR</option><option value="TE">TE</option><option value="K">K</option><option name="OL">OL</option><option name="DL">DL</option><option name="LB">LB</option><option name="DB">DB</option></select>
 NFL: <select name="nfl"><option value="ALL">ALL</option>
-<?php while ($row = $nflResult->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+<?php while ($row = $nflResult->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
     print "<option value=\"{$row["nflteamid"]}\">{$row["nflteamid"]}</option>";
 }
 ?></select>
@@ -95,7 +95,7 @@ NFL: <select name="nfl"><option value="ALL">ALL</option>
                         </tr>
 
 <?php $results = $conn->query( $sql) or die("Ug: " . $conn->error);
-while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
 
     print <<<EOD
                 <tr id="pick_{$row["round"]}_{$row["pick"]}">

@@ -293,7 +293,7 @@ EOD;
 print "<form action=\"processProtect.php\" method=\"post\" onsubmit=\"return checkform();\"/>";
 print "<div id=\"roster\">";
 print "<table><tr><th><a title=\"Protection - Limit 5\">P</a></th><th><a title=\"Pull-Back - Limit 2\">PB<a></th><th><a title=\"Alternate - Limit 1\">A</a></th><th>Player</th><th>Pos</th><th>NFL Team</th></tr>";
-    while ($player = $teamResults->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+    while ($player = $teamResults->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
     print "<tr id=\"${player["playerid"]}\" onclick=\"rotate(this)\">";
     print "<td><input type=\"checkbox\" name=\"pro[]\" value=\"${player["playerid"]}\" onclick=\"saveClick(this)\" id=\"pro${player["playerid"]}\"/></td>";
     print "<td><input type=\"checkbox\" name=\"pb[]\" value=\"${player["playerid"]}\" onclick=\"saveClick(this)\" id=\"pb${player["playerid"]}\"/></td>";

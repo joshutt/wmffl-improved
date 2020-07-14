@@ -10,7 +10,7 @@ function getPreviousPickTime() {
     // Get the previous pick time
     $sql = "SELECT max(pickTime) as 'pickTime', max(c.value) as 'startTime'  FROM draftpicks p JOIN config c ON c.key='draft.full.start'";
     $results = $conn->query( $sql) or die ("Unable to get max time: " . $conn->error);
-    $rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
+    $rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE);
     $pickTime = strtotime($rows["pickTime"]);
     $startTime = $rows["startTime"];
     return max($pickTime, $startTime);
@@ -27,7 +27,7 @@ function getExtraTime($season, $round, $pick) {
     $sql = "SELECT * FROM draftclockstop WHERE season=$season AND round=$round and pick=$pick";
     $results = $conn->query( $sql) or die ("Unable to get clock stop: " . $conn->error);
     $totalExtra = 0;
-    while ($rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+    while ($rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
         //error_log(print_r($rows,true), 3, "check.log");
         $timeStopped = strtotime($rows["timeStopped"]);
         $timeStarted = strtotime($rows["timeStarted"]);
@@ -50,7 +50,7 @@ function getCurrentPick($season) {
     global $conn;
     $sql = "SELECT round, pick FROM draftpicks WHERE season=$season and playerid is null ORDER BY round, pick";
     $results = $conn->query( $sql) or die ("Unable to get current pick: " . $conn->error);
-    $rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
+    $rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE);
     $returnArray = array($rows["round"], $rows["pick"]);
     return $returnArray;
 }
@@ -59,7 +59,7 @@ function getTimeAvail($team) {
     global $conn;
     $sql = "SELECT value FROM config WHERE `key`='draft.team.$team' ";
     $results = $conn->query( $sql) or die ("Unable to get time available: " . $conn->error);
-    $rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
+    $rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE);
     $remainTime = $rows["value"];
     return $remainTime;
 }
@@ -68,7 +68,7 @@ function clockRunning() {
     global $conn;
     $sql = "SELECT value from config WHERE `key`='draft.clock.run' ";
     $results = $conn->query( $sql) or die ("Unable to get time available: " . $conn->error);
-    $rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
+    $rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE);
     $clockRun = $rows["value"];
     return $clockRun;
 }

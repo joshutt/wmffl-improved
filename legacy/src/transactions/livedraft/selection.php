@@ -103,14 +103,14 @@ if (sizeof($errors) > 0) {
     // Get the previous pick time
     $sql = "SELECT max(pickTime) as 'pickTime'  FROM draftpicks";
     $results = $conn->query( $sql) or die ("Unable to get max time: ".$conn->error); 
-    $rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC);
+    $rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE);
     $pickTime = strtotime($rows["pickTime"]);
 
     // Get any clock stop time
     $sql = "SELECT * FROM draftclockstop WHERE season=$season AND round={$draftPicks->Round} and pick={$draftPicks->Pick}";
     $results = $conn->query( $sql) or die ("Unable to get clock stop: ".$conn->error); 
     $totalExtra = 0;
-    while ($rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOC)) {
+    while ($rows = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
         $timeStopped = strtotime($rows["timeStopped"]);
 	$timeStarted = strtotime($rows["timeStarted"]);
 	if ($timeStarted == null) {
