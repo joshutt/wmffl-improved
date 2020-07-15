@@ -1,26 +1,32 @@
-<?php require_once "utils/start.php";
+<?php
+require_once "utils/start.php";
 
 if ($currentWeek == 0) {
     $currentSeason = $currentSeason - 1;
 }
 
-function getOrd($num) {
+function getOrd($num)
+{
 
-    switch($num) {
-        case 1 : return "st";
-        case 2 : return "nd";
-        case 3 : return "rd";
-        default : return "th";
+    switch ($num) {
+        case 1 :
+            return "st";
+        case 2 :
+            return "nd";
+        case 3 :
+            return "rd";
+        default :
+            return "th";
     }
 }
 
 
-$indRec = array('QB'=> array(), 'RB'=> array(), 'WR'=> array(), 'TE'=> array(),
-            'K'=> array(), 'OL'=> array(), 'DL'=> array(), 'LB'=> array(),
-            'DB'=> array());
-$seasRec = array('HC'=> array(), 'QB'=> array(), 'RB'=> array(), 'WR'=> array(), 'TE'=> array(),
-            'K'=> array(), 'OL'=> array(), 'DL'=> array(), 'LB'=> array(),
-            'DB'=> array());
+$indRec = array('QB' => array(), 'RB' => array(), 'WR' => array(), 'TE' => array(),
+    'K' => array(), 'OL' => array(), 'DL' => array(), 'LB' => array(),
+    'DB' => array());
+$seasRec = array('HC' => array(), 'QB' => array(), 'RB' => array(), 'WR' => array(), 'TE' => array(),
+    'K' => array(), 'OL' => array(), 'DL' => array(), 'LB' => array(),
+    'DB' => array());
 
 $indRec['QB'][1] = 53;
 $indRec['QB'][2] = 45;
@@ -243,11 +249,11 @@ $seasRec['DB'][10] = 122;
 
 $newRecs = array();
 
-foreach ($indRec as $pos=>$list) {
+foreach ($indRec as $pos => $list) {
 
-$tMin = min($list);
+    $tMin = min($list);
 
-$query = <<<EOD
+    $query = <<<EOD
 SELECT CONCAT(p.firstname, ' ', p.lastname) as 'name',
 wm.weekname as 'week',
 ps.active as 'pts'
@@ -260,39 +266,39 @@ AND ps.active >= $tMin
 ORDER BY ps.active DESC, ps.week
 EOD;
 
-    $results = $conn->query( $query) or die("Error: " . $conn->error);
+    $results = $conn->query($query) or die("Error: " . $conn->error);
 
-$count = 1;
-$adj = 0;
-$softAdj = 0;
-$lastChange = 999;
+    $count = 1;
+    $adj = 0;
+    $softAdj = 0;
+    $lastChange = 999;
     while ($rank = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
-    //print "{$rank["name"]}<br/>";
+        //print "{$rank["name"]}<br/>";
 //    print "Adding: {$rank["name"]} - {$rank["pts"]} - **$pos**<br/>";
-    for ($i = $count; $i<=sizeof($list); $i++) {
-        if ($rank["pts"] < $lastChange) {
-            $adj = $softAdj;
-            $lastChange = $rank["pts"];
-        }
-        if ($i+$adj > 10) break;
-        if ($rank["pts"] > $list[$i]) {
-            $toAdd = array($pos, $rank["name"], $rank["week"], $rank["pts"], $i+$adj, '');
-            $softAdj++;
+        for ($i = $count; $i <= sizeof($list); $i++) {
+            if ($rank["pts"] < $lastChange) {
+                $adj = $softAdj;
+                $lastChange = $rank["pts"];
+            }
+            if ($i + $adj > 10) break;
+            if ($rank["pts"] > $list[$i]) {
+                $toAdd = array($pos, $rank["name"], $rank["week"], $rank["pts"], $i + $adj, '');
+                $softAdj++;
 //            print "Adding: {$rank["name"]} - {$rank["pts"]} - **$pos**<br/>";
-            array_push($newRecs, $toAdd);
-            $count = $i;
-            continue 2;
-        } else if ($rank["pts"] == $list[$i]) {
-            $toAdd = array($pos, $rank["name"], $rank["week"], $rank["pts"], $i+$adj, '(tie)');
-            $softAdj++;
+                array_push($newRecs, $toAdd);
+                $count = $i;
+                continue 2;
+            } else if ($rank["pts"] == $list[$i]) {
+                $toAdd = array($pos, $rank["name"], $rank["week"], $rank["pts"], $i + $adj, '(tie)');
+                $softAdj++;
 //            print "Adding: {$rank["name"]} - {$rank["pts"]} - **$pos**<br/>";
-            array_push($newRecs, $toAdd);
-            $count = $i;
-            continue 2;
+                array_push($newRecs, $toAdd);
+                $count = $i;
+                continue 2;
+            }
         }
+        break;
     }
-    break;
-}
 
 
 }
@@ -300,11 +306,11 @@ $lastChange = 999;
 
 // Season Records
 $seaRecs = array();
-foreach ($seasRec as $pos=>$list) {
+foreach ($seasRec as $pos => $list) {
 
-$sMin = min($list);
+    $sMin = min($list);
 
-$totalQuery = <<<EOD
+    $totalQuery = <<<EOD
 SELECT CONCAT(p.firstname, ' ', p.lastname) as 'name',
 sum(ps.active) as 'pts'
 FROM newplayers p, playerscores ps
@@ -316,59 +322,61 @@ HAVING `pts` >= $sMin
 ORDER BY `pts` DESC
 EOD;
 
-    $results = $conn->query( $totalQuery) or die("Error: " . $conn->error);
+    $results = $conn->query($totalQuery) or die("Error: " . $conn->error);
 
-$count = 1;
-$adj = 0;
-$softAdj = 0;
-$lastChange = 999;
+    $count = 1;
+    $adj = 0;
+    $softAdj = 0;
+    $lastChange = 999;
     while ($rank = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
-    //print "{$rank["name"]}<br/>";
-    //print "Adding: {$rank["name"]} - {$rank["pts"]} - **$pos**<br/>";
-    for ($i = $count; $i<=sizeof($list); $i++) {
-        if ($rank["pts"] < $lastChange) {
-            $adj = $softAdj;
-            $lastChange = $rank["pts"];
-        }
-        if ($i+$adj > 10) break;
-        if ($rank["pts"] > $list[$i]) {
-            $toAdd = array($pos, $rank["name"], $rank["pts"], $i+$adj, '');
-            $softAdj++;
+        //print "{$rank["name"]}<br/>";
+        //print "Adding: {$rank["name"]} - {$rank["pts"]} - **$pos**<br/>";
+        for ($i = $count; $i <= sizeof($list); $i++) {
+            if ($rank["pts"] < $lastChange) {
+                $adj = $softAdj;
+                $lastChange = $rank["pts"];
+            }
+            if ($i + $adj > 10) break;
+            if ($rank["pts"] > $list[$i]) {
+                $toAdd = array($pos, $rank["name"], $rank["pts"], $i + $adj, '');
+                $softAdj++;
 //            print "Adding: {$rank["name"]} - {$rank["pts"]} - **$pos**<br/>";
-            array_push($seaRecs, $toAdd);
-            $count = $i;
-            continue 2;
-        } else if ($rank["pts"] == $list[$i]) {
-            $toAdd = array($pos, $rank["name"], $rank["pts"], $i+$adj, '(tie)');
-            $softAdj++;
+                array_push($seaRecs, $toAdd);
+                $count = $i;
+                continue 2;
+            } else if ($rank["pts"] == $list[$i]) {
+                $toAdd = array($pos, $rank["name"], $rank["pts"], $i + $adj, '(tie)');
+                $softAdj++;
 //            print "Adding: {$rank["name"]} - {$rank["pts"]} - **$pos**<br/>";
-            array_push($seaRecs, $toAdd);
-            $count = $i;
-            continue 2;
+                array_push($seaRecs, $toAdd);
+                $count = $i;
+                continue 2;
+            }
         }
+        break;
     }
-    break;
-}
 
 
 }
 $dateQuery = "SELECT max(week) FROM playerscores where season=$currentSeason and week<=16";
-$dateRes = $conn->query( $dateQuery);
+$dateRes = $conn->query($dateQuery);
 list($week) = $dateRes->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 
 $title = "Player Records";
 include "base/menu.php";
 ?>
 
-<h1 align="center"><?php print $title; ?></h1>
-<h5 align="center"><i>Through Week <?php print $week; ?></i></h5>
-<hr/>
+    <h1 align="center"><?php print $title; ?></h1>
+    <h5 align="center"><i>Through Week <?php print $week; ?></i></h5>
+    <hr/>
 
 <?php include "base/statbar.html"; ?>
 
-<p>This is a list of individual player performances this season, that rank among the top 10 ever at a given position.</p>
+    <p>This is a list of individual player performances this season, that rank among the top 10 ever at a given
+        position.</p>
 
-<?php $seasonFirst = true;
+<?php
+$seasonFirst = true;
 foreach ($seaRecs as $record) {
     if ($record[3] > 1) {
         continue;
@@ -392,10 +400,10 @@ EOD;
 }
 
 if (!$seasonFirst) {
-?>
-</table>
-</center>
-</p>
+    ?>
+    </table>
+    </center>
+    </p>
 <?php }
 
 
@@ -423,54 +431,70 @@ EOD;
 }
 
 if (!$first) {
-?>
-</table>
-</center>
-</p>
+    ?>
+    </table>
+    </center>
+    </p>
 <?php }
 ?>
 
 <?php if (sizeof($seaRecs) > 0) {
-?>
-<p><center>
-<table border="1">
-<tr><th colspan="5">Single Season Top Ten</th></tr>
-<tr><th>Pos</th><th>Player</th><th>Pts</th><th>Rank</th></tr>
-<?php foreach ($seaRecs as $record) {
-    if ($record[3] == 1) continue;
-    $ordinal = getOrd($record[4]);
-    print <<<EOD
+    ?>
+    <p>
+    <center>
+        <table border="1">
+            <tr>
+                <th colspan="5">Single Season Top Ten</th>
+            </tr>
+            <tr>
+                <th>Pos</th>
+                <th>Player</th>
+                <th>Pts</th>
+                <th>Rank</th>
+            </tr>
+            <?php foreach ($seaRecs as $record) {
+                if ($record[3] == 1) continue;
+                $ordinal = getOrd($record[4]);
+                print <<<EOD
 <tr><td>$record[0]</td><td>$record[1]</td>
 <td>$record[2]</td><td>$record[3]$ordinal $record[4]</td></tr>
 EOD;
-}
+            }
 
+            ?>
+        </table>
+    </center></p>
+<? } ?>
+
+
+<?php
+if (sizeof($newRecs) > 0) {
 ?>
-</table>
-</center></p>
-<?}?>
-
-
-
-<?php if (sizeof($newRecs) > 0) {
-?>
-<center>
-<table border="1">
-<tr><th colspan="5">Single Game Top Ten</th></tr>
-<tr><th>Pos</th><th>Player</th><th>Week</th><th>Pts</th><th>Rank</th></tr>
-<?php foreach ($newRecs as $record) {
-    if ($record[4] == 1) continue;
-    $ordinal = getOrd($record[4]);
-    print <<<EOD
+        <center>
+            <table border="1">
+                <tr>
+                    <th colspan="5">Single Game Top Ten</th>
+                </tr>
+                <tr>
+                    <th>Pos</th>
+                    <th>Player</th>
+                    <th>Week</th>
+                    <th>Pts</th>
+                    <th>Rank</th>
+                </tr>
+<?php
+            foreach ($newRecs as $record) {
+                if ($record[4] == 1) continue;
+                $ordinal = getOrd($record[4]);
+                print <<<EOD
 <tr><td>$record[0]</td><td>$record[1]</td><td>$record[2]</td>
 <td>$record[3]</td><td>$record[4]$ordinal $record[5]</td></tr>
 EOD;
+            }
+?>
+            </table>
+        </center>
+<?php
 }
-
-?>
-</table>
-</center>
-<?}?>
-
-<?php include "base/footer.html";
-?>
+}
+include "base/footer.html";

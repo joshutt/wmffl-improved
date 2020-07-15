@@ -80,10 +80,10 @@ Trade" section below.  </P>
         $buttons = array("Withdraw", "Amend");
     }
 ?>
-<TR BGCOLOR="#CCCCCC"><TD COLSPAN=2><B><?print $teamName;?></B></TD>
+<TR BGCOLOR="#CCCCCC"><TD COLSPAN=2><B><?= $teamName;?></B></TD>
 <TD COLSPAN=2><B>Offered: <?php printf("%s", date("n/j/Y", $trade->getDateOffered()));?></B></TD>
 <TD COLSPAN=2><B>Expires: <?php printf("%s", date("n/j/Y", $trade->getDateExpires()));?></B></TD>
-<TR><TD COLSPAN=6><B>Status: </B><?print $status;?></TD></TR>
+<TR><TD COLSPAN=6><B>Status: </B><?= $status;?></TD></TR>
 <TR><TD COLSPAN=3 VALIGN=top>
 You Would Receive:
 <UL>
@@ -119,7 +119,7 @@ foreach ($trade->getPointsFrom() as $points) {
 </TD></TR>
 
 <FORM ACTION="processTrade.php" METHOD="POST">
-<INPUT TYPE="hidden" NAME="offerid" VALUE="<?print $trade->getID();?>">
+<INPUT TYPE="hidden" NAME="offerid" VALUE="<?= $trade->getID();?>">
 <TR>
 
 <?php foreach ($buttons as $buttonName) {

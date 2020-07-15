@@ -11,7 +11,7 @@ GROUP BY p.playerid, pos.position
 ORDER BY t.name, Extra desc, pc.years desc";
 
 $result = $conn->query( $query) or die("Error: " . $conn->error);
-$count = mysqli_num_rows($result);
+$count = 0;
 $page = array();
 $countall = array();
 while ($aLine = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
@@ -23,6 +23,7 @@ while ($aLine = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     $page[$aLine['name']] .= "</TD><TD ALIGN=Center>" . $aLine['years'] . "</TD>";
     $page[$aLine['name']] .= "<TD ALIGN=Center>+" . $aLine['Extra'] . "</TD></TR>";
     $countall[$aLine['name']]++;
+    $count++;
 }
 
 $title = "2006 WMFFL Protection Costs";

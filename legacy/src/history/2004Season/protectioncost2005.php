@@ -1,19 +1,32 @@
-<?php require_once "base/conn.php";
-$query = "SELECT p.firstname, p.lastname, pc.years, MAX(pos.cost)-MIN(pos.cost) as 'Extra', t.name ";
-$query .= "FROM players p, protectioncost pc, positioncost pos ";
-$query .= "LEFT JOIN roster r ON r.playerid=p.playerid AND r.dateoff is null ";
-$query .= "LEFT JOIN team t on r.teamid=t.teamid ";
-$query .= "WHERE p.playerid=pc.playerid and pc.season=2005 ";
-$query .= "and p.position=pos.position and pos.years<=pc.years ";
-$query .= "GROUP BY p.playerid, pos.position ";
-$query .= "ORDER BY t.name, Extra desc, pc.years desc";
+<?php
+require_once "base/conn.php";
+$queryBuilder = $conn->createQueryBuilder();
+$queryBuilder->select('p.firstname', 'p.lastname', 'pc.years', "max(pos.cost)-min(pos.cost) as 'Extra'", 't.name')
+    ->from('players', 'p')
+    ->join('p', 'protectioncost', 'pc', 'p.playerid=pc.playerid and pc.season=:season')
+    ->join('p', 'positioncost', 'pos', 'p.position=pos.position and pos.years<=pc.years')
+    ->leftJoin('p', 'roster', 'r', 'r.playerid=p.playerid and r.dateoff is null')
+    ->leftJoin('p', 'team', 't', 'r.teamid=t.teamid')
+    ->groupBy('p.playerid')
+    ->addGroupBy('pos.position')
+    ->orderBy('t.name')
+    ->addOrderBy('Extra', 'DESC')
+    ->addOrderBy('pc.years', 'DESC')
+    ->setParameter('season', 2005);
 
-$result = $conn->query( $query);
-$count = mysqli_num_rows($result);
-while ($aLine = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
-	$page[$aLine['name']] .= "<TR><TD>".$aLine['firstname']." ".$aLine['lastname'];
-	$page[$aLine['name']] .= "</TD><TD ALIGN=Center>".$aLine['years']."</TD>";
-	$page[$aLine['name']] .= "<TD ALIGN=Center>+".$aLine['Extra']."</TD></TR>";
+$result = $queryBuilder->execute()->fetchAll(\Doctrine\DBAL\FetchMode::MIXED);
+
+$count = count($result);
+$page = array();
+$countall = array();
+foreach($result as $aLine) {
+    if (!array_key_exists($aLine['name'], $page)) {
+        $page[$aLine['name']] = '';
+        $countall[$aLine['name']] = 0;
+    }
+    $page[$aLine['name']] .= "<TR><TD>" . $aLine['firstname'] . " " . $aLine['lastname'];
+    $page[$aLine['name']] .= "</TD><TD ALIGN=Center>" . $aLine['years'] . "</TD>";
+    $page[$aLine['name']] .= "<TD ALIGN=Center>+" . $aLine['Extra'] . "</TD></TR>";
     $countall[$aLine['name']]++;
 }
 ?>

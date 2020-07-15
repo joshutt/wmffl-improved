@@ -20,7 +20,7 @@ include "base/menu.php";
 <tr><td class="cat" align="center">Current Standings</td></tr></table>
 <center>
 <?php
-include "../common/weekstandings.php";
+include "history/common/weekstandings.php";
 
 if (!empty($clinchedList)) {
 ?>

@@ -9,12 +9,19 @@ $query .= "GROUP BY p.playerid, pos.position ";
 $query .= "ORDER BY t.name, Extra desc, pc.years desc";
 
 $result = $conn->query( $query);
-$count = mysqli_num_rows($result);
+$count = 0;
+$page = array();
+$countall = array();
 while ($aLine = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
+    if (!array_key_exists($aLine['name'], $page)) {
+        $page[$aLine['name']] = '';
+        $countall[$aLine['name']] = 0;
+    }
 	$page[$aLine['name']] .= "<TR><TD>".$aLine['firstname']." ".$aLine['lastname'];
 	$page[$aLine['name']] .= "</TD><TD ALIGN=Center>".$aLine['years']."</TD>";
 	$page[$aLine['name']] .= "<TD ALIGN=Center>+".$aLine['Extra']."</TD></TR>";
     $countall[$aLine['name']]++;
+    $count++;
 }
 ?>
 

@@ -68,7 +68,7 @@ include "base/menu.php";
 $thisSeason = 2019;
 $thisWeek = 17;
 $clinchedList = array(  'Fighting Squirrels' => 't-',  'Crusaders' => 'y-', 'Norsemen' => 'y-', 'British Bulldogs' => 't-', 'Richard\'s Lionhearts' => 'x-',  'Testudos Revenge' => 'y-');
-include "../common/weekstandings.php";
+include "history/common/weekstandings.php";
 ?>
 </center>
 

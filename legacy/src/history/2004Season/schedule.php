@@ -15,8 +15,9 @@ $sql .= "AND t1.season=s.season AND t2.season=s.season ";
 $sql .= "AND s.season=w.season AND s.week=w.week ";
 $sql .= "ORDER BY s.week, s.label, MD5(CONCAT(t1.name, t2.name)) ";
 
-$byeWeekQuery = "SELECT t.name FROM nflstatus s, nflteams t WHERE status='B' AND s.nflteam=t.nflteam AND season=$thisSeason and week=";
-
+$byeWeekQuery = "SELECT t.name FROM nflstatus s, nflteams t WHERE status='B' AND s.nflteam=t.nflteam AND season=:season and week=:week";
+$byeWeekStmt = $conn->prepare($byeWeekQuery);
+$byeWeekStmt->bindValue("season", $thisSeason);
 ?>
 
 <HTML>
@@ -46,7 +47,9 @@ $listWeek = 0;
 print "<TABLE BORDER=0>";
 while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     if ($row[0] != $listWeek) {
-        $byes = $conn->query( $byeWeekQuery . $row[0]);
+        $byeWeekStmt->bindValue("week", $row[0]);
+        $byes = $byeWeekStmt->fetchAll(\Doctrine\DBAL\FetchMode::NUMERIC);
+
         print "</TABLE><P>";
         print "<A NAME=\"".str_replace(" ","",$row[5])."\"><H4>".$row[5]."</H4></A>";
         print "<H5>".$row[6]." ".$row[7]."-";
@@ -57,11 +60,12 @@ while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
         if ($row[8] != "Sunday") {
             print " (".$row[8].")";
         }
-        $numByes = mysqli_num_rows($byes);
+
+        $numByes = count($byes);
         if ($numByes > 0) {
             print "<BR>NFL Byes: ";
             $byeCount = 1;
-            while (list($byeTeam) = $byes->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
+            foreach($byes as $byeTeam) {
                 print $byeTeam;
                 if ($byeCount+1 == $numByes) {
                     print " and ";

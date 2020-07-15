@@ -78,9 +78,9 @@ function checkDraft($teamid, &$retArray, $post)
                 $sql = "SELECT * FROM draftpicks WHERE season=$year AND ";
                 $sql .= "round=$round AND teamid=$team";
                 //print "Checking $sql";
-                $results = $conn->query( $sql);
+                $results = $conn->query( $sql)->fetchAll();
                 //$arr = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED);
-                $num = mysqli_num_rows($results);
+                $num = count($results);
                 if ($num != 1) {
                     $newInvalid = new InvalidDraft();
                     $newInvalid->team = $team;

@@ -130,7 +130,7 @@ $title = "Power Rankings";
 <?php include "base/menu.php"; ?>
 
 <H1 ALIGN=Center>Power Rankings</H1>
-<H5 ALIGN=Center><I>Through Week <?print $week;?></I></H5>
+<H5 ALIGN=Center><I>Through Week <?= $week;?></I></H5>
 <HR>
 <?php include "base/statbar.html"; ?>
 
@@ -168,7 +168,7 @@ if ($week >= 3) {
 </TABLE></CENTER><BR>
 
 <TABLE ALIGN=Center>
-<TR><TH COLSPAN=5>Week <?print ($week+1);?> Lines</TH></TR>
+<TR><TH COLSPAN=5>Week <?= ($week+1);?> Lines</TH></TR>
 <TR><TH>Favorite</TH><TH></TH><TH>Line</TH><TH></TH><TH>Underdog</TH></TR>
 <?php
 for ($i=0; $i<sizeof($arra); $i++) {

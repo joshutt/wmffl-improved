@@ -100,7 +100,7 @@ if (isset($firstSort) && $firstSort != "none") {
 
 //print "Last Name,First Name,Pos,NFL,Week,Pts\n";
 $newHold = array();
-$results = $conn->query( $sql) or die("There was an error in the query: " . mysqli_error());
+$results = $conn->query( $sql) or die("There was an error in the query: " . $conn->error);
 while ($playList = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     //print $playList[0].",".$playList[1].",".$playList[2].",";
     //print $playList[3].",".$playList[4].",".$playList[5];

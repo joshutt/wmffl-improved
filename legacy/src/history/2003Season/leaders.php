@@ -27,7 +27,7 @@ list($week) = $dateRes->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
 <?php include "base/menu.php"; ?>
 
 <H1 ALIGN=Center>League Leaders</H1>
-<!-- <H5 ALIGN=Center><I>Through Week <?print $week;?></I></H5> -->
+<!-- <H5 ALIGN=Center><I>Through Week <?= $week;?></I></H5> -->
 <H5 ALIGN=Center><I>Season Final</I></H5>
 <HR>
 

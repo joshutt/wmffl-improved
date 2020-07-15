@@ -54,7 +54,7 @@ include "base/menu.php";
 ?>
 
 <H1 ALIGN=Center>Transactions</H1>
-<H5 ALIGN=Center>Last Updated <?print $lastupdate;?></H5>
+<H5 ALIGN=Center>Last Updated <?= $lastupdate;?></H5>
 <HR size = "1">
 <?php
 include "history/2001Season/transmenu.html";

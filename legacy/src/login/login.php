@@ -4,9 +4,6 @@ require_once "utils/start.php";
 $thequery = "select teamid, password, name, userid from user where username=? and (password=password(?) or password=md5(?)) and Active='Y'";
 
 $result = $conn->executeQuery( $thequery, array($username, $password, $password));
-//$numrow = mysqli_num_rows($result);
-//$numrow = $conn->affected_rows;
-//$numrow = $result->num_rows;
 $teamReturn = $result->fetchAll(\Doctrine\DBAL\FetchMode::NUMERIC);
 
 if (sizeof($teamReturn) == 0) {

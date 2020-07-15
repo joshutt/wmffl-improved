@@ -33,7 +33,7 @@ ORDER BY t.name, p.pos";
 
 $dateQuery = "SELECT max(week) FROM playerscores where season=$thisSeason and week<=14";
 
-$results = $conn->query( $sql) or die("$sql<br/>" . mysqli_error());
+$results = $conn->query( $sql) or die("$sql<br/>" . $conn->error);
 $dateRes = $conn->query( $dateQuery);
 
 list($week) = $dateRes->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);

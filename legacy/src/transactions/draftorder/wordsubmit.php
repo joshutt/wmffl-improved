@@ -15,8 +15,8 @@ $query = "select `key` from config where `key` like 'draft.order.word.%' and val
 $results = $conn->query( $query) or die("Ugg " . $conn->error);
 
 $query2 = "select `key`, value from config where `key` like 'draft.order.team.%' and value='$teamid'";
-$result2 = $conn->query( $query2) or die("Ugg " . $conn->error);
-$count = mysqli_num_rows($result2);
+$result2 = $conn->query( $query2)->fetchAll() or die("Ugg " . $conn->error);
+$count = count($result2);
 
 if ($count > 0) {
     $message2 = "You have already submitted a word.";
@@ -24,7 +24,7 @@ if ($count > 0) {
 
 $min = 9;
 while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)) {
-    $key = $row["key"]; 
+    $key = $row["key"];
     if (substr($key, -1) < $min) {
         $min = substr($key, -1);
     }

@@ -104,7 +104,7 @@ EOD;
 
 //print $sql;
 $result = $conn->executeQuery($sql, array($title, $fullName, $caption, $article, $usernum)) or die("Failed: " . $conn->error);
-$uid = mysqli_insert_id($conn);
+$uid = $conn->lastInsertId();
 $_REQUEST["uid"] = $uid;
 
 include "preview.php";

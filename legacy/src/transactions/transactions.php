@@ -17,8 +17,7 @@ function trade($teamid, $date) {
 
     $results = $conn->query( $tradequery);
 	$oldgroup = 0;
-    //print mysqli_num_rows($results);
-    //print $tradequery;
+
     while (list($group, $date, $TeamFrom, $lastname, $firstname, $position, $nflteam, $other) = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
 		if ($oldgroup != $group) {
 			print "<LI>Traded ";
@@ -52,7 +51,7 @@ if (isset($_REQUEST["year"])) $theyear = $_REQUEST["year"];
 ?>
 
 <H1 ALIGN=Center>Transactions</H1>
-<H5 ALIGN=Center>Last Updated <?print $lastupdate;?></H5>
+<H5 ALIGN=Center>Last Updated <?= $lastupdate;?></H5>
 <HR size = "1">
 <!--
 <FORM ACTION="transactions.php" METHOD="GET">

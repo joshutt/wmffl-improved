@@ -94,8 +94,14 @@ $mapping = array($teamnum=>$thisTeam->getName(),
 //print "<br/>";
 
 if ($updateFlag) {
-    $you = $_POST["you"];
-    $they = $_POST["they"];
+    $you = array();
+    $they = array();
+    if (isset($_POST["you"])) {
+        $you = $_POST["you"];
+    }
+    if (isset($_POST["they"])) {
+        $they = $_POST["they"];
+    }
     include "updatetrade.inc.php";
 //    print_r ($trade);
 }
@@ -183,7 +189,8 @@ foreach ($trade->getPointsTo() as $pts) {
 
 
 <TR><TD VALIGN="top"><B>Your Roster:</B><BR>
-<?php $roster = loadRoster($thisTeam);
+<?php
+$roster = loadRoster($thisTeam);
 foreach ($roster as $player) {
     if ($player->getPos() == "HC") {
         continue;
@@ -195,7 +202,8 @@ foreach ($roster as $player) {
 </TD>
 
 <TD VALIGN="top"><B>Their Roster:</B><BR>
-<?php $roster = loadRoster($otherTeam);
+<?php
+$roster = loadRoster($otherTeam);
 foreach ($roster as $player) {
     if ($player->getPos() == "HC") {
         continue;
@@ -270,7 +278,7 @@ for ($i=1; $i<=$NUM_PTS_DISPLAY; $i++) {
 }
 ?>
 
-<input type="hidden" name="teamto" value="<?print $otherTeam->getID();?>" />
+<input type="hidden" name="teamto" value="<?= $otherTeam->getID();?>" />
 </TD></TR>
 </TABLE>
 

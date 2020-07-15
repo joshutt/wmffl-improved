@@ -2,13 +2,13 @@
 
 if (isset($teamid)) {
 	$thequery = "select teamid, password from user where password='".$teamid."'";
-    $result = $conn->query( $thequery);
-    $numrow = mysqli_num_rows($result);
+    $result = $conn->query( $thequery)->fetchAll(\Doctrine\DBAL\FetchMode::NUMERIC);
+    $numrow = count($result);
 
 	if ($numrow == 0) {
 		$teamnum = 0;
 	} else {
-        $team = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
+        $team = $result[0];
 		$teamnum = $team[0];
 		setcookie ("teamid", $team[1], time()+1800, "/", ".wmffl.com");
 		print $teamid;

@@ -1,5 +1,6 @@
-<?php require_once "utils/start.php";
-session_start();
+<?php
+require_once "utils/start.php";
+//session_start();
 
 if (!$isin || $usernum != 2) {
   //print "Not in: **$isin**<br/>";
@@ -21,14 +22,13 @@ if (!isset($_REQUEST["teamchangeid"])) {
 	$teamchangeid = $_REQUEST["teamchangeid"];
 	$thequery = "select teamid, password, name, username, userid from user where teamid=$teamchangeid";
     $result = $conn->query( $thequery);
-    $numrow = mysqli_num_rows($result);
+    $teams = $result->fetchAll(\Doctrine\DBAL\FetchMode::NUMERIC);
 
-	if ($numrow == 0) {
+	if (count($teams) == 0) {
 		header("Location: " . $_SERVER['HTTP_REFERER']);
 		setcookie ("message", "Invalid Username/Password", 0, "/", ".wmffl.com");
-	}
-	else {
-        $team = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
+	} else {
+        $team = $teams[0];
 		$_SESSION["isin"] = true;
 		$_SESSION["teamnum"] = $team[0];
 		$_SESSION["usernum"] = $team[4];
@@ -40,5 +40,3 @@ if (!isset($_REQUEST["teamchangeid"])) {
 		print "You are ".$team[2];
 	}
 }
-
-?>

@@ -6,9 +6,9 @@ if (isset($Username)) {
 
     // Make sure that old password matches password passed in
     $thequery = "select name, email from user where username='" . $Username . "'";
-    $result = $conn->query( $thequery);
-    $email = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
-    $numrow = mysqli_num_rows($result);
+    $result = $conn->query( $thequery)->fetchAll(\Doctrine\DBAL\FetchMode::NUMERIC);
+    $email = $result[0];
+    $numrow = count($result);
     if ($numrow == 0) {
         $ErrorMessage = "Invalid Account";
     } else {

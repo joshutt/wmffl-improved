@@ -4,6 +4,7 @@ if (!$isin) {
     exit();
 }
 
+$errorMessage = "";
 if (isset($change)) {
     if ($user != $username) {
         $errorMessage = "You can only change the password for your account";
@@ -15,18 +16,32 @@ if (isset($change)) {
         $errorMessage = "Success";
 
         // Make sure that the old password matches entered password
-        $theQuery = "SELECT name, email FROM user WHERE username='$username' AND (password=PASSWORD('$oldpassword') or password=MD5('$oldpassword'))";
-        $result = $conn->query( $theQuery);
-        $numrow = mysqli_num_rows($result);
+//        $theQuery = "SELECT name, email FROM user WHERE username='$username' AND (password=PASSWORD('$oldpassword') or password=MD5('$oldpassword'))";
+        $thisQuery = $conn->createQueryBuilder()
+            ->select("name","email")
+            ->from("user")
+            ->where("username=:username")
+            ->andWhere("password=PASSWORD(:password) OR password=MD5(:password)")
+            ->setParameter("username", $username)
+            ->setParameter("password", $oldpassword);
+        $result = $thisQuery->execute()->fetchAll(\Doctrine\DBAL\FetchMode::ASSOCIATIVE);
+        $numrow = count($result);
+        var_dump($result);
 
         if ($numrow != 1) {
             $errorMessage = "Old password does not equal current password";
         } else {
-            list($name, $email) = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
-            
+            $name = $result[0]['name'];
+            $email = $result[0]['email'];
+
             // Save password in database
-            $theQuery = "UPDATE user SET password=MD5('$newpassword1') WHERE username='$user'";
-            $result = $conn->query( $theQuery) or die("An error occured: " . $conn->error);
+            $theQuery = $conn->createQueryBuilder()
+                ->update("user")
+                ->set("password", "MD5(:newpassword)")
+                ->where("username=:user")
+                ->setParameter("newpassword", $newpassword1)
+                ->setParameter("user", $user);
+            $theQuery->execute() or die("An error occured: " . $conn->error);
 
             // Send email confirming change
             $body = "$name,

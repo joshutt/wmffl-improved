@@ -58,8 +58,8 @@ If no action is taken for seven days the offer will automaticlly become void.
 
 <H3 ALIGN=Center>Current Offer</H3>
 
-<P><B><?print $myTeam->getName();?></B> offer <?php print printList($youItems);?><BR>
-to the <B><?print $otherTeam->getName();?></B> in exchange for <?php print printList($theyItems); ?>
+<P><B><?= $myTeam->getName();?></B> offer <?php print printList($youItems);?><BR>
+to the <B><?= $otherTeam->getName();?></B> in exchange for <?php print printList($theyItems); ?>
 <?php ?>
 </P>
 

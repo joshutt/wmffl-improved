@@ -33,7 +33,6 @@ $result = $conn->query( $thequery);
 
 print "<P><TABLE BORDER=1>";
 
-print "Rows: " + mysqli_num_rows($result);
 $oldissue = "";
 while (list($issuenum, $team, $vote) = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
     if ($issuenum != $oldissue) {
@@ -44,4 +43,3 @@ while (list($issuenum, $team, $vote) = $result->fetch(\Doctrine\DBAL\FetchMode::
 }
 print "</TABLE></P>";
 
-?>

@@ -92,7 +92,7 @@ $playoffQuery =<<<EOD
     order by s.season asc, s.week asc
 EOD;
 
-$result = $conn->query( $playoffQuery) or die("Mysql error: " . mysqli_error());
+$result = $conn->query( $playoffQuery) or die("Mysql error: " . $conn->error);
 $playoffResults = array();
 
 while ($recordList = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
@@ -122,7 +122,7 @@ $titleQuery =<<<EOD
     order by t.season asc
 EOD;
 
-$result = $conn->query( $titleQuery) or die("Mysql error: " . mysqli_error());
+$result = $conn->query( $titleQuery) or die("Mysql error: " . $conn->error);
 $leagueTitles = array();
 $divisionTitles = array();
 
@@ -162,7 +162,7 @@ array_push($namedArray, $oneName);
  *********************************************************/
 $ownerArray = array();
 $ownerQuery = "SELECT u.name, o.season, o.primary from owners o, user u where o.userid=u.userid and o.teamid=$viewteam order by o.season asc, o.primary asc";
-$result = $conn->query( $ownerQuery) or die("Die: " . mysqli_error());
+$result = $conn->query( $ownerQuery) or die("Die: " . $conn->error);
 $prevName = "";
 $finalName = "";
 $startSeason = 0;

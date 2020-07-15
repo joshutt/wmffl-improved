@@ -114,7 +114,7 @@ $title = "Schedule Luck";
 <?php include "base/menu.php"; ?>
 
 <H1 ALIGN=Center>Schedule Luck</H1>
-<H5 ALIGN=Center><I>Through Week <?print $week;?></I></H5>
+<H5 ALIGN=Center><I>Through Week <?= $week;?></I></H5>
 <HR>
 <?php include "base/statbar.html"; ?>
 

@@ -112,7 +112,7 @@ while (list($ta, $tb) = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
 <?php include "base/menu.php"; ?>
 
 <H1 ALIGN=Center>Power Rankings</H1>
-<H5 ALIGN=Center><I>Through Week <?print $week;?></I></H5>
+<H5 ALIGN=Center><I>Through Week <?= $week;?></I></H5>
 <HR>
 
 <P>The current power rankings as well as the rankings for the previous two
@@ -126,7 +126,7 @@ purposes only.  </P>
 <CENTER>
 <TABLE>
 <TR><TH ALIGN="Left">Team</TH><TH></TH><TH>Current Rating</TH><TH></TH>
-<TH>Last Week</TH><TH></TH><TH>Week <?print ($week-2);?></TH></TR>
+<TH>Last Week</TH><TH></TH><TH>Week <?= ($week-2);?></TH></TR>
 
 <?php foreach($powerArray as $team=>$finalPow) {
     print "<TR><TD>$team</TD><TD>&nbsp;</TD>";
@@ -138,7 +138,7 @@ purposes only.  </P>
 </TABLE></CENTER><BR>
 
 <TABLE ALIGN=Center>
-<TR><TH COLSPAN=5>Week <?print ($week+1);?> Lines</TH></TR>
+<TR><TH COLSPAN=5>Week <?= ($week+1);?> Lines</TH></TR>
 <TR><TH>Favorite</TH><TH></TH><TH>Line</TH><TH></TH><TH>Underdog</TH></TR>
 <?php #$arra = array("War Eagles", "Werewolves", "Crusaders", "Freezer Burn", "Illuminati");
 #$arrb = array("Rednecks", "Norsemen", "Whiskey Tango", "Green Wave", "MeggaMen");

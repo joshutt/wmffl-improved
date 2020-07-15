@@ -19,7 +19,9 @@ $sql .= "WHERE s.season=$thisSeason ";
 $sql .= "ORDER BY s.week, s.label, MD5(CONCAT(t1.name, t2.name)) ";
 
 $currentWeekQuery = "SELECT week FROM weekmap WHERE curdate() between StartDate and EndDate";
-$byeWeekQuery = "SELECT if(t.name='New York', concat(t.name, ' ', t.nickname), t.name) FROM nflstatus s, nflteams t WHERE status='B' AND s.nflteam=t.nflteam AND season=$thisSeason and week=";
+$byeWeekQuery = "SELECT if(t.name='New York', concat(t.name, ' ', t.nickname), t.name) FROM nflstatus s, nflteams t WHERE status='B' AND s.nflteam=t.nflteam AND season=:season and week=:week";
+$byeWeekStmt = $conn->prepare($byeWeekQuery);
+$byeWeekStmt->bindValue("season", $thisSeason);
 
 $title = "WMFFL Schedule";
 ?>
@@ -102,7 +104,8 @@ EOD;
         }
 
 
-        $byes = $conn->query( $byeWeekQuery . $row[0]);
+        $byeWeekStmt->bindValue("week", $row[0]);
+        $byes = $byeWeekStmt->fetchAll(\Doctrine\DBAL\FetchMode::NUMERIC);
         $anchorName = str_replace(" ","",$row[5]);
         $displayWeek = $row[5];
         if ($row[11] != "") {
@@ -127,11 +130,11 @@ EOD;
         </td>
     </tr>
 EOD;
-        $numByes = mysqli_num_rows($byes);
+        $numByes = count($byes);
         if ($numByes > 0) {
             $byeCount = 1;
             $byeList = "";
-            while (list($byeTeam) = $byes->fetch(\Doctrine\DBAL\FetchMode::NUMERIC)) {
+            foreach($byes as $byeTeam) {
                 $byeList .= $byeTeam;
                 if ($byeCount+1 == $numByes) {
                     $byeList .= " and ";

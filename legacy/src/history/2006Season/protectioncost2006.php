@@ -11,7 +11,7 @@ GROUP BY p.playerid, pos.position
 ORDER BY t.name, Extra desc, pc.years desc";
 
 $result = $conn->query( $query) or die("Error: " . $conn->error);
-$count = mysqli_num_rows($result);
+$count = 0;
 $page = array();
 $countall = array();
 while ($aLine = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
@@ -23,6 +23,7 @@ while ($aLine = $result->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
     $page[$aLine['name']] .= "</TD><TD ALIGN=Center>" . $aLine['years'] . "</TD>";
     $page[$aLine['name']] .= "<TD ALIGN=Center>+" . $aLine['Extra'] . "</TD></TR>";
     $countall[$aLine['name']]++;
+    $count++;
 }
 
 $title = "2006 WMFFL Protection Costs";
@@ -118,7 +119,8 @@ include "base/menu.php";
 
             <TABLE ALIGN="Center">
 
-                <?php                 $sumup = 0;
+                <?php
+                $sumup = 0;
                 foreach ($page
 
                 as $teamName => $val) {
@@ -132,24 +134,26 @@ include "base/menu.php";
         <TD WIDTH=50% VALIGN=Top>
 
             <TABLE ALIGN=Right VALIGN=Top>
-                <?php                 $sumup = 0;
+                <?php
+                $sumup = 0;
                 }
                 ?>
 
                 <TR>
-                    <TH COLSPAN=3><?php print $teamName; ?></TH>
+                    <TH COLSPAN=3><?= $teamName; ?></TH>
                 </TR>
                 <TR>
                     <TH>Player Name</TH>
                     <TH>Years Protected</TH>
                     <TH>Extra Cost</TH>
                 </TR>
-                <?php print $val; ?>
+                <?= $val; ?>
                 <TR>
                     <TD>&nbsp;</TD>
                 </TR>
 
-                <?php                 $sumup += $countall[$teamName] + 3;
+                <?php
+                $sumup += $countall[$teamName] + 3;
                 }
                 $teamName = '';
                 ?>
@@ -161,7 +165,7 @@ include "base/menu.php";
                     <TH>Years Protected</TH>
                     <TH>Extra Cost</TH>
                 </TR>
-                <?php print $page['']; ?>
+                <?= $page['']; ?>
                 <TR>
                     <TD>&nbsp;</TD>
                 </TR>

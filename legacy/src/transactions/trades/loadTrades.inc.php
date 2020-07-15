@@ -22,8 +22,10 @@ function _array_search ($needle, $haystick) {
 
 function loadTeam($teamID) {
     global $conn;
-    $sql = "SELECT name FROM team WHERE teamid=$teamID";
-    $resultlt = $conn->query( $sql);
+    $sql = "SELECT name FROM team WHERE teamid=?";
+//    $stmt = $conn->prepare($sql);
+//    $stmt->bindValue(1, $teamID);
+    $resultlt = $conn->executeQuery($sql, [$teamID]);
     $name = $resultlt->fetch(\Doctrine\DBAL\FetchMode::MIXED);
     return new Team($name[0], $teamID);
 }
@@ -133,11 +135,11 @@ function loadRoster($team) {
     global $conn;
     $sql = "select * from newplayers p, roster r ";
     $sql .= "where p.playerid=r.playerid and r.dateoff is null ";
-    $sql .= "and r.teamid=".$team->getID();
-    $sql .= " order by p.pos, p.lastname";
+    $sql .= "and r.teamid=? ";
+    $sql .= "order by p.pos, p.lastname";
     
     $roster = array();
-    $results = $conn->query( $sql);
+    $results = $conn->executeQuery( $sql, [$team->getID()]);
     while ($arr = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
         $player = new Player($arr["firstname"]." ".$arr["lastname"], $arr["playerid"]);
         $player->setPos($arr["pos"]);
@@ -184,7 +186,7 @@ function saveOffer($trade) {
     }
     $offerSQL .= "($teamAID, $teamBID, 'Pending', now(), $teamAID)";
     $conn->query( $offerSQL);
-    $tradeID = mysqli_insert_id($conn);
+    $tradeID = $conn->lastInsertId();
     $trade->setID($tradeID);
 
     // Insert Players
@@ -279,7 +281,7 @@ function validateTrade($offerid, $teamid) {
     $mTeam = loadTeam($teamid);
     $trade = loadTradeByID($offerid, $mTeam);
     $oTeam = $trade->getOtherTeam();
-    
+
     $mRoster = loadRoster($mTeam);
     $oRoster = loadRoster($oTeam);
     foreach ($trade->getPlayersTo() as $player) {
@@ -310,40 +312,27 @@ function validateTrade($offerid, $teamid) {
         $round = $pick->getRound();
         $orginalTeam = $pick->getOrgOwner();
         $orgTeam = $orginalTeam->getID();
-        $sql = "SELECT * FROM draftpicks WHERE season=$year AND round=$round ";
+        $sql = "SELECT count(*) FROM draftpicks WHERE season=$year AND round=$round ";
         $sql .= "AND teamid=$teamID AND orgTeam=$orgTeam";
         //print $sql;
-        $results = $conn->query( $sql);
+        $results = $conn->query( $sql)->fetch();
         //print_r($results);
-        if (mysqli_num_rows($results) != 1) {
+        if (count($results) != 1) {
             //print "<p>return false due to no draft picks</p>";
             return false;
         }
     }
-    /*
-    foreach ($trade->getPointsTo() as $pts) {
-        $year = $pts->getSeason();
-        $numPts = $pts->getPts();
-        $sql = "SELECT ProtectionPts, TransPts, TotalPts FROM transpoints WHERE season=$year AND teamid=$teamid";
-        $results = $conn->query( $sql);
-        list($protPts, $tranPts, $totPts) = $results->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
-        //print "$protPts + $tranPts + $numPts + $totPts<br/>";
-        if ($protPts+$tranPts+$numPts > $totPts) {
-            return false;
-        }
-    }
-    */
-    
+
     $teamID = $mTeam->getID();
     foreach ($trade->getPicksFrom() as $pick) {
         $year = $pick->getSeason();
         $round = $pick->getRound();
         $orginalTeam = $pick->getOrgOwner();
         $orgTeam = $orginalTeam->getID();
-        $sql = "SELECT * FROM draftpicks WHERE season=$year AND round=$round ";
+        $sql = "SELECT count(*) FROM draftpicks WHERE season=$year AND round=$round ";
         $sql .= "AND teamid=$teamID AND orgTeam=$orgTeam";
-        $results = $conn->query( $sql);
-        if (mysqli_num_rows($results) != 1) {
+        $results = $conn->query( $sql)->fetch();
+        if (count($results) != 1) {
             //print "<p>return false due to no draft picks from</p>";
             return false;
         }

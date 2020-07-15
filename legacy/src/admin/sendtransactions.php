@@ -19,8 +19,8 @@ if (!isset($_GET["EndDate"]) || $_GET["EndDate"] == "") {
 	$checkQuery = "SELECT * FROM transactions WHERE Date BETWEEN $StartDate AND $EndDate";
 
 	// Check if any exist
-$result = $conn->query( $checkQuery);
-if (mysqli_num_rows($result) <= 0 && !$cronEnter) {
+$result = $conn->query( $checkQuery)->fetchAll();
+if (count($result) <= 0 && !$cronEnter) {
 		print "No Transactions to send";
 		exit();
 	} 

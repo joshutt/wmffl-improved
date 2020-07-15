@@ -127,8 +127,8 @@ include "base/menu.php";
 
 <P>The following offer terms have been submitted:</P>
 
-<P><B><?print $myTeam->getName();?></B> offer <?php print printList($youItems);?><BR>
-to the <B><?print $otherTeam->getName();?></B> in exchange for <?php print printList($theyItems); ?>
+<P><B><?= $myTeam->getName();?></B> offer <?php print printList($youItems);?><BR>
+to the <B><?= $otherTeam->getName();?></B> in exchange for <?php print printList($theyItems); ?>
 
 <P>This trade will become offical when the other team agrees to these terms.  
 Either team may amend or withdraw this offer at any time prior to its approval.

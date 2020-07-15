@@ -59,7 +59,7 @@ $byPos = false;
 if (isset($_REQUEST["team"]) && $_REQUEST["team"] != "") {
     $searchTeam = $_REQUEST["team"];
 } else if (isset($_REQUEST["pos"]) && $_REQUEST["pos"] != "") {
-    $searchPos = mysqli_real_escape_string($conn, $_REQUEST["pos"]);
+    $searchPos = $_REQUEST["pos"];
     $byPos = true;
 } else if (array_key_exists('teamnum', $_SESSION) && $_SESSION["teamnum"] != "") {
     $searchTeam = $_SESSION["teamnum"];
@@ -78,35 +78,29 @@ if (isset($_REQUEST["season"])) {
 }
 
 
+$queryBuilder = $conn->createQueryBuilder();
+$queryBuilder->select('p.playerid', 'p.firstname', 'p.lastname', 'p.pos', "ps.season as 'season'", "ps.week as 'week'", "ps.pts as 'pts'", 't.abbrev', "p.team as 'nfl'")
+    ->from('newplayers', 'p')
+    ->leftJoin('p', 'roster', 'r', 'p.playerid=r.playerid and r.dateoff is null')
+    ->leftJoin('r', 'teamnames', 't', 'r.teamid=t.teamid and t.season=:season')
+    ->leftJoin('p', 'playerscores', 'ps', 'p.playerid=ps.playerid and ps.season=:season')
+    ->orderBy('p.pos', 'ASC')
+    ->addOrderBy('p.lastname', 'ASC')
+    ->addOrderBy('p.firstname', 'ASC')
+    ->addOrderBy('ps.week', 'ASC')
+    ->setParameter('season', $season);
+
 // Search by Position
-
 if (isset($searchTeam)) {
-
-    $sql = <<<EOD
-select p.playerid, p.firstname, p.lastname, p.pos, ps.season as 'season', ps.week as 'week', ps.pts as 'pts', t.abbrev, p.team as 'nfl'
-from newplayers p
-left join roster r on p.playerid=r.playerid and r.dateoff is null
-left join teamnames t on r.teamid=t.teamid and t.season=$season
-left join playerscores ps on p.playerid=ps.playerid and ps.season=$season
-where r.teamid=$searchTeam 
-order by p.pos, p.lastname, p.firstname, ps.week
-EOD;
-
+    $queryBuilder->where('r.teamid=:teamid')->setParameter('teamid', $searchTeam);
 } else if ($byPos) {
-
-    $sql = <<<EOD
-select p.playerid, p.firstname, p.lastname, p.pos, ps.season as 'season', ps.week as 'week', ps.pts as 'pts', t.abbrev, p.team as 'nfl'
-from newplayers p
-left join roster r on p.playerid=r.playerid and r.dateoff is null
-left join teamnames t on r.teamid=t.teamid and t.season=$season
-left join playerscores ps on p.playerid=ps.playerid and ps.season=$season
-where p.pos='$searchPos' and p.active=1
-order by p.pos, p.lastname, p.firstname, ps.week
-EOD;
-
+    $queryBuilder->where('p.pos=:pos')
+        ->andWhere('p.active=1')
+        ->setParameter('pos', $searchPos);
 }
 
-$results = $conn->query( $sql) or die("There was an error in the query: " . $conn->error);
+$results = $queryBuilder->execute() or die("There was an error in the query: " . $conn->error);
+//$results = $conn->query($sql) or die("There was an error in the query: " . $conn->error);
 $newHold = array();
 $max = 0;
 while ($playList = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
@@ -167,7 +161,8 @@ if ($format == "html" || !supportedFormat($format)) {
     <hr size="1">
 
 
-    <?php     include "base/statbar.html";
+    <?php
+    include "base/statbar.html";
     print "<div id=\"tblblock\" class='container justify-content-center'>";
     include "weekbyweekinc.php";
     print "<div id=\"mainTable\" class='row col-12 justify-content-center'>";
@@ -181,4 +176,4 @@ if ($format == "html" || !supportedFormat($format)) {
 } else if ($format == "json") {
     outputJSON($titles, $newHold);
 }
-?>
+
