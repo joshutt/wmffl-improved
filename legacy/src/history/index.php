@@ -26,43 +26,43 @@ include "base/menu.php";
 </TD></TR><TR><TD> </TD></TR>
 
 <TR><TD>
-<A HREF="1992Season.shtml"><IMG SRC="/images/football.jpg" BORDER=0>1992 Season</A><P>
+<A HREF="1992Season.php"><IMG SRC="/images/football.jpg" BORDER=0>1992 Season</A><P>
 </TD><TD>
-<A HREF="1993Season.shtml"><IMG SRC="/images/football.jpg" BORDER=0>1993 Season</A><P>
+<A HREF="1993Season.php"><IMG SRC="/images/football.jpg" BORDER=0>1993 Season</A><P>
 </TD><TD>
-<A HREF="1994Season.shtml"><IMG SRC="/images/football.jpg" BORDER=0>1994 Season</A><P>
+<A HREF="1994Season.php"><IMG SRC="/images/football.jpg" BORDER=0>1994 Season</A><P>
 </TD></TR>
 
 <TR><TD> </TD></TR><TR><TD>
-<A HREF="1995Season.shtml"><IMG SRC="/images/football.jpg" BORDER=0>1995 Season</A><P>
+<A HREF="1995Season.php"><IMG SRC="/images/football.jpg" BORDER=0>1995 Season</A><P>
 </TD><TD>
-<A HREF="1996Season.shtml"><IMG SRC="/images/football.jpg" BORDER=0>1996 Season</A><P>
+<A HREF="1996Season.php"><IMG SRC="/images/football.jpg" BORDER=0>1996 Season</A><P>
 </TD><TD>
-<A HREF="1997Season.shtml"><IMG SRC="/images/football.jpg" BORDER=0>1997 Season</A><P>
+<A HREF="1997Season.php"><IMG SRC="/images/football.jpg" BORDER=0>1997 Season</A><P>
 </TD></TR><TR><TD> </TD></TR>
 
 <TR><TD>
-<A HREF="1998Season.shtml"><IMG SRC="/images/football.jpg" BORDER=0>1998 Season</A><P>
+<A HREF="1998Season.php"><IMG SRC="/images/football.jpg" BORDER=0>1998 Season</A><P>
 </TD><TD>
-<A HREF="1999Season.shtml"><IMG SRC="/images/football.jpg" BORDER=0>1999 Season</A><P>
+<A HREF="1999Season.php"><IMG SRC="/images/football.jpg" BORDER=0>1999 Season</A><P>
 </TD><TD>
-<A HREF="2000Season.shtml"><IMG SRC="/images/football.jpg" BORDER=0>2000 Season</A><P>
+<A HREF="2000Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2000 Season</A><P>
 </TD></TR><TR><TD> </TD></TR>
 
 <TR><TD>
-<A HREF="2001Season.shtml"><IMG SRC="/images/football.jpg" BORDER=0>2001 Season</A><P>
+<A HREF="2001Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2001 Season</A><P>
 </TD><TD>
-<A HREF="2002Season.shtml"><IMG SRC="/images/football.jpg" BORDER=0>2002 Season</A><P>
+<A HREF="2002Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2002 Season</A><P>
 </TD><TD>
-<A HREF="2003Season.shtml"><IMG SRC="/images/football.jpg" BORDER=0>2003 Season</A><P>
+<A HREF="2003Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2003 Season</A><P>
 </TD></TR><TR><TD> </TD></TR>
 
 <TR><TD>
-<A HREF="2004Season.shtml"><IMG SRC="/images/football.jpg" BORDER=0>2004 Season</A><P>
+<A HREF="2004Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2004 Season</A><P>
 </TD><TD>
-<A HREF="2005Season.shtml"><IMG SRC="/images/football.jpg" BORDER=0>2005 Season</A><P>
+<A HREF="2005Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2005 Season</A><P>
 </TD><TD>
-<A HREF="2006Season.shtml"><IMG SRC="/images/football.jpg" BORDER=0>2006 Season</A><P>
+<A HREF="2006Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2006 Season</A><P>
 </TD></TR><TR><TD> </TD></TR>
 
 <TR><TD>

@@ -3,7 +3,7 @@
 <TITLE>WMFFL Schedule</TITLE>
 </HEAD>
 
-<!--#include virtual="/base/menu.php"-->
+<?php include "base/menu.php"; ?>
 
 <H1 Align=Center>2003 Schedule</H1>
 <HR size = "1"><CENTER>
@@ -183,4 +183,4 @@ Toliet Bowl V: Blue Division #5 vs Orange Division #5
 Playoff Winner #1 vs Playoff Winner #2
 <P>
 
-<!--#include virtual="/base/footer.html"-->
+<?php include "base/footer.html"; ?>

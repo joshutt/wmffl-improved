@@ -8,7 +8,7 @@ li.newRule { font-weight:bold }
 
 </HEAD>
 
-<?php include "/base/menu.php" ?>
+<?php include "base/menu.php" ?>
 
 <H1 ALIGN=CENTER>Rules of the WMFFL</H1>
 <H5 ALIGN=CENTER><I>Last Updated: August 4, 2010</I></H5>
@@ -614,4 +614,4 @@ Section 4: <A HREF="#XI">Financial Situations</A>; <A HREF="#XII">Changing Rules
 <LI>The rule is rejected by more than 50% of the vote.
 </OL></OL></OL>
 
-<?php include "/base/footer.html" ?>
+<?php include "base/footer.html" ?>
