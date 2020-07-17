@@ -28,4 +28,4 @@ discussion.  These deal with penalties for failing to attend to the draft.</P>
 
 <P><B>Josh</B></P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

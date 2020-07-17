@@ -210,4 +210,4 @@ DB: Williams,Darryl     CIN   1     DB: Warfield,Eric       KC   11
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -62,4 +62,4 @@ Below is a summary of the offical division alignments for 2000 and 2001.
 <TR><TD>Werewolves</TD><TD>ZEN</TD></TR>
 </TABLE></P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

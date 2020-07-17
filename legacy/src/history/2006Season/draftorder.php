@@ -74,4 +74,4 @@ while ($pick = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
 </TABLE>
 </P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

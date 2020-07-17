@@ -142,4 +142,4 @@ My address is as follows:
 22    Final Score                      Final Score         1
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

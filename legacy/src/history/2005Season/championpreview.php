@@ -30,4 +30,4 @@ $title = "Championship Preview";
 <li> MeggaMen are favored by 7 points
 </ul></p>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

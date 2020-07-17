@@ -140,4 +140,4 @@ DB: McQuarters,R.W.                      6
     Total Points For =    28
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

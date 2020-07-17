@@ -168,7 +168,7 @@ if ($format == "html" || !supportedFormat($format)) {
     print "<div id=\"mainTable\" class='row col-12 justify-content-center'>";
     outputHtml($titles, $newHold);
     print "</div></div>";
-    include "base/footer.html";
+    include "base/footer.php";
 } else if ($format == "ajax") {
     outputHtml($titles, $newHold);
 } else if ($format == "csv") {

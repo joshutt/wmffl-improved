@@ -259,4 +259,4 @@ DB: Bartee,William      KC    9     DB: O'Neal,Deltha       DEN   1
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

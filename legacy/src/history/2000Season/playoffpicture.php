@@ -64,4 +64,4 @@ position.</P>
 </BLOCKQUOTE></P>
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

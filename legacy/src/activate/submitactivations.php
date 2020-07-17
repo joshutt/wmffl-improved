@@ -385,4 +385,4 @@ foreach ($starters as $player) {
 
 <?php
 }
-include "base/footer.html";
+include "base/footer.php";

@@ -37,5 +37,5 @@ while ($player = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
 }
 print "</table>";
 
-include "base/footer.html";
+include "base/footer.php";
 ?>

@@ -76,4 +76,4 @@ DB: SANDERS,DEION       DAL  0     DB: SEHORN,JASON        NYG  2
         Defensive Points =  20             Defensive Points =  39
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

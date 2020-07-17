@@ -210,4 +210,4 @@ DB: Williams,Roy        DAL   5     DB: McAlister,Chris     BAL   4
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

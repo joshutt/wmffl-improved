@@ -59,4 +59,4 @@ include "base/menu.php";
 </ul>
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -81,6 +81,6 @@ which pick to use.</P>
 
 </form>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>
 </BODY>
 </HTML>

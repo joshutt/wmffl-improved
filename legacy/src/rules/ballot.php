@@ -81,6 +81,6 @@ while (list($issueid, $issuenum, $issuename, $vote, $descr) = $results->fetch(\D
 
 <CENTER><B>You must be logged in to cast your votes </B></CENTER>
 
-<?php }	include "base/footer.html";
+<?php }	include "base/footer.php";
 ?>
 

@@ -120,4 +120,4 @@ DB: Lynch,Lorenzo       ARI  2     DB: Jones,Roger         CIN  0
 DB: Ross,Kevin          ATL  3     DB: Woodson,Darren      DAL  5
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

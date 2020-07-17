@@ -27,4 +27,4 @@
 <A HREF="94wkc.php">Championship - December 18, 1994</A><BR>
 <BR>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

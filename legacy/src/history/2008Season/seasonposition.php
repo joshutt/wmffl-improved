@@ -45,4 +45,4 @@ extra game matchups for next season.</P>
 <li>Pretend I'm Not Here - Crusaders</li>
 </ul></p>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

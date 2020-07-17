@@ -220,4 +220,4 @@ ZEN traded 4th round to War Eagles<BR>
 </TABLE>
 </P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

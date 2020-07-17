@@ -45,4 +45,4 @@ extra game matchups for next season.</P>
 <TR><TD>Sacks on the Beach</TD><TD>Crusaders</TD></TR>
 </TABLE></P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

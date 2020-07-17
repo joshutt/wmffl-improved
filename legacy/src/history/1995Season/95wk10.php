@@ -188,4 +188,4 @@ Lorenzo Lynch  DB-IYR  72 yds  Renegades  10/29/95
 	Broke- Tim McDonald  Tsunami  52 yds  9/3/95
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

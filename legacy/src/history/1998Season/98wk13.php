@@ -185,4 +185,4 @@ DB: Springs,Shawn       SEA   3     DB: Law,Ty              NE    5
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

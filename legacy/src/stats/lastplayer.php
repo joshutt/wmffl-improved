@@ -452,5 +452,5 @@ EOD;
 </center>
 <?}?>
 
-<?php include "base/footer.html";
+<?php include "base/footer.php";
 ?>

@@ -186,4 +186,4 @@ week were on the list at the end of last season.  They are Jerry Rice,
 Bruce Smith and Junior Seau.
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

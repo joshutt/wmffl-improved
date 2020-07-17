@@ -83,4 +83,4 @@ The Total Weight is the sum of Previous Deviation, Order of Finish and Losses.<B
 <TR><TD>ZEN</TD><TD>0</TD><TD>5</TD><TD>6</TD><TD>11</TD></TR>
 </TABLE></P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

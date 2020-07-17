@@ -199,4 +199,4 @@ DB: Milloy,Lawyer          4 TAS: 4- 2-0.0-0.0
      Total Points For =    1
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

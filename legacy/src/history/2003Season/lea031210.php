@@ -24,4 +24,4 @@ nomination.  Next week the voting will take place.</P>
 
 <P>Josh</P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

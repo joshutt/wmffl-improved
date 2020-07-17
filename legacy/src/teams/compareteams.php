@@ -60,4 +60,4 @@ while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
 }
 ?>
 </CENTER>
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

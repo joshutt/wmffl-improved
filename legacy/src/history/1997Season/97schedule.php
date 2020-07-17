@@ -139,4 +139,4 @@ Crusaders 62 - Zen 1<P><BR>
 <H5>December 13-15</H5>
 Crusaders 50 - Werewolves 11<P><BR>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

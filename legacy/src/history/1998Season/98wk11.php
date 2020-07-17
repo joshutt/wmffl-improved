@@ -153,4 +153,4 @@ DB: Turner,Eric         OAK   0     DB: Harrison,Rodney     SD    3
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

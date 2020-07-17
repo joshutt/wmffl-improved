@@ -137,4 +137,4 @@ DB: MCNEIL,RYAN                                              9
      Defensive Points =  24
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

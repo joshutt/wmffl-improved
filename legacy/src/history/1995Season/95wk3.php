@@ -194,4 +194,4 @@ Chad Brown	LB-S	3 S	Norsemen
 	Breaks-Simon Fletcher  2.5  Renegades  11/28/93
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -149,4 +149,4 @@ DB: Harrison,Rodney     SD    4     DB: Lyght,Todd          STL   4
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

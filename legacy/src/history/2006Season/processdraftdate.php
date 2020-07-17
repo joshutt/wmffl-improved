@@ -29,4 +29,4 @@ $title="WMFFL Draft Dates";
 changes you may update your availablity at any time until the draft date is 
 announced.  After that time you will need to contact Josh.</P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

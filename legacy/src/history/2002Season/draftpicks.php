@@ -172,4 +172,4 @@ Rd#12 Pk# Team        Pos Player              NFL
       120 Freezer Burn DL Freeney,Dwight      IND
 
 </PRE>
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

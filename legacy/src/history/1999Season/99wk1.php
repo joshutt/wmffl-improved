@@ -145,4 +145,4 @@ DB: GRIFFITH,ROBERT     MIN   5     DB: WOODSON,ROD         BAL   5
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

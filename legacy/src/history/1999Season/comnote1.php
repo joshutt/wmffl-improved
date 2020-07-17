@@ -70,5 +70,5 @@ In case you don't remember the web page is
 
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>
 

@@ -188,4 +188,4 @@ DB: Tongue,Reggie       SEA   0     DB: Barber,Ronde        TB    5
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -43,4 +43,4 @@ announced next week.  Thanks for everyone that submitted thier ideas.
 <P>Josh</P>
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

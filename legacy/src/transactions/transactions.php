@@ -157,6 +157,6 @@ while (list($date, $teamname, $method, $player, $position, $nflteam, $teamid, $r
 	}
 	print "</UL></UL>";
 
-	include "base/footer.html";
+	include "base/footer.php";
 ?>
 

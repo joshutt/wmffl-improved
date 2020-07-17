@@ -56,4 +56,4 @@ number of points acored, above the opponent at the same position.</P>
 <P>Josh</P>
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

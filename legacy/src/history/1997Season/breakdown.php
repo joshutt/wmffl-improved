@@ -216,4 +216,4 @@ The Owner of the Year Award is given to the team who produced the best overall m
 <TR><TD>8.</TD><TD>Barbarians</TD></TR>
 </TABLE><P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

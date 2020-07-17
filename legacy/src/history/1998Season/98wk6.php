@@ -153,4 +153,4 @@ DB: Turner,Eric         OAK   4     DB: Woodson,Charles     OAK   3
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

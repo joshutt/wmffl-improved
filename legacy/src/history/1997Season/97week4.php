@@ -157,4 +157,4 @@ DB: TURNER,ERIC           2     DB: HARRISON,RODNEY      22
      Defensive Points =  21          Defensive Points =  48
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

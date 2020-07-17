@@ -201,4 +201,4 @@ Next Week's Fantasy Schedule
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

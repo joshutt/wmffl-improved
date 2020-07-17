@@ -121,4 +121,4 @@ DB: Edward Reed                                            3
                                       Total Points      =  7
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

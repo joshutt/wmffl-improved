@@ -38,4 +38,4 @@ position.</P>
 <B>ZEN</B> - <BLOCKQUOTE>Have clinched a Toliet Bowl berth</BLOCKQUOTE></P>
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

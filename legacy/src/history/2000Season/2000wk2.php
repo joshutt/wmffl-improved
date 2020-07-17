@@ -213,4 +213,4 @@ DB: Williams,Willie     SEA   7     DB: Shade,Sam           WAS   2
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -167,4 +167,4 @@ DB: Turner,Eric         OAK  10     DB: Wheaton,Kenny       DAL   1
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

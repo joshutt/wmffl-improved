@@ -165,4 +165,4 @@ DB: Law,Ty              NE    5     DB: Woodson,Charles     OAK   4
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -45,4 +45,4 @@ extra game matchups for next season.</P>
 <li>Bitch Better Have My Money - Go Balls Deep</li>
 </ul></p>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

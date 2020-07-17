@@ -46,4 +46,4 @@ in that team's flex player being considered an illegal activation.<br/>
 </i></blockquote>
 </div>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

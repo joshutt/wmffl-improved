@@ -223,4 +223,4 @@ DB: Williams,Willie        3 TAS: 3- 1-0.0-0.0
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

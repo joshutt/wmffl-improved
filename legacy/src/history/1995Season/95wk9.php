@@ -200,4 +200,4 @@ Ken Norton  ALL-PTS  Iradicators  44 pts  10/22/95
 	Jerry Rice  WR  Norsemen  40 pts  11/20/94
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -168,4 +168,4 @@ DB: Sanders,Deion       DAL   0     DB: Williams,Aeneas     ARI   7
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

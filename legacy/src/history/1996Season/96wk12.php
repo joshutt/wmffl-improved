@@ -159,4 +159,4 @@ DB: Woolford,Donnell    CHI  3     DB: Pope,Marquez        SF   0
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

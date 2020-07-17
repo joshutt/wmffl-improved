@@ -99,4 +99,4 @@ N/A	Reggie White		Clyde Simmons		N/A
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

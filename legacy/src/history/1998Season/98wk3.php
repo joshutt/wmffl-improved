@@ -173,4 +173,4 @@ DB: Woodson,Charles     OAK   4     DB: Lyght,Todd          STL   4
         Defensive Points =   22             Defensive Points =   29
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

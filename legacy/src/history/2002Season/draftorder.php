@@ -214,4 +214,4 @@ $ - War Eagles traded 1st round to Rednecks for 2nd and 3rd Round picks<BR>
 </TABLE>
 </P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

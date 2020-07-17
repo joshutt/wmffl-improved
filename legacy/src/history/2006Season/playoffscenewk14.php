@@ -42,4 +42,4 @@ The Norsemen and the Sacks on the Beach have both clinched the wild cards, seedi
 <p>The Gallic Warriors and the Lindbergh Baby Casserole are eliminated from post-season consideration.</p>
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

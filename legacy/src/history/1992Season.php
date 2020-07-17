@@ -52,4 +52,4 @@
 <P><SUB> x - Wild Card Team<BR>
 y - Regular Season Champion</SUB><P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

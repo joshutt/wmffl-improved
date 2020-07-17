@@ -153,4 +153,4 @@ There is a Thursday game this week, so activations are due by 7:00 pm
 Thursday.
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

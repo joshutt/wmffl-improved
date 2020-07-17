@@ -109,4 +109,4 @@ include "base/menu.php";
 </TD></TR></TABLE>
 <BR>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

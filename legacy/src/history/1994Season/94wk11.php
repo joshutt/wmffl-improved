@@ -183,4 +183,4 @@ season plus the Championship, 14 last season plus 1 playoff games and
 11 games to date this season.)
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

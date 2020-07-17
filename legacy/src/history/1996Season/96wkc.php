@@ -57,4 +57,4 @@ DB: Woolford,Donnell    CHI 11  TAS: 7- 0-0.0 I:1
         Total Points For =  -1
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

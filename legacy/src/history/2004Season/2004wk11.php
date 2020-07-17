@@ -12,4 +12,4 @@
 <?php include "0411_Standings.txt"; ?>
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

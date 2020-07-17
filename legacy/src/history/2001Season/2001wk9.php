@@ -217,4 +217,4 @@ DB: Brown,Eric          DEN   3     DB: Minter,Mike         CAR  18
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

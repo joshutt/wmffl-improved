@@ -189,4 +189,4 @@ Round #16 Picks
 # 8:Green Wave         ?  (NONE)              ---
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

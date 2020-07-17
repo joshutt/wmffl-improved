@@ -148,4 +148,4 @@ include "base/menu.php";
 <TR><TD>2018</TD><TD>Amish Electricians</TD><TD>41</TD><TD>Fighting Squirrels</TD><TD>0</TD></TR>
 </TABLE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -57,4 +57,4 @@ deciding on who the Imuminati are going to let win this
 year =^></P>
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

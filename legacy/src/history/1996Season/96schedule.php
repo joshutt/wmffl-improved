@@ -139,4 +139,4 @@ Warriors 23 - Renegades 17<P><BR>
 <H5>December 14-16</H5>
 Norsemen 15 - Warriors 0<P><BR>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

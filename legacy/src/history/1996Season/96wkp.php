@@ -232,4 +232,4 @@ DB: Woodson,Rod         PIT  2  TAS: 2- 2-0.0
         Total Points For =  31
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

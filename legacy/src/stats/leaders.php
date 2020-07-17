@@ -88,7 +88,7 @@ if ($format == "html" || !supportedFormat($format)) {
             <?php outputHtml($colTitles, $teamResults); ?>
         </div>
     </div>
-    <?php include "base/footer.html"; ?>
+    <?php include "base/footer.php"; ?>
 
     <?php
 } else if ($format == "csv") {

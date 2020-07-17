@@ -21,4 +21,4 @@ August 14th.  Also, the final draft order will be determined no later than
 August 7th, mostly likely it'll be done before the end of July.
 </P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

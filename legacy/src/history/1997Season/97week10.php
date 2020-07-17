@@ -147,4 +147,4 @@ DB: MCNEIL,RYAN         STL  5     DB: BUCKLEY,TERRELL     MIA  6
         Defensive Points =  25             Defensive Points =  23
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

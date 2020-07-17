@@ -202,4 +202,4 @@ DB: Brown,Eric          DEN  10     DB: Williams,Aeneas     STL   5
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

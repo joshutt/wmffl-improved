@@ -215,4 +215,4 @@ DB: Sanders,Deion       DAL  16     DB: Griffith,Robert     MIN   5
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

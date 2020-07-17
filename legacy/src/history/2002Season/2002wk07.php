@@ -227,4 +227,4 @@ DB: O'Neal,Deltha       DEN   4     DB: McAlister,Chris     BAL   6
        Total Points For =    21            Total Points For =    54
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -219,4 +219,4 @@ DB: Williams,Tyrone     GB    7     DB: Beckett,Rogers      SD    3
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

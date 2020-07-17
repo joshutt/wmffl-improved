@@ -10,4 +10,4 @@ include "base/menu.php";
 <p>Your password has been changed.  You will recieve an email shortly with
 your new password.</p>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

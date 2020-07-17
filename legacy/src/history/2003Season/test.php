@@ -26,4 +26,4 @@ discussion.  These deal with penalties for failing to attend to the draft.</P>
 
 <P><B>Josh</B></P>
 
-<?php include "/base/testfooter.html"; ?>
+<?php include "/base/testfooter.php"; ?>

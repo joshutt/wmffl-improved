@@ -161,4 +161,4 @@ DB: BUCKLEY,TERRELL       2     DB: MCNEIL,RYAN           2
      Defensive Points =  25          Defensive Points =  26
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

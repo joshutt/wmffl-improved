@@ -34,4 +34,4 @@ over.  For those of you wishing to pay ahead of time you may do so via PayPal
 
 <P>Josh</P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

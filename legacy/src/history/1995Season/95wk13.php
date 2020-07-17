@@ -212,4 +212,4 @@ Head Coach).  In the case of a tie I will compare #1's, then #2, etc.
 Failure to number your players will result in automaticly losing a tie game.
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

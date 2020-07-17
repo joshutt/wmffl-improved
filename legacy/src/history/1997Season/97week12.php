@@ -176,4 +176,4 @@ DB: MCNEIL,RYAN          10     DB: MARION,BROCK          4
      Defensive Points =  30          Defensive Points =  56
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

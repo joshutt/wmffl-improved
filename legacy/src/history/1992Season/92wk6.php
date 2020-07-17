@@ -99,4 +99,4 @@ Slayers (2-4) VS. Legions of Byron (1-5)
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -106,4 +106,4 @@ Slayers (3-8) VS. Archers (6-5)
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

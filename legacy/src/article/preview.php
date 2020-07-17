@@ -22,5 +22,5 @@
 <input type="submit" name="Publish" value="Publish"/>
 </form>
 
-<?php include "base/footer.html";
+<?php include "base/footer.php";
 ?>

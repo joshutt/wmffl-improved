@@ -45,4 +45,4 @@ extra game matchups for next season.</P>
 <TR><TD>War Eagles</TD><TD>Rednecks</TD></TR>
 </TABLE></P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

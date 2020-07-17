@@ -149,4 +149,4 @@ DB: Mcdonald,Tim        SF   6     DB: Green,Victor        NYJ  7
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

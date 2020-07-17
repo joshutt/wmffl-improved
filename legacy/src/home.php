@@ -7,6 +7,8 @@ $javascriptList = array("/base/js/front.js");
 //$javascriptList = array("/legacy/js/front.js");
 include "base/menu.php";
 
+
+
 ?>
 
 
@@ -48,5 +50,5 @@ include "base/menu.php";
 </TABLE>
 
 <?php
-include "base/footer.html";
+include "base/footer.php";
 ?>

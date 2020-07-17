@@ -187,4 +187,4 @@ Philadelphia K  FG-40  2 FG  Renegades
 	Minnesota  Warriors  9/24/95
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

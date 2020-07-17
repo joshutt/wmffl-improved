@@ -497,4 +497,4 @@ EOD;
 <?php
 }
 }
-include "base/footer.html";
+include "base/footer.php";

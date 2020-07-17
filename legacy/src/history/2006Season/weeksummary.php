@@ -47,4 +47,4 @@ H4 {color:660000; text-decoration:None; font-size:14pt; font-weight:bold}
 <?php include "boxscores.php"; ?>
 </p>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -107,4 +107,4 @@ if ($isin && array_key_exists($teamnum, $amt_owed)) { ?>
 
 </div>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

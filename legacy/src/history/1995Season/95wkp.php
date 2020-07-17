@@ -208,4 +208,4 @@ Victor Green  DB-S  1 SCK  Archers  12/3/95
 	Rod Woodson  Barbarians  11/13/94
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

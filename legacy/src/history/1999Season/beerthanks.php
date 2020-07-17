@@ -12,4 +12,4 @@
 the votes will be counted and the offical league beer will be 
 announced.  Stay tuned.</P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

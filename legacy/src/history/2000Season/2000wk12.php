@@ -205,4 +205,4 @@ DB: Sehorn,Jason        NYG   4     DB: Milloy,Lawyer       NE   17
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -326,5 +326,5 @@ Crusaders 31 - Freezer Burn 28
 
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>
 

@@ -89,4 +89,4 @@ Install Derrick Inman as the new owner of the Woodland Rangers.
 <blockquote><i>No rule change required</i></blockquote>
 </p>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

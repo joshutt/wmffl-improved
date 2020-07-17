@@ -170,4 +170,4 @@ DB: Springs,Shawn       SEA   6     DB: Harrison,Rodney     SD    8
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

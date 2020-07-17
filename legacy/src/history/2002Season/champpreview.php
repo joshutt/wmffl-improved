@@ -27,4 +27,4 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MeggaMen are favored by 11
 </P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

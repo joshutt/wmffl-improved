@@ -17,7 +17,7 @@ if (!$isin) {
 <HR>
 
 <b>You must be logged in to use this feature</b>
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>
 </BODY>
 </HTML>
 <?php exit;
@@ -150,6 +150,6 @@ Offer Trade To: <SELECT NAME="teamto">
 <INPUT TYPE="Submit" VALUE="Make Offer">
 </FORM>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>
 </BODY>
 </HTML>

@@ -44,4 +44,4 @@ Bowl, so February 3, 2002.</P>
 </TABLE>
 
 </P>
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

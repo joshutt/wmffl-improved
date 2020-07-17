@@ -109,4 +109,4 @@ Archers (6-2) VS. Slayers (2-6)
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

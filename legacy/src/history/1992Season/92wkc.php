@@ -52,4 +52,4 @@ Josh	  -$11.00
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

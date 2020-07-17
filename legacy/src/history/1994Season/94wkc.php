@@ -54,4 +54,4 @@ George Seyfirt		1 W			 3 PTS
 			Final Score		59 PTS
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

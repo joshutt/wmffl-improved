@@ -247,4 +247,4 @@ The Most Valuable Player goes to the Individual Player that has contriubuted the
 <TR><TD>3rd Place</TD><TD>Peyton Manning (QB-IND) - NOR</TD></TR>
 </TABLE><P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -124,4 +124,4 @@ at http:/wmffl.com by Wednesday morning or e-mail me and I will make
 sure that you get it.
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -30,4 +30,4 @@ Listed are each of the Award Winners.  For a complete description and breakdown 
 <TR><TD><A HREF="breakdown.php#MVP">Most Valuable Player</A></TD><TD>Ladainian Tomlinson</TR>
 </TABLE><P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

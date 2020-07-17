@@ -464,5 +464,5 @@ list($numplayers, $ptsleft) = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
     <CENTER><B>You must be logged in to perform transactions</B></CENTER>
 
 <?php }
-include "base/footer.html";
+include "base/footer.php";
 ?>

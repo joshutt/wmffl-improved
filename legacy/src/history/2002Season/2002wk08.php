@@ -215,4 +215,4 @@ DB: Williams,Roy        DAL   7     DB: Williams,Tyrone     GB    0
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

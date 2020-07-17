@@ -202,4 +202,4 @@ print "</div><br/>";
 
 <a name="Playoffs"/><a name="Championship"/>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

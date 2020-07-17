@@ -23,4 +23,4 @@ is that it is such sort notice.  Again, activations are due by FRIDAY at 7:00pm.
 <p>Josh
 </P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

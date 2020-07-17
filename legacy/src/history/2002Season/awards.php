@@ -33,4 +33,4 @@ Listed are each of the Award Winners.  For a complete discription and breakdown 
 <TR><TD><A HREF="breakdown.php#OWN">Owner of the Year</A></TD><TD>MeggaMen</TR>
 </TABLE><P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

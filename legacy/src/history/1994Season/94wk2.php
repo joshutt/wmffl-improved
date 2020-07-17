@@ -193,4 +193,4 @@ Tight End led all point scorers in one week.
 of the 1992 season for the Archers.
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -19,4 +19,4 @@ Our search to find a new owner for the Bug Stompers has been completed.  Ayrik M
 <p>Josh
 </P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

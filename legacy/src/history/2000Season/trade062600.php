@@ -30,4 +30,4 @@ commented "We're making history."  Exactly, what the historical result of
 this trade are, will be seen in time.
 </P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

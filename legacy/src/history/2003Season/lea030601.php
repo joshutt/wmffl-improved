@@ -34,4 +34,4 @@ years.</P>
 1999, they lost the Championship in overtime.  
 </P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

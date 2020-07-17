@@ -165,4 +165,4 @@ Green Bay QB  QB-TD  5 TD  Norsemen  11/12/95
 	Tied- Miami  Slayers  9/4/94
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

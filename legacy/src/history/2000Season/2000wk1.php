@@ -192,4 +192,4 @@ DB: Williams,Willie     SEA   2     DB: Milloy,Lawyer       NE    3
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

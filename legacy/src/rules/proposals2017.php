@@ -124,4 +124,4 @@ Eliminate halving of negative scores.
 </i></blockquote>
 </p>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

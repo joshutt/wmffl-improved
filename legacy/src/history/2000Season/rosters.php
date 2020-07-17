@@ -170,4 +170,4 @@ DB: ABRAHAM,DONNIE      TB      DB: BEASLEY,AARON       JAX
     PLUMMER,AHMED       SF
 </PRE></P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

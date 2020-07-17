@@ -98,4 +98,4 @@ HC  Bobby Ross		1 Win					 3 PTS
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

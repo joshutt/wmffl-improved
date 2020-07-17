@@ -127,4 +127,4 @@ include "base/menu.php";
 <div class="posList"><?php printRankList($sql, "LB", $currentSeason, $lbList); ?></div>
 <div class="posList"><?php printRankList($sql, "DB", $currentSeason, $dbList); ?></div>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

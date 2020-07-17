@@ -104,4 +104,4 @@ Renegades (3-3) VS. Archers (7-5)
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

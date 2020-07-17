@@ -147,4 +147,4 @@ while ($row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
 </tbody></table>
 </div><br/>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

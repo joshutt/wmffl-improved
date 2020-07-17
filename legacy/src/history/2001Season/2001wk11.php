@@ -212,4 +212,4 @@ DB: Warfield,Eric       KC    5     DB: Milloy,Lawyer       NE   11
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

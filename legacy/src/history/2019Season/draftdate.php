@@ -77,5 +77,5 @@ while (list($date, $fulldate, $attend) = $results->fetch(\Doctrine\DBAL\FetchMod
 <CENTER><B>You must be logged in to use this feature</B></CENTER>
 
 <?php }
-include "base/footer.html";
+include "base/footer.php";
 

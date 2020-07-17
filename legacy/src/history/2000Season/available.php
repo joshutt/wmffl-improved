@@ -115,4 +115,4 @@ DB: BUCHANAN,RAY        ATL	    LANGHAM,ANTONIO     NE
 
 </PRE></P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

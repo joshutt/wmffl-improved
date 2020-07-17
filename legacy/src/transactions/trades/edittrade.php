@@ -293,6 +293,6 @@ for ($i=1; $i<=$NUM_PTS_DISPLAY; $i++) {
 
 </FORM>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>
 </BODY>
 </HTML>

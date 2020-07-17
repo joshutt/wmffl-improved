@@ -102,4 +102,4 @@ switch picks in the 5th round<BR>
 </TABLE>
 </P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

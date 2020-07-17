@@ -30,4 +30,4 @@ talent," says Allen.  "Also, I'm sick of them bitching about the
 location of training camp."
 </P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

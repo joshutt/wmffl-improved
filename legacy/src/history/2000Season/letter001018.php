@@ -50,4 +50,4 @@ resolved to the satisfaction of everyone involved.  Thank you.</P>
 <B>Josh <BR>
 Commissioner WMFFL</B></P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -203,4 +203,4 @@ DB: Evans,Doug          CAR  13     DB: Sehorn,Jason        NYG   5
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

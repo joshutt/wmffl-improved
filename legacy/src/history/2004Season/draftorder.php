@@ -219,4 +219,4 @@ $ - Gallic Warriors swapped 1st round and gave a 4th round to Bug Stompers in Aa
 </TABLE>
 </P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

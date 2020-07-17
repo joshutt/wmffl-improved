@@ -45,4 +45,4 @@ extra game matchups for next season.</P>
 <li>Lindbergh Baby Casserole - Rednecks</li>
 </ul></p>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

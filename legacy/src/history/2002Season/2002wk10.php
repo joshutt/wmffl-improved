@@ -213,4 +213,4 @@ DB: Surtain,Patrick     MIA   3     DB: O'Neal,Deltha       DEN   4
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

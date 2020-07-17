@@ -237,4 +237,4 @@ DB: McAlister,Chris     BAL   5     DB: Woodson,Darren      DAL   4
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

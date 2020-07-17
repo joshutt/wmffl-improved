@@ -210,4 +210,4 @@ DB: O'Neal,Deltha       DEN  19     DB: Williams,Tyrone     GB    6
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -100,6 +100,6 @@ foreach ($you as $value) {
 </CENTER>
 </FORM>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>
 </BODY>
 </HTML>

@@ -175,4 +175,4 @@ how many were on that list at the end of last season?
 then Legions, now the Norsemen.
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

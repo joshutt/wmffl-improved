@@ -211,4 +211,4 @@ DB: Glenn,Aaron         HOU   6     DB: Williams,Tyrone     GB    6
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

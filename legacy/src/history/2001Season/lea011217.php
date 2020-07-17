@@ -30,4 +30,4 @@ The <B>Bonehead Move</B> goes to a single team that did something really stupid 
 <P>Josh</P>
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

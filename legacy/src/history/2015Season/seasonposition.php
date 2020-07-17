@@ -28,5 +28,5 @@ table of every team's draft positions.</P>
 <TR><TD>Joe Gibbs Good Head</TD><td></td><TD>12th</TD></TR>
 </TABLE></P>
 
-<?php include "base/footer.html";
+<?php include "base/footer.php";
 ?>

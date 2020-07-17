@@ -51,4 +51,4 @@ Reduce the size of rosters to 23 players<br/>
     <blockquote class="mb-0 mt-2 px-3"><i>No Rule change necessary </i></blockquote>
 </div>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

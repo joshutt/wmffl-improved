@@ -164,4 +164,4 @@ if ($powerArray{$teama}[$week] > $powerArray{$teamb}[$week]) {
 ?>
 </TABLE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

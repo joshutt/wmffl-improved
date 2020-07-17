@@ -94,4 +94,4 @@ Slayers (0-2) VS. Legions of Byron (0-2)
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

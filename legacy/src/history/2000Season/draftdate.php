@@ -45,4 +45,4 @@ and clear it up.  That's all for now.</P>
 <B>Josh <BR>
 Commissioner WMFFL</B></P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

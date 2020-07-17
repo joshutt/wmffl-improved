@@ -71,4 +71,4 @@
 <P><SUB> x - Wild Card Team<BR>
 y - Division Champion</SUB><P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

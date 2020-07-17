@@ -168,4 +168,4 @@ Rd#12 Pk# Team        Pos Player              NFL
       119 Freezer Burn TE HEAP,TODD           BAL
       120 Barbarians   DB BELSER,JASON        IND
 </PRE>
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

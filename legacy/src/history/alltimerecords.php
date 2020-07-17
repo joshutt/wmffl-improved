@@ -195,4 +195,4 @@ $title = "WMFFL ALL-Time Records";
 </tbody>
 </table>
 
-<?php include "base/footer.html" ?>
+<?php include "base/footer.php" ?>

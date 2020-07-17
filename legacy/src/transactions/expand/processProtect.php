@@ -52,4 +52,4 @@ $conn->query( $sql) or die ("Unable to save your protections: " . $conn->error);
 
 <p><a href="protectList.php">Return to Protections page</a></p>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

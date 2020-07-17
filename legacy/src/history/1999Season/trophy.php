@@ -22,4 +22,4 @@ Thanks.</P>
 
 <BR CLEAR="all">
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

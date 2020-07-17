@@ -146,5 +146,5 @@ we be determined at a later date) and a 12 pack of the Champion's choice of beer
 
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>
 

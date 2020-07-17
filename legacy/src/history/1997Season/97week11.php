@@ -152,4 +152,4 @@ DB: PERRY,DARREN        PIT  8     DB: MCNEIL,RYAN         STL  8
         Defensive Points =  37             Defensive Points =  51
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

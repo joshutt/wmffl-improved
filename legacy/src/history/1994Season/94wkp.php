@@ -174,4 +174,4 @@ Best 1st Draft	San Fransico 	QB	Barbarians
 Pick
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

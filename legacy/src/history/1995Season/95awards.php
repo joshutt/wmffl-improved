@@ -63,4 +63,4 @@ Emmitt Smith - RB - Barbarians<p>
 <tr><td> DB</TD><td>Lorenzo Lynch</TD><td>Renegades</TD></TR>
 </table>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

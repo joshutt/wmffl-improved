@@ -28,4 +28,4 @@
 <A HREF="96wkc.php">Championship - December 17, 1996</A><BR>
 <BR>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

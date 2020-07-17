@@ -53,4 +53,4 @@ HC  Marv Levy		1 w				 3 pts
 		    MVP - CHRIS WARREN
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -125,5 +125,5 @@ Tsunami 121 - Slayers 87<P><BR>
 <H5>December 19</H5>
 Barbarians 85 - Tsunami 67<P><BR>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>
 

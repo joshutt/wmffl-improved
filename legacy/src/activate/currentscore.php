@@ -471,4 +471,4 @@ while ($row = $gameresults->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
 </td></tr>
 </table>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

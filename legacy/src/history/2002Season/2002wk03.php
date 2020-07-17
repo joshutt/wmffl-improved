@@ -267,4 +267,4 @@ DB: O'Neal,Deltha       DEN   9
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

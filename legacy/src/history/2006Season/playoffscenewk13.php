@@ -64,4 +64,4 @@ If no team wins both games, then any team that wins one fits under the following
 </ul>
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

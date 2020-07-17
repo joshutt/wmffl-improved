@@ -141,4 +141,4 @@ HC	Don Shula		Zebus		 27 pts
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

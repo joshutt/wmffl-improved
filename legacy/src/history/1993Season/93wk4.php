@@ -140,4 +140,4 @@ HC	Wayne Fontes		Barbarians	  9 pts
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

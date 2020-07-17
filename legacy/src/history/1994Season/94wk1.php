@@ -206,4 +206,4 @@ of 1130, set last year by the Barbarians.
 day?
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -101,4 +101,4 @@ Archers (3-0) VS. Legions of Byron (0-3)
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -150,4 +150,4 @@ DB: Law,Ty              NE   10     DB: Lyght,Todd          STL   1
         Defensive Points =   35             Defensive Points =   27
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

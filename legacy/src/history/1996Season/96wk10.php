@@ -174,4 +174,4 @@ DB: Griffith,Robert     MIN  7     DB: Pope,Marquez        SF   1
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

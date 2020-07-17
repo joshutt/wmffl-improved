@@ -140,4 +140,4 @@ DB: Mcneil,Ryan         STL   0     DB: Woodson,Charles     OAK   7
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

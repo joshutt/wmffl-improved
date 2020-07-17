@@ -286,5 +286,5 @@ Toliet Bowl I: Barbarians 2 - Archers Who Say Ni 0
 
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>
 

@@ -37,4 +37,4 @@ rule proposals please submit them via the web page.</P>
 <B>Josh <BR>
 Commissioner WMFFL</B></P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -157,4 +157,4 @@ DB: Springs,Shawn       SEA   3     DB: Woodson,Rod         BAL   2
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -69,4 +69,4 @@ MeggaMen beat Bug Stompers head-to-head, they get the #4 seed</li></ol></p>
 <li>Werewolves</li>
 <li>MeggaMen</li></ol></p>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

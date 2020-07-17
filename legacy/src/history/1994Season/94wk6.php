@@ -187,4 +187,4 @@ out version of Rookie of the Year)
 QB unit scored -9 points for the Barbarians.
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

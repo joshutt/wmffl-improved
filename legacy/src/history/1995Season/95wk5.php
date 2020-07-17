@@ -196,4 +196,4 @@ Minnesota K	K-FG40	2 FG	Warriors
 	Pittsburgh  Slayers  9/10/95
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

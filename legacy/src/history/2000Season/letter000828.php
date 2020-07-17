@@ -48,4 +48,4 @@ Until then his team will informally be called the Losers Without a Name. </P>
 <B>Josh <BR>
 Commissioner WMFFL</B></P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

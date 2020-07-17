@@ -53,4 +53,4 @@ foreach ($teamList as $divisionName => $division) {
 
 </tr></table>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

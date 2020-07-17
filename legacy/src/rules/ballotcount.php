@@ -68,4 +68,4 @@ ballot closes.  <A HREF="ballot.php">Ballot</A>.</P>
 ?>
 </P>
 
-<?php include "base/footer.html";?>
+<?php include "base/footer.php";?>

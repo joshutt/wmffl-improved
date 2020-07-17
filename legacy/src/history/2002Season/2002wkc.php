@@ -132,4 +132,4 @@ DB: Harrison,Rodney                      7
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

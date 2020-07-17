@@ -247,4 +247,4 @@ The Most Valuable Player goes to the Individual Player that has contriubuted the
 <TR><TD>Nominee</TD><TD>Donovan McNabb (QB-PHI)</TD></TR>
 </TABLE><P><HR size = "1">
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

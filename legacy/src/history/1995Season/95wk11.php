@@ -213,4 +213,4 @@ RECORD PERFORMANCES FOR WEEK 10
 No records were tied or broken in week 10.
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

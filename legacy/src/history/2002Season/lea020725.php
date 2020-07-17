@@ -35,4 +35,4 @@ playing the Werewolves, of course).
 <P><A NAME="sub">
 <SUB>* - Quote may have been modified from what was actually said.</SUB></A></P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -36,4 +36,4 @@ and Norsemen have the most difficult road ahead of them.
 </TABLE>
 </P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

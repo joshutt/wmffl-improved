@@ -160,4 +160,4 @@ DB: Wheaton,Kenny       DAL   0     DB: Butler,Leroy        GB    7
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

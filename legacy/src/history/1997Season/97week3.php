@@ -167,4 +167,4 @@ DB: TURNER,ERIC           3     DB: PERRY,DARREN          0
      Defensive Points =  16          Defensive Points =  27
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

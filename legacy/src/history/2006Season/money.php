@@ -61,4 +61,4 @@ also a page detailing each team's balance.</P>
 <TR BGCOLOR="#CCCCCC"><TD>&nbsp;&nbsp;&nbsp;League Champion</TD><TD>&nbsp;</TD><TD>1 @ $98.43</TD></TR>
 </TABLE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

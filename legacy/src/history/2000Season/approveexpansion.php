@@ -38,4 +38,4 @@ team losses a player to an expansion team, they may protect two more players
 </UL>
 </P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

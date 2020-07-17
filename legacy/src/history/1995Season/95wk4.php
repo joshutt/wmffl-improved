@@ -199,4 +199,4 @@ Chad Brown	LB-IYR	20 YDS	Norsemen
 	Breaks-Sam Mills  13  Norsemen  9/10/95
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

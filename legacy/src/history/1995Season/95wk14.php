@@ -159,4 +159,4 @@ will be announced.
 49	Final Score			Final Score		16
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

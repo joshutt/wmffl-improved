@@ -209,4 +209,4 @@ EOD;
 
 <p><div align="right"><a href="statcsv.php?pos=<?php print "$pos&sort=$sort&season=$season";?>"><img src="/images/csv.gif" border="0"></a></div><p>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

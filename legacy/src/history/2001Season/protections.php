@@ -101,4 +101,4 @@ DB: Abraham,Donnie      TB      DB: Sehorn,Jason        NYG
 
 </PRE></P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

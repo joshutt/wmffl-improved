@@ -63,4 +63,4 @@ Jerry Rice - WR - Barbarians<p>
 <tr><td> DB</TD><td>Eric Allen</TD><td>Tsunami</TD></TR>
 </table><P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

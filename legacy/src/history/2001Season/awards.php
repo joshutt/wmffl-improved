@@ -33,4 +33,4 @@ Listed are each of the Award Winners.<P>
 <TR><TD>Owner of the Year</TD><TD>Freezer Burn</TR>
 </TABLE><P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -25,4 +25,4 @@
 <A HREF="92wkc.php">Championship - November 29, 1992</A><BR>
 <BR>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

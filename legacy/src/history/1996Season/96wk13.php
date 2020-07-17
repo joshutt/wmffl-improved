@@ -180,4 +180,4 @@ DB: Pope,Marquez        SF   5     DB: Woodson,Darren      DAL  5
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

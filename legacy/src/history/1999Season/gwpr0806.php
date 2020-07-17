@@ -46,5 +46,5 @@ been called the Cloakers and the Zebus.</P>
 
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>
 

@@ -211,4 +211,4 @@ DB: Rice,Ron            DET   0     DB: Williams,Willie     SEA   4
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

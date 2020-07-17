@@ -156,4 +156,4 @@ DB: Milloy,Lawyer       NE   10     DB: Woodson,Rod         BAL   0
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

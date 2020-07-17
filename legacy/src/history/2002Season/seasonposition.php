@@ -47,4 +47,4 @@ extra game matchups for next season.</P>
 <TR><TD>Norsemen</TD><TD>ZEN</TD></TR>
 </TABLE></P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -20,4 +20,4 @@ there are no friends...only enemies and bitches that we control. Thank you.
 </P>
 <IMG SRC="/teams/illuminati.jpg"/>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

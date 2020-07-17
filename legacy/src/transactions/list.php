@@ -197,5 +197,5 @@ First Name:<INPUT TYPE="text" NAME="First" VALUE="<?php print $First; ?>"><BR>
 <CENTER><B>You must be logged in to perform transactions</B></CENTER>
 
 <?php }
-include  "base/footer.html";
+include  "base/footer.php";
 ?>

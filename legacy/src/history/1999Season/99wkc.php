@@ -199,4 +199,4 @@ Other Top Single Game Performances
       Washington Redskins!!!!!!) scored 26 points.
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

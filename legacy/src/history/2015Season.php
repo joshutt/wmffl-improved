@@ -63,5 +63,5 @@ include "base/menu.php";
 $thisWeek = 17;
 $clinchedList = array( 'Sean Taylor\'s Ashes' => 'y-', 'Crusaders' => 'y-', 'MeggaMen' => 'y-', 'Sacks on the Beach' => 'x-', "Whiskey Tango" => 'z-', 'Woodland Rangers' => 'z-');
 include "common/weekstandings.php";
-include "base/footer.html";
+include "base/footer.php";
 ?>

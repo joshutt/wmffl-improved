@@ -89,7 +89,7 @@ foreach ($displayArray as $key=>$teamArray) {
 ?>
 </TABLE>
 
-<?php         include "base/footer.html";
+<?php         include "base/footer.php";
 ?>
 
 

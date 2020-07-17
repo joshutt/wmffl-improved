@@ -44,4 +44,4 @@
 <P>God Bless America.</P>
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

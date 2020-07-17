@@ -42,5 +42,5 @@ If you want to improve your team, now is the time to do it.  Thanks.</P>
 
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>
 

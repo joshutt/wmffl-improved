@@ -88,4 +88,4 @@ y- Clinched division title<BR>
 x- Clinched Toliet Bowl berth</P>
 <BR>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

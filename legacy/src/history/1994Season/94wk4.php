@@ -191,4 +191,4 @@ a Fantasy Bowl?
 and 5 losses (not counting this week).  For a percentage of .737.
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

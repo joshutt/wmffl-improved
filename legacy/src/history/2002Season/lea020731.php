@@ -110,4 +110,4 @@ then be the remaining teams in order, so; #4 Rednecks, #5 Green Wave and
 #6 War Eagles.  Picks 7-10 are already set with the playoff teams.
 </P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

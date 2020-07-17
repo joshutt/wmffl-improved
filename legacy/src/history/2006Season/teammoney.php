@@ -185,4 +185,4 @@ number indicates a negative balance or debit.</P>
 <TR class="summary"><TD><B>Totals</B></TD><TD ALIGN=Right><B><FONT COLOR="#FF0000">$72.00</FONT></B></TD><TD ALIGN=Right><B>$137.90</B></TD></TR>
 
 </TABLE>
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

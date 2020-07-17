@@ -131,6 +131,6 @@ include "base/menu.php"; ?>
 </FORM>
 </CENTER>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>
 </BODY>
 </HTML>

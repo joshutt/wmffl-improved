@@ -96,4 +96,4 @@ HIGH INT:	Brad Edwards		Byron	1 Interception
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

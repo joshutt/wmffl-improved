@@ -148,4 +148,4 @@ DB: PERRY,DARREN          5     DB: WOODSON,DARREN        6
      Defensive Points =  20          Defensive Points =  27
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

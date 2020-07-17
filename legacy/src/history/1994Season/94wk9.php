@@ -193,4 +193,4 @@ Year have?
 Emmitt Smith with 107 points.
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -108,5 +108,5 @@ while ($player = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
 <div class="clearLine"></div>
 
 <?php
-include "base/footer.html";
+include "base/footer.php";
 ?>

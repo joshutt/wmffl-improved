@@ -44,5 +44,5 @@ $title = "2012 WMFFL Draft Information";
     Please log in to get get address information.
 <?php }
 
-include "base/footer.html"; 
+include "base/footer.php"; 
 ?>

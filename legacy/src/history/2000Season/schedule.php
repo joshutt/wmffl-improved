@@ -314,5 +314,5 @@ Toliet Bowl II: Freezer Burn 76 - Barbarians 12
 
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>
 

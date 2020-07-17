@@ -166,4 +166,4 @@ DB: LANGHAM,ANTONIO     CLE
 
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

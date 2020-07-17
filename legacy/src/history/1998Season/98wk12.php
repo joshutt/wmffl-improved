@@ -213,4 +213,4 @@ DB: Springs,Shawn       SEA   4     DB: Turner,Eric         OAK   0
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

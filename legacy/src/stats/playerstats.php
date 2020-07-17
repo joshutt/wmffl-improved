@@ -163,7 +163,7 @@ if ($format == "html" || !supportedFormat($format)) {
     </div>
 
 
-    <?php include "base/footer.html"; ?>
+    <?php include "base/footer.php"; ?>
 
 
     <?php

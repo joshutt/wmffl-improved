@@ -156,4 +156,4 @@ DB: MCDONALD,TIM          0     DB: PERRY,DARREN          3
      Defensive Points =  30          Defensive Points =  16
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

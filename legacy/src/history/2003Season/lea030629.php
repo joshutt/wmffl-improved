@@ -20,4 +20,4 @@ to be determined, and will be announced sometime in July.</P>
 
 <P>Josh</P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

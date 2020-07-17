@@ -188,4 +188,4 @@ regular season play?
 losing effort against the Barbarians in last years Fantasy Bowl.
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

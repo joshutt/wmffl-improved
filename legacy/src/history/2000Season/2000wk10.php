@@ -191,4 +191,4 @@ DB: Williams,Willie     SEA   0     DB: Tongue,Reggie       SEA   2
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

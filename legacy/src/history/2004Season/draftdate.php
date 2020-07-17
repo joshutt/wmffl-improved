@@ -53,6 +53,6 @@ weekend days.
 <CENTER><B>You must be logged in to use this feature</B></CENTER>
 
 <?php }
-include "base/footer.html";
+include "base/footer.php";
 ?>
 

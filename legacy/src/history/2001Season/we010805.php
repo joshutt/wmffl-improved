@@ -118,4 +118,4 @@ Thats my current projections for each guy. Note that I gave you the higher rated
 .....jim
 </P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

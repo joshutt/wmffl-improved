@@ -108,4 +108,4 @@ Renegades (4-3) VS. Slayers (2-5)
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

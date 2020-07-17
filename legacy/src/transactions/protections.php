@@ -111,6 +111,6 @@ while (list($playerid, $firstname, $lastname, $pos, $nfl, $year, $cost, $protect
 <?php } ?>
 
 <?php
-	include "base/footer.html";
+	include "base/footer.php";
 ?>
 

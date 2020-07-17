@@ -27,4 +27,4 @@
 <A HREF="97weekc.php">Championship - December 16, 1997</A><BR>
 <BR>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

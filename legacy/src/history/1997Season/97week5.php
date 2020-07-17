@@ -150,4 +150,4 @@ DB: BRAXTON,TYRONE        6     DB: TURNER,ERIC          13
      Defensive Points =  33          Defensive Points =  31
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

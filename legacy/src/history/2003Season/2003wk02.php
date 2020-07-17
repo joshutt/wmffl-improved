@@ -197,4 +197,4 @@ ____________________________ __     ____________________________ __
          Total Points For =  22              Total Points For =   6
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

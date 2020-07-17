@@ -31,4 +31,4 @@ on the game at hand."</P>
 </P>
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

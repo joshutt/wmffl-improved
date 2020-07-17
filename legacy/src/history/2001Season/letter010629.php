@@ -97,4 +97,4 @@ know.  Thanks.</P>
 <B>Josh <BR>
 Commissioner WMFFL</B></P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

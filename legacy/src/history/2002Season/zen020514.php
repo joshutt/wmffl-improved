@@ -51,4 +51,4 @@ greatest.  Go team!" And fell over and broke his martini glass.  Thus ends
 the era of Team ZEN.</P>
 
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

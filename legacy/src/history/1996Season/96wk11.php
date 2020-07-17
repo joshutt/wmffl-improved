@@ -160,4 +160,4 @@ DB: Mcdonald,Tim        SF   5     DB: Pope,Marquez        SF  11
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

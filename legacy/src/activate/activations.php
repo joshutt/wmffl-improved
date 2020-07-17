@@ -22,5 +22,5 @@ $season = $currentSeason;
 <?php include "currentactivations.php"; ?>
 </CENTER>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>
 

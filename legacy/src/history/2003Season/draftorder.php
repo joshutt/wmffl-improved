@@ -217,4 +217,4 @@ $ - Green Wave traded a 2nd and 3rd pick to Freezer Burn for Donovan McNabb<BR>
 </TABLE>
 </P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

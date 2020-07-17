@@ -70,4 +70,4 @@ HC: TURNER,NORV         WAS
 
 </PRE></P>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

@@ -215,4 +215,4 @@ DB: Williams,Willie     SEA   6     DB: Milloy,Lawyer       NE    9
 
 </PRE>
 
-<?php include "base/footer.html"; ?>
+<?php include "base/footer.php"; ?>

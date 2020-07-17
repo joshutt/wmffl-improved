@@ -30,5 +30,5 @@ found <A HREF="ballot.php">here</A>.</P>
 You must be logged in to submit rule proposals.
 <?php }
 
-include "base/footer.html";
+include "base/footer.php";
 ?>
