@@ -175,7 +175,9 @@ h1 {
 
 body {
     margin: 8px;
-    background-color: #660000;
+    /*background-color: #773141;*/
+    /*background-color: #660000;*/
+    background-color: #5a1414;
     font-family: "Times New Roman", Times, Serif;
 }
 
@@ -266,4 +268,13 @@ a.btn.disabled, fieldset:disabled a.btn {
 
 .bg-div-3 {
     background-color: rgba(255, 255, 255, 0.6);
+}
+
+#topName {
+    background-color: #5a1414;
+    /*background-color: #773141;*/
+    color: #ffb612;
+    text-align: justify;
+    font-weight: bolder;
+    justify-content: space-between;
 }
