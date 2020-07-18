@@ -5,108 +5,46 @@ include "base/menu.php";
 ?>
 
 <H1 ALIGN=Center>League History</H1>
-<HR size = "1">
+<HR size="1">
 <BR>
-<TABLE WIDTH="100%">
 
-<TR><TD>
-    <A HREF="pastchamps.php"><IMG SRC="/images/football.jpg" BORDER=0>Past Champions</A><P>
-</TD><TD>
-    <A HREF="pastdrafts.php"><IMG SRC="/images/football.jpg" BORDER=0>Past #1 Draft Picks</A><P>
-</TD><TD>
-    <A HREF="paststreaks.php"><IMG SRC="/images/football.jpg" BORDER=0>Past Streaks</A><P>
-</TD></TR><TR><TD> </TD></TR>
+<ul class="list-group justify-content-around">
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/pastchamps">Past Champions</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/pastdrafts">Past #1 Draft Picks</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/paststreaks">Past Streaks</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/alltimerecords">All-Time Records</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/recordsweek">Player Single Week Records</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/recordSeason.php">Player Single Season Records</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/1992Season.php">1992 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/1993Season.php">1993 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/1994Season.php">1994 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/1995Season.php">1995 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/1996Season.php">1996 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/1997Season.php">1997 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/1998Season.php">1998 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/1999Season.php">1999 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2000Season.php">2000 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2001Season.php">2001 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2002Season.php">2002 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2003Season.php">2003 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2004Season.php">2004 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2005Season.php">2005 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2006Season.php">2006 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2007Season.php">2007 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2008Season.php">2008 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2009Season.php">2009 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2010Season.php">2010 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2011Season.php">2011 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2012Season.php">2012 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2013Season.php">2013 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2014Season.php">2014 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2015Season.php">2015 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2016Season.php">2016 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2017Season.php">2017 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2018Season.php">2018 Season</a></li>
+    <li class="list-group-item float-left col-6 col-md-4"><a href="/history/2019Season.php">2019 Season</a></li>
+</ul>
 
-<TR><TD>
-    <A HREF="alltimerecords.php"><IMG SRC="/images/football.jpg" BORDER=0>All-Time Records</A><P>
-</TD><TD>
-    <A HREF="recordsweek"><IMG SRC="/images/football.jpg" BORDER=0>Player Single Week Records</A><P>
-</TD><TD>
-    <A HREF="recordseason"><IMG SRC="/images/football.jpg" BORDER=0>Player Single Season Records</A><P>
-</TD></TR><TR><TD> </TD></TR>
-
-<TR><TD>
-<A HREF="1992Season.php"><IMG SRC="/images/football.jpg" BORDER=0>1992 Season</A><P>
-</TD><TD>
-<A HREF="1993Season.php"><IMG SRC="/images/football.jpg" BORDER=0>1993 Season</A><P>
-</TD><TD>
-<A HREF="1994Season.php"><IMG SRC="/images/football.jpg" BORDER=0>1994 Season</A><P>
-</TD></TR>
-
-<TR><TD> </TD></TR><TR><TD>
-<A HREF="1995Season.php"><IMG SRC="/images/football.jpg" BORDER=0>1995 Season</A><P>
-</TD><TD>
-<A HREF="1996Season.php"><IMG SRC="/images/football.jpg" BORDER=0>1996 Season</A><P>
-</TD><TD>
-<A HREF="1997Season.php"><IMG SRC="/images/football.jpg" BORDER=0>1997 Season</A><P>
-</TD></TR><TR><TD> </TD></TR>
-
-<TR><TD>
-<A HREF="1998Season.php"><IMG SRC="/images/football.jpg" BORDER=0>1998 Season</A><P>
-</TD><TD>
-<A HREF="1999Season.php"><IMG SRC="/images/football.jpg" BORDER=0>1999 Season</A><P>
-</TD><TD>
-<A HREF="2000Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2000 Season</A><P>
-</TD></TR><TR><TD> </TD></TR>
-
-<TR><TD>
-<A HREF="2001Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2001 Season</A><P>
-</TD><TD>
-<A HREF="2002Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2002 Season</A><P>
-</TD><TD>
-<A HREF="2003Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2003 Season</A><P>
-</TD></TR><TR><TD> </TD></TR>
-
-<TR><TD>
-<A HREF="2004Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2004 Season</A><P>
-</TD><TD>
-<A HREF="2005Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2005 Season</A><P>
-</TD><TD>
-<A HREF="2006Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2006 Season</A><P>
-</TD></TR><TR><TD> </TD></TR>
-
-<TR><TD>
-<A HREF="2007Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2007 Season</A><P>
-</TD><TD>
-<A HREF="2008Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2008 Season</A><P>
-</TD><TD>
-<A HREF="2009Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2009 Season</A><P>
-</TD></TR><TR><TD> </TD></TR>
-
-
-<TR><TD>
-<A HREF="2010Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2010 Season</A><P>
-</TD><TD>
-<A HREF="2011Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2011 Season</A><P>
-</TD><TD>
-<A HREF="2012Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2012 Season</A><P>
-</TD></TR><TR><TD> </TD></TR>
-
-<TR><TD>
-    <A HREF="2013Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2013 Season</A><P>
-</TD><TD>
-    <A HREF="2014Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2014 Season</A><P>
-</TD><TD>
-    <A HREF="2015Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2015 Season</A><P>
-</TD></TR><TR><TD> </TD></TR>
-
-<TR><TD>
-    <A HREF="2016Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2016 Season</A><P>
-</TD><TD>
-    <A HREF="2017Season.php"><IMG SRC="/images/football.jpg" BORDER=0>2017 Season</A><P>
-</TD><TD>
-    <A HREF="2018Season"><IMG SRC="/images/football.jpg" BORDER=0>2018 Season</A><P>
-</TD><TD>
-</TD></TR><TR><TD> </TD></TR>
-
-<TR><TD>
-</TD><TD>
-    <A HREF="2019Season"><IMG SRC="/images/football.jpg" BORDER=0>2019 Season</A><P>
-</TD><TD>
-</TD><TD>
-</TD></TR><TR><TD> </TD></TR>
-
-</TD></TR></TABLE>
 <BR>
 
 <?php include "base/footer.php"; ?>

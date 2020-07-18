@@ -8,18 +8,6 @@ if ($currentWeek < 1) {
     $thisSeason = $currentSeason;
 }
 
-$check = "select wm.week, wm.weekname
-from weekmap wm
-JOIN (select wm.season, max(wm.week) as 'week'
-      from weekmap wm
-      WHERE (DATE_SUB(wm.DisplayDate, INTERVAL 12 HOUR) < now() or wm.week = 1)
-        and wm.season = ?) maxweek
-ON wm.Season=maxweek.season and wm.week=maxweek.week";
-//$checRe = $conn->query( $check) or die("Dead: $check<br/>" . $conn->error);
-//list($useWeek, $weekname) = $checRe->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
-$checRe = $conn->executeQuery($check, array($thisSeason)) or die("Dead: $check<br/>" . $conn->error);
-list($useWeek, $weekname) = $checRe->fetch(\Doctrine\DBAL\FetchMode::MIXED);
-
 
 $sql = "SELECT wm.weekname, wm.week, s.teama, if(s.scorea>=s.scoreb,t1.name, t2.name) as 'leadname', 
 if(s.scorea>=s.scoreb,s.scorea,s.scoreb) as 'leadscore', if(s.scorea>=s.scoreb,t2.name, t1.name) as 'trailname', 
@@ -33,11 +21,12 @@ order by wm.week DESC, s.label, MD5(CONCAT(t1.name, t2.name)) ";
 //limit 5";
 
 //$results = $conn->query( $sql) or die("Dead: $sql <br/>" . $conn->error);
-$results = $conn->executeQuery($sql, array($thisSeason, $useWeek)) or die("Dead: $sql <br/>" . $conn->error);
+//$results = $conn->executeQuery($sql, array($thisSeason, $useWeek)) or die("Dead: $sql <br/>" . $conn->error);
+$results = $conn->executeQuery($sql, array($thisSeason, $currentWeek)) or die("Dead: $sql <br/>" . $conn->error);
 
 ?>
 
-<div class="cat text-center"><?= strtoupper($weekname) ?> SCORES</div>
+<div class="cat text-center"><?= strtoupper($weekName) ?> SCORES</div>
 <div class="container">
     <?php
 

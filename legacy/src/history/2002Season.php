@@ -13,7 +13,7 @@
 
 
 <TD ALIGN=Left><A HREF="2002Season/schedule.php">
-<IMG SRC="/images/football.jpg" BORDER=0>Schedule</A></TD>
+<IMG SRC="/images/football.jpg" BORDER=0><img src="/images/logo3.png"/>Schedule</A></TD>
 
 <TD>
 <A HREF="2002Season/awards.php">

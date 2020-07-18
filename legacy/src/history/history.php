@@ -7,6 +7,14 @@ include "base/menu.php";
 <H1 ALIGN=Center>League History</H1>
 <HR size = "1">
 <BR>
+
+<ul class="list-group">
+    <li class="list-group-item float-left"><a href="/rules/proposals2020">Rule Change Proposals</a></li>
+    <li class="list-group-item float-left"><a href="/history/2020Season/draftorder">Draft Order</a></li>
+    <li class="list-group-item float-left"><a href="/history/2020Season/protectioncost">Protection Costs</a></li>
+    <li class="list-group-item float-left"><a href="/history/2019Season/teammoney">Winnings</a></li>
+</ul>
+
 <TABLE WIDTH="100%">
 
 <TR><TD>
