@@ -32,7 +32,8 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/"><img src="{{ asset('images/logo3.png') }}" alt="WMFFL" height="48px"/></a>
 
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb" aria-expanded="true">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb"
+                aria-expanded="true">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -44,21 +45,35 @@
                 <li class="nav-item"><a class="nav-link" href="/stats/leaders">Stats</a></li>
                 <li class="nav-item"><a class="nav-link" href="/history/2019Season/schedule">Schedule</a></li>
                 <li class="nav-item"><a class="nav-link" href="/history/2019Season/standings">Standings</a></li>
-                <li class="nav-item"><a class="nav-link" href="/transactions/transactions">Transactions</a></li>
+                <li class="nav-item"><a class="nav-link" href="/transactions">Transactions</a></li>
                 <li class="nav-item"><a class="nav-link" href="/rules">Rules</a></li>
                 <li class="nav-item"><a class="nav-link" href="/history">History</a></li>
             </ul>
 
             <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><span class="fas fa-sign-in-alt"></span> Login</a>
-                </li>
+                {% if not app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login"><span class="fas fa-sign-in-alt"></span> Login</a>
+                    </li>
+                {% endif %}
+
+                {% if app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout"><span class="fas fa-user-alt"></span> {{ app.user.name }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout"><span class="fas fa-sign-out-alt"></span> Logout</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
 
     </nav>
 
 </header>
+
+{#{{ include('security/login.html.twig') }}#}
+{#{{ include('login.html.twig') }}#}
 
 
 <div class="container-fluid text-center p-3" style="background-color: #ffffff">

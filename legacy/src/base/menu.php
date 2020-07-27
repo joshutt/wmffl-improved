@@ -7,6 +7,7 @@ if (!isset($title)) {
 
 global $kernel;
 $container = $kernel->getContainer()->get('twig');
+//var_dump($kernel);
 
 // Javascript list has to exist or errors occur
 if (!isset($javascriptList)) {

@@ -18,7 +18,7 @@
 
 
 
-<!--#include file="transmenu.php"-->
+<?php include "transmenu.php" ?>
 
 
 

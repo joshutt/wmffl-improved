@@ -34,7 +34,7 @@
 </td>
 
 <td ALIGN=Left>
-<A HREF="/transactions/transactions.php?year=2003"><IMG SRC="/images/football.jpg" BORDER=0>Transactions</A>
+<A HREF="/transactions?year=2003"><IMG SRC="/images/football.jpg" BORDER=0>Transactions</A>
 </td>
 
 <td ALIGN=Left><A HREF="#standings"><IMG SRC="/images/football.jpg" BORDER=0>Current Standings</A></td></tr>

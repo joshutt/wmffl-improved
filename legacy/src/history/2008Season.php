@@ -32,7 +32,7 @@ include "base/menu.php";
 </td>
 
 <td>
-<A HREF="/transactions/transactions.php?year=2008"><IMG SRC="/images/football.jpg" BORDER=0>Transactions</A>
+<A HREF="/transactions?year=2008"><IMG SRC="/images/football.jpg" BORDER=0>Transactions</A>
 </td>
 
 <td ALIGN=Left><A HREF="#standings"><IMG SRC="/images/football.jpg" BORDER=0>Final Standings</A></td>

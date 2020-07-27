@@ -2486,7 +2486,7 @@ class DB_DataObject extends DB_DataObject_Overload
         
         // Note this is verbose deliberatly! 
         
-        if ($db_driver == 'DB') {
+        if ($db_driver === 'DB') {
             
             /* PEAR DB connect */
             
@@ -4252,10 +4252,10 @@ class DB_DataObject extends DB_DataObject_Overload
                 // todo: date time.....
                 case  ($val & DB_DATAOBJECT_STR):
                     $ret[$key] = Validate::string($this->$key, VALIDATE_PUNCTUATION . VALIDATE_NAME);
-                    continue;
+                    continue 2;
                 case  ($val & DB_DATAOBJECT_INT):
                     $ret[$key] = Validate::number($this->$key, array('decimal'=>'.'));
-                    continue;
+                    continue 2;
             }
         }
         // if any of the results are false or an object (eg. PEAR_Error).. then return the array..

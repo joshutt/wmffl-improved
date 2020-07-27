@@ -3,20 +3,21 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
  *
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="Username_2", columns={"Username"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=App\Repository\UserRepository::class)
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var int
      *
+     * @ORM\Id()
      * @ORM\Column(name="UserID", type="integer", nullable=false)
-     * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $userid;
@@ -29,16 +30,16 @@ class User
     private $teamid = 'NULL';
 
     /**
-     * @var string
+     * @var string The hashed password
      *
-     * @ORM\Column(name="Username", type="string", length=20, nullable=false, options={"default"="''"})
+     * @ORM\Column(name="Username", type="string", length=20, nullable=false, options={"default"="''"}, unique=true)
      */
-    private $username = '\'\'';
+    private $username;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Password", type="string", length=50, nullable=false, options={"default"="''"})
+     * @ORM\Column(name="Password", type="string", length=255, nullable=false, options={"default"="''"})
      */
     private $password = '\'\'';
 
@@ -91,6 +92,12 @@ class User
      */
     private $commish = '0';
 
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+
     public function getUserid(): ?int
     {
         return $this->userid;
@@ -108,9 +115,9 @@ class User
         return $this;
     }
 
-    public function getUsername(): ?string
+    public function getUsername(): string
     {
-        return $this->username;
+        return (string)$this->username;
     }
 
     public function setUsername(string $username): self
@@ -120,9 +127,9 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
-        return $this->password;
+        return (string)$this->password;
     }
 
     public function setPassword(string $password): self
@@ -217,4 +224,39 @@ class User
     }
 
 
+    /**
+     * @return string[]
+     */
+    public function getRoles()
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @return mixed
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
 }

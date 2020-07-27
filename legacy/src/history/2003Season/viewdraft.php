@@ -18,7 +18,7 @@
 
 
 <PRE>
-<!--#include file="draftsummary.txt"-->
+<?php include "draftsummary.txt" ?>
 </PRE>
 
 

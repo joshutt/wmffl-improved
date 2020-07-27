@@ -16,7 +16,7 @@
 This is the complete list of up-to-the-minute draft picks.  
 
 <PRE>
-<!--#include file="draftsummary.txt"-->
+<?php include "draftsummary.txt" ?>
 </PRE>
 
 

@@ -1,0 +1,7 @@
+{% extends 'newbase.html.twig' %}
+
+{% block title %}Transactions{% endblock %}
+
+{% block body %}
+    {{ render(controller('App\\Controller\\Legacy\\LegacyTransactionController::content')) }}
+{% endblock %}
