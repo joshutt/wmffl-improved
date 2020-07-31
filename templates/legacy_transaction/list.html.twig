@@ -1,0 +1,7 @@
+{% extends 'newbase.html.twig' %}
+
+{% block title %}WMFFL Players List{% endblock %}
+
+{% block body %}
+    {{ render(controller('App\\Controller\\Legacy\\LegacyTransactionController::listContent', request)) }}
+{% endblock %}

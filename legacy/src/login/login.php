@@ -9,12 +9,16 @@ $teamReturn = $result->fetchAll(\Doctrine\DBAL\FetchMode::NUMERIC);
 if (sizeof($teamReturn) == 0) {
     $_SESSION["message"] = "Invalid Username/Password";
     $_SESSION["isin"] = False;
+    global $isin;
+    $isin = false;
     header("Location: " . $_SERVER['HTTP_REFERER']);
     exit();
 } else {
     $team = $teamReturn[0];
 //    $team = $result->fetch(\Doctrine\DBAL\FetchMode::NUMERIC);
     $_SESSION["isin"] = True;
+    global $isin;
+    $isin = true;
     $_SESSION["teamnum"] = $team[0];
     $_SESSION["user"] = $username;
     $_SESSION["usernum"] = $team[3];

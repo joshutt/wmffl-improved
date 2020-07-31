@@ -87,6 +87,7 @@ include_once "base/useful.php";
 <HR size = "1">
 
 <?php
+global $isin;
 if($isin) {
 ?>
 

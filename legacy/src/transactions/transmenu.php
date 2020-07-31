@@ -1,7 +1,7 @@
 <TABLE ALIGN=Center WIDTH=100% BORDER=0>
 
 <TR>
-<TD WIDTH=33%><A HREF="/transactions/list.php">
+<TD WIDTH=33%><A HREF="/transactions/list">
 <!--<IMG SRC="/images/football.jpg" BORDER=0>-->Perform Transactions</A>
 </TD>
 

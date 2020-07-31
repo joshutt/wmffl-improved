@@ -52,10 +52,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
-        $request->getSession()->set(
-            Security::LAST_USERNAME,
-            $credentials['username']
-        );
+        $request->getSession()->set( Security::LAST_USERNAME, $credentials['username'] );
 
         return $credentials;
     }
@@ -81,7 +78,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     {
         if (!$this->passwordEncoder->isPasswordValid($user, $credentials['password'])) {
             throw new CustomUserMessageAuthenticationException('Username or Password is invalid');
-
         }
         return true;
     }
@@ -96,6 +92,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+        // TODO: Remove this once legacy stuff is gone
+        global $isin;
+        $isin = true;
+
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }

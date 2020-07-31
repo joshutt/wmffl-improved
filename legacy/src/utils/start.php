@@ -59,6 +59,8 @@ foreach ($_SESSION as $key => $value) {
     $GLOBALS[$key] = $value;
 }
 
+global $isin;
+
 if (!isset($isin) || empty($isin)) {
     $isin = false;
 }
