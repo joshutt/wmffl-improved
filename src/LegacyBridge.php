@@ -23,9 +23,9 @@ class LegacyBridge
 
 
 //        $basePath = $kernel->getProjectDir();
-        $basePath = $kernel->getProjectDir() . "/legacy/src";
         $pathInfo = $request->getPathInfo();
-        $fileLoc =  $basePath . $pathInfo;
+        $basePath = $kernel->getProjectDir() . "/legacy/src";
+        $fileLoc = $basePath . $pathInfo;
         $returnVal = self::checkPath($fileLoc);
         if ($returnVal !== null) {
             return [$returnVal, false];
@@ -58,7 +58,8 @@ class LegacyBridge
     }
 
 
-    public static function checkPath($fileLoc) {
+    public static function checkPath($fileLoc)
+    {
         if (file_exists($fileLoc)) {
             // If it's a directory go to the index file
             if (is_dir($fileLoc)) {

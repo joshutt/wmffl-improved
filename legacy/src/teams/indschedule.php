@@ -29,6 +29,9 @@ AND s.season=wm.season AND s.week=wm.week
 AND t.season=s.season
 ORDER BY s.season, s.week";
 
+//echo $SQL;
+//exit();
+
 $results = $conn->query( $SQL) or die("Unable to complete query: " . $conn->error);
 
 print "<table align=\"center\" border=\"1\">";

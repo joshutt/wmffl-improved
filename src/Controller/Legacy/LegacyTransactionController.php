@@ -32,7 +32,6 @@ class LegacyTransactionController extends AbstractController
 
 
     /**
-     * @Route("/legacy/transaction_content", name="legacy_transaction_content")
      */
     public function content(): Response
     {
@@ -191,8 +190,8 @@ class LegacyTransactionController extends AbstractController
     }
 
     /**
-     * @Route("/legacy/transactions/list", name="legacy_transaction")
-     * @Route("/transactions/list", name="legacy_transaction")
+     * @Route("/legacy/transactions/list", name="legacy_transaction_list")
+     * @Route("/transactions/list", name="legacy_transaction_list")
      * @return Response
      */
     public function list(Request $request): Response

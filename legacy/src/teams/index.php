@@ -1,8 +1,8 @@
 <?php
-include "utils/start.php";
+//include "utils/start.php";
 
 $title = "WMFFL Teams";
-include "base/menu.php";
+//include "base/menu.php";
 
 $divisionSQL = "SELECT t.teamid, t.name as 'team', d.name as 'division', d.divisionid
 FROM team t, division d
@@ -88,4 +88,4 @@ while ($teamInfo = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED)) {
 </div>
 
 
-<?php include "base/footer.php"; ?>
+<?php //include "base/footer.php"; ?>

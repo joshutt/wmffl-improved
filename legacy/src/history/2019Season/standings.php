@@ -1,5 +1,5 @@
 <?php
-require_once "utils/start.php";
+//require_once "utils/start.php";
 
 $thisWeek = isset($_POST['week']) ? $_POST["week"] : '';
 if ($thisWeek == "") {
@@ -12,7 +12,7 @@ $title = "Standings";
 $clinchedList = array('Norsemen' => 'y-', 'British Bulldogs' => 't-', 'Fighting Squirrels' => 't-', 'Sean Taylor\'s Ashes' => 'e-', 'Crusaders' => 'y-', 'Testudos Revenge' => 'y-', 'Gallic Warriors' => 'e-',
                 'Sacks on the Beach' => 'e-', 'Richard\'s Lionhearts' => 'x-', 'Amish Electricians' => 'e-', 'Trump Molests Collies' => 'e-', 'MeggaMen' => 'e-');
 
-include "base/menu.php";
+//include "base/menu.php";
 ?>
 
 
@@ -20,6 +20,7 @@ include "base/menu.php";
 <tr><td class="cat" align="center">Current Standings</td></tr></table>
 <center>
 <?php
+
 include "history/common/weekstandings.php";
 
 if (!empty($clinchedList)) {
@@ -35,5 +36,5 @@ t - clinched Toilet Bowl berth
 <?php
 }
 
-include "base/footer.php";
+//include "base/footer.php";
 ?>

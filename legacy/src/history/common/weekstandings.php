@@ -1,5 +1,4 @@
 <?php
-
 include "lib/Team.php";
 
 $query = <<<EOD
