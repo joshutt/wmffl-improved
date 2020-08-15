@@ -65,7 +65,7 @@ include "base/menu.php";
 <?php $thisSeason = 2018;
 $thisWeek = 17;
 $clinchedList = array('Trump Molests Collies' => 'y-', 'Amish Electricians' => 'z-', 'Fighting Squirrels' => 'z-', 'MeggaMen' => 'x-',  'Norsemen' => 'y-', 'Fightin\' Bitin\' Beavers' => 'y-');
-include "../common/weekstandings.php";
+include "history/common/weekstandings.php";
 
 include "base/footer.php";
 ?>

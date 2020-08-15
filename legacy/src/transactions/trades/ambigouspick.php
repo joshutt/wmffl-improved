@@ -1,4 +1,4 @@
-<?php session_start();
+<?php
 require_once "checkambigous.inc.php";
 require_once "loadTrades.inc.php";
 

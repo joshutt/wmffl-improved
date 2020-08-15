@@ -2,5 +2,5 @@
 $season = 2008;
 $dateSet = "'2008-08-31'";
 
-include "../common/draftresults.php";
+include "history/common/draftresults.php";
 include "base/footer.php";

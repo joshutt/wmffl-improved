@@ -1,4 +1,4 @@
-<?php session_start();
+<?php
 require_once "base/conn.php";
 require "login/loginglob.php";
 require_once "loadTrades.inc.php";

@@ -2,5 +2,5 @@
 $season = 2019;
 $dateSet = "'2019-08-31'";
 
-include "../common/draftresults.php";
+include "history/common/draftresults.php";
 include "base/footer.php";

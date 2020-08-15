@@ -27,7 +27,7 @@ H4 {color:660000; text-decoration:None; font-size:14pt; font-weight:bold}
 <table width="100%">
 <tr><td class="othertitle" align="center">Current Standings</td></tr></table>
 <center>
-<?php include "../common/weekstandings.php"; ?>
+<?php include "history/common/weekstandings.php"; ?>
 
 <?php if (!empty($clinchedList)) {
 ?>

@@ -5,4 +5,4 @@ $thisSeason = 2019;
 $thisWeek = $currentWeek;
 
 include "history/common/schedule.php";
-//include "../common/schedule.php";
+//include "history/common/schedule.php";

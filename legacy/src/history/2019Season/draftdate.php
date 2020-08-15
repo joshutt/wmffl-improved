@@ -29,7 +29,7 @@ if ($isin) {
 
     <div class="container px-2"><?= $draftMessage ?></div>
 
-<P><FORM ACTION="../common/processdraftdate" METHOD="POST">
+<P><FORM ACTION="history/common/processdraftdate" METHOD="POST">
 
         <div class="container">
             <div class="row m-1">

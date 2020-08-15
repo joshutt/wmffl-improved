@@ -1,4 +1,4 @@
-<?php session_start();
+<?php
 $title = "WMFFL Rule Proposals";
 
 $cssList = array("rules.css");

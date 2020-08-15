@@ -28,7 +28,7 @@ include "base/menu.php";
 
 <p><?php print $draftMessage; ?></p>
 
-<P><FORM ACTION="../common/processdraftdate" METHOD="POST">
+<P><FORM ACTION="history/common/processdraftdate" METHOD="POST">
 
 <TABLE BORDER=1>
 <TR><TH WIDTH=30%>Can Attend?</TH><TH WIDTH=70%>Date</TH></TR>

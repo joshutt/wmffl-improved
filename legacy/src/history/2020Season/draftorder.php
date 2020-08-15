@@ -1,6 +1,6 @@
 <?php
 $thisSeason = 2020;
-include "../common/draftorder.php";
+include "history/common/draftorder.php";
 ?>
 
 <P><TABLE WIDTH=100% BORDER=1 ALIGN=Center>

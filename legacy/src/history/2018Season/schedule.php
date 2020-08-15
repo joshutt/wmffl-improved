@@ -3,5 +3,4 @@
 $thisSeason = 2018;
 $thisWeek = $currentWeek;
 
-include "../common/schedule.php";
-?>
+include "history/common/schedule.php";

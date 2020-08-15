@@ -72,9 +72,9 @@ include "base/menu.php";
     </li>
     <li class="list-group-item float-left col-12 col-sm-6 col-md-4"><a href="/history/2017Season.php">2017 Season</a>
     </li>
-    <li class="list-group-item float-left col-12 col-sm-6 col-md-4"><a href="/history/2018Season.php">2018 Season</a>
+    <li class="list-group-item float-left col-12 col-sm-6 col-md-4"><a href="/history/2018Season">2018 Season</a>
     </li>
-    <li class="list-group-item float-left col-12 col-sm-6 col-md-4"><a href="/history/2019Season.php">2019 Season</a>
+    <li class="list-group-item float-left col-12 col-sm-6 col-md-4"><a href="/history/2019Season">2019 Season</a>
     </li>
 </ul>
 
