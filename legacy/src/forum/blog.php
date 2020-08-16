@@ -27,7 +27,7 @@ if ($isin) {
 <div id="content"> 
 
   <!-- Begin #main -->
-  <div id="main">
+  <div id="main" class="text-left">
    
   
 <?php
@@ -60,7 +60,6 @@ while($posts->fetch()) {
         <div class="post-title">{$posts->title}</div>
 		  <strong>posted by {$user->Name}, {$team->Name} at $time</strong>
         <div class="post-body my-2"> {$posts->body}  </div>
-        </div>
 
       </div>
 EOD;
@@ -71,5 +70,5 @@ EOD;
 <div class="py-2">
 <div class="float-left"><a href="comments.php?start=<?= $first ?>">&lt;&lt;&lt; Newer</a></div>
 <div class="float-right"><a href="comments.php?start=<?= $posts->forumid ?>">Older &gt;&gt;&gt;</a></div>
-</div>
+</div></div>
 

@@ -14,7 +14,7 @@
  * @param $conn
  * @return array
  */
-function getOtherTeam($thisTeamID, $thisWeek, $thisSeason, $conn)
+function getOtherTeam($thisTeamID, $thisWeek, $thisSeason, $conn, $logger = null)
 {
     $getTeamSQL = "SELECT if(s.scorea >= s.scoreb, s.teamA, s.teamB) as 'teamA', ";
     $getTeamSQL .= "if(s.scorea >= s.scoreb, s.teamB, s.teamA) as 'teamB', ";
@@ -29,6 +29,13 @@ function getOtherTeam($thisTeamID, $thisWeek, $thisSeason, $conn)
 
     $results = $conn->query( $getTeamSQL);
     $row = $results->fetch(\Doctrine\DBAL\FetchMode::MIXED);
+
+    if ($logger) {
+        $logger->debug($getTeamSQL);
+//        $logger->debug($results);
+//        $logger->debug($row);
+    }
+
     return $row;
 }
 

@@ -4,15 +4,16 @@ include "base/scoring.php";
 include "scoreFunctions.php";
 
 // Get Team to show
-$thisTeamID = isset($teamid) ? $teamid : 2;
+$thisTeamID = $_REQUEST["teamid"] ??  2;
+//$thisTeamID = isset($teamid) ? $teamid : 2;
 
 // Determine season and week to show
 if ($currentWeek < 1) {
-    $thisSeason= isset($season) ? $season : $currentSeason-1;
-    $thisWeek = isset($week) ? $week : 16;
+    $thisSeason= $_REQUEST["season"] ?? $currentSeason-1;
+    $thisWeek = $_REQUEST["week"] ?? 16;
 } else {
-    $thisSeason = isset($season) ? $season : $currentSeason;
-    $thisWeek = isset($week) ? $week : $currentWeek;
+    $thisSeason = $_REQUEST['season'] ?? $currentSeason;
+    $thisWeek = $_REQUEST['week'] ?? $currentWeek;
 }
 
 if ($thisSeason == $currentSeason) {
@@ -42,8 +43,10 @@ include "base/menu.php";
 <tr><td colspan="6" align="center" class="othertitle"><?php print $weekLabel; ?> Scores</td></tr>
 <tr><td class="buffer">&nbsp;</td></tr>
 <tr><td>
-<?php $teams = getOtherTeam($thisTeamID, $thisWeek, $thisSeason, $conn);
+<?php
+$teams = getOtherTeam($thisTeamID, $thisWeek, $thisSeason, $conn, $logger);
 
+//var_dump($teams);
 $javascriptString = "";
 for ($i = 0; $i<2; $i++) {
     $select = generateReserves($teams[$i], $thisSeason, $thisWeek);

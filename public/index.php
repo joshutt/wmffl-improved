@@ -34,6 +34,7 @@ $kernel = new Kernel($_SERVER['APP_ENV'], (bool)$_SERVER['APP_DEBUG']);
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 
+
 //$kernel->getContainer()->get("monolog.logger");
 
 //$log = $kernel->getContainer()->get("monolog.logger.debug");

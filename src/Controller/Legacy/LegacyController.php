@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class LegacyController extends AbstractController
 {
@@ -47,6 +48,12 @@ class LegacyController extends AbstractController
     ];
 
 
+    /**
+     * @Route("/{req}", name="legacy", requirements={"req"=".*"}, priority="-2")
+     * @param Request $request
+     * @param LoggerInterface $logger
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|Response
+     */
     public function index(Request $request, LoggerInterface $logger)
     {
         $this->logger = $logger;
@@ -60,7 +67,7 @@ class LegacyController extends AbstractController
         if ($this->isResource($fileReq)) {
             return $this->file($path);
         }
-        $logger->debug("FileReq: [".$fileReq."]");
+        $logger->debug("FileReq: [" . $fileReq . "]");
 
         // Determine if extra css or js files are needed
         $params = ['page' => $path];
@@ -79,6 +86,55 @@ class LegacyController extends AbstractController
         return $this->render('legacy_transaction/legacy.html.twig', $params);
     }
 
+    /**
+     * Determines if the given file is an image, css or javascript file
+     *
+     * @param $fileReq the file to check
+     * @return bool true if a css, javascript or images file, false otherwise
+     */
+    private function isResource($fileReq): bool
+    {
+        if ($this->endsWith($fileReq, "css")
+            || $this->endsWith($fileReq, "gif")
+            || $this->endsWith($fileReq, "jpg")
+            || $this->endsWith($fileReq, "png")
+            || $this->endsWith($fileReq, "js")) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Does a string end with a given other string
+     * TODO: This belongs in a StringUtil class
+     *
+     * @param $haystack
+     * @param $needle
+     * @return bool
+     */
+    private function endsWith($haystack, $needle)
+    {
+        return substr_compare($haystack, $needle, -strlen($needle)) === 0;
+    }
+
+    private function subKeyInArray($array, $searchKey)
+    {
+        $keys = array_keys($array);
+        $this->logger->debug("Search Key [$searchKey]");
+        foreach ($keys as $key) {
+            $this->logger->debug("Key [$key]");
+            $this->logger->debug("Pos: " . strpos($key, $searchKey));
+            $this->logger->debug("Pos: " . strpos($searchKey, $key));
+
+
+            if (strpos($searchKey, $key) !== false) {
+                $this->logger->debug("Found Match");
+                return $array[$key];
+            }
+        }
+        return false;
+    }
+
     public function content($page, LoggerInterface $logger): Response
     {
         $this->logger = $logger;
@@ -93,7 +149,13 @@ class LegacyController extends AbstractController
 
         // Make sure the include has everything we need
         $legacyRoot = $projDir . "/legacy/src";
-        set_include_path(get_include_path() . ":" . $legacyRoot);
+        $libRoot = $projDir . "/legacy/lib";
+        $pearRoot = $projDir . "/legacy/pear";
+        $confRoot = $projDir . "/legacy/conf"; // This is only needed for DB_DataObjects
+//        set_include_path(get_include_path() . ":$legacyRoot:$libRoot:$pearRoot");
+        set_include_path(get_include_path() . ":$legacyRoot:$libRoot:$pearRoot:$confRoot");
+
+        $isin = $this->getUser() != null;
 
         // If the file exist then include id
         if ($fullPage != null) {
@@ -116,7 +178,6 @@ class LegacyController extends AbstractController
         // Return the response
         return new Response($content);
     }
-
 
     /**
      * Look to see if given file exists
@@ -141,55 +202,6 @@ class LegacyController extends AbstractController
             return $fileLoc . ".php";
         }
         return null;
-    }
-
-    /**
-     * Does a string end with a given other string
-     * TODO: This belongs in a StringUtil class
-     *
-     * @param $haystack
-     * @param $needle
-     * @return bool
-     */
-    private function endsWith($haystack, $needle)
-    {
-        return substr_compare($haystack, $needle, -strlen($needle)) === 0;
-    }
-
-    /**
-     * Determines if the given file is an image, css or javascript file
-     *
-     * @param $fileReq the file to check
-     * @return bool true if a css, javascript or images file, false otherwise
-     */
-    private function isResource($fileReq):bool
-    {
-        if ($this->endsWith($fileReq, "css")
-            || $this->endsWith($fileReq, "gif")
-            || $this->endsWith($fileReq, "jpg")
-            || $this->endsWith($fileReq, "png")
-            || $this->endsWith($fileReq, "js")) {
-            return true;
-        }
-        return false;
-    }
-
-    private function subKeyInArray($array, $searchKey)
-    {
-        $keys = array_keys($array);
-        $this->logger->debug("Search Key [$searchKey]");
-        foreach ($keys as $key) {
-            $this->logger->debug("Key [$key]");
-            $this->logger->debug("Pos: ". strpos($key, $searchKey));
-            $this->logger->debug("Pos: ". strpos($searchKey, $key));
-
-
-            if (strpos($searchKey, $key) !== false) {
-                $this->logger->debug("Found Match");
-                return $array[$key];
-            }
-        }
-        return false;
     }
 
 }

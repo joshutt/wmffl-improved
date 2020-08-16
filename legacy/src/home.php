@@ -7,7 +7,7 @@ $javascriptList = array("/base/js/front.js");
 //$javascriptList = array("/legacy/js/front.js");
 include "base/menu.php";
 
-
+require_once "utils/setup.php";
 
 ?>
 

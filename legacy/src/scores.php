@@ -4,8 +4,10 @@ require_once "utils/connect.php";
 
 if ($currentWeek < 1) {
     $thisSeason = $currentSeason - 1;
+    $useWeek = 16;
 } else {
     $thisSeason = $currentSeason;
+    $useWeek = $currentWeek;
 }
 
 
@@ -22,7 +24,7 @@ order by wm.week DESC, s.label, MD5(CONCAT(t1.name, t2.name)) ";
 
 //$results = $conn->query( $sql) or die("Dead: $sql <br/>" . $conn->error);
 //$results = $conn->executeQuery($sql, array($thisSeason, $useWeek)) or die("Dead: $sql <br/>" . $conn->error);
-$results = $conn->executeQuery($sql, array($thisSeason, $currentWeek)) or die("Dead: $sql <br/>" . $conn->error);
+$results = $conn->executeQuery($sql, array($thisSeason, $useWeek)) or die("Dead: $sql <br/>" . $conn->error);
 
 ?>
 
